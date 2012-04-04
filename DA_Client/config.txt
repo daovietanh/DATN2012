@@ -1,0 +1,5 @@
+ServerName=localhost
+Username=sa
+Password=
+Database=TESTONLINE
+ServerChat=localhost
