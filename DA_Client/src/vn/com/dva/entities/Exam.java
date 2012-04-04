@@ -7,7 +7,6 @@ package vn.com.dva.entities;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Temporal;
-import vn.com.dva.backup.IEntity;
 
 
 /**

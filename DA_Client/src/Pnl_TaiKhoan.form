@@ -24,8 +24,8 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="785" max="32767" attributes="1"/>
-                  <Component id="jTabbedPane1" alignment="0" pref="785" max="32767" attributes="1"/>
+                  <Component id="jScrollPane1" alignment="0" pref="1080" max="32767" attributes="1"/>
+                  <Component id="jTabbedPane1" alignment="0" pref="1080" max="32767" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -108,7 +108,7 @@
                               <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="500" max="32767" attributes="0"/>
+                      <EmptySpace pref="795" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -442,7 +442,7 @@
                               <Component id="txtDiaChi" alignment="0" max="32767" attributes="1"/>
                               <Component id="txtHoTen" alignment="0" pref="122" max="32767" attributes="1"/>
                           </Group>
-                          <EmptySpace pref="44" max="32767" attributes="0"/>
+                          <EmptySpace pref="51" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -851,7 +851,7 @@
                               <Component id="jDateU" alignment="0" max="32767" attributes="1"/>
                               <Component id="txtHoTenU" alignment="0" pref="131" max="32767" attributes="1"/>
                           </Group>
-                          <EmptySpace pref="31" max="32767" attributes="0"/>
+                          <EmptySpace pref="326" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
