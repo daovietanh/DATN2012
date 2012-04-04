@@ -1,7 +1,5 @@
 
-import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import vn.com.dva.entities.Users;
 
 /*
  * To change this template, choose Tools | Templates
@@ -13,7 +11,6 @@ import java.util.logging.Logger;
  *
  * Created on Sep 12, 2011, 9:54:20 PM
  */
-
 /**
  *
  * @author VietAnh
@@ -164,68 +161,67 @@ public class FrmQuenMatKhau extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        if (txtUser.getText().equals(""))
-        {
+        if (txtUser.getText().equals("")) {
             Cl_Client.ShowError("Hãy nhập tên tài khoản cần lấy mật khẩu !!!");
             return;
         }
-        if (jCbCauHoi.getSelectedIndex() == 0)
-        {
-             Cl_Client.ShowError("Bạn phải chọn 1 câu hỏi bí mật !!!");
-             return;
+        if (jCbCauHoi.getSelectedIndex() == 0) {
+            Cl_Client.ShowError("Bạn phải chọn 1 câu hỏi bí mật !!!");
+            return;
         }
 
-        if (jCbCauHoi.getSelectedIndex() == 7 && txtCauHoi.getText().equals(""))
-        {
+        if (jCbCauHoi.getSelectedIndex() == 7 && txtCauHoi.getText().equals("")) {
             Cl_Client.ShowError("Bạn hãy nhập nội dung câu hỏi !!!");
             return;
         }
 
-        if (txtTraLoi.getText().equals(""))
-        {
+        if (txtTraLoi.getText().equals("")) {
             Cl_Client.ShowError(" Hãy nhập câu trả lời !!!");
             return;
         }
 
-        String cauhoi ;
-        if (jCbCauHoi.getSelectedIndex() != 7 )
-                cauhoi = jCbCauHoi.getSelectedItem().toString();
-            else
-                cauhoi = txtCauHoi.getText();
+        String cauhoi = "";
+        if (jCbCauHoi.getSelectedIndex() != 7) {
+            cauhoi = jCbCauHoi.getSelectedItem().toString();
+        } else {
+            cauhoi = txtCauHoi.getText();
+        }
         try {
-            String id = Cl_Client.c.getIDUser(txtUser.getText());
-            if (Cl_Client.c.checkCauHoiBiMat(id,cauhoi, txtTraLoi.getText())) {
+            Users u = Cl_Client.c.getUserByUserName(txtUser.getText().trim());
+            if (u.getQuestion().equals(cauhoi) && u.getAnserQuestion().equals(txtTraLoi.getText())) {
+                u.setPassword("123456");
+                if (Cl_Client.c.updateUser(u)) {
+                    Cl_Client.ShowSuccess("Thành Công . Mật Khẩu của bạn mặc định là : 123456 . Hãy đăng nhập và đổi lại mật khẩu !!! ");
+                }
+                this.dispose();
+                new FrmLogon().show();
+            } else {
                 Cl_Client.ShowError(" Thông tin nhập vào không đúng . Vui lòng kiểm tra lại !");
                 return;
             }
-            else
-            {
-                boolean k = Cl_Client.c.changeMatKhau(id, "123456");
-                if (k) Cl_Client.ShowSuccess("Thành Công . Mật Khẩu của bạn mặc định là : 123456 . Hãy đăng nhập và đổi lại mật khẩu !!! ");
-                this.dispose();
-                new FrmLogon().show();
-            }
-        } catch (RemoteException ex) {
-            Logger.getLogger(FrmQuenMatKhau.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Cl_Client.ShowError(" Thông tin nhập vào không đúng . Vui lòng kiểm tra lại !");
+            System.out.print(ex.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        this.disable();
+        this.dispose();
+        new FrmLogon().show();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new FrmQuenMatKhau().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -255,5 +251,4 @@ public class FrmQuenMatKhau extends javax.swing.JFrame {
         txtCauHoi.setVisible(false);
 
     }
-
 }

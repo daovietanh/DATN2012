@@ -72,7 +72,7 @@ public class Group_DAO {
         if (!listObject.isEmpty()){
             return (GroupUser) listObject.get(0);
         }
-        return new GroupUser();      
+        return null;      
     }
     
     public boolean insertGroupUser(GroupUser u){

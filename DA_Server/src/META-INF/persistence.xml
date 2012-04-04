@@ -5,7 +5,6 @@
     <class>vn.com.dva.entities.LevelAll</class>
     <class>vn.com.dva.entities.Users</class>
     <class>vn.com.dva.entities.Subject</class>
-    <class>vn.com.dva.entities.Group_User</class>
     <class>vn.com.dva.entities.Train</class>
     <class>vn.com.dva.entities.Exam</class>
     <class>vn.com.dva.entities.Question</class>

@@ -1,11 +1,10 @@
 
-import java.awt.GraphicsEnvironment;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import vn.com.dva.entities.GroupUser;
 import vn.com.dva.entities.Users;
-import vn.com.dva.entities.config_DAO;
 
 /*
  * To change this template, choose Tools | Templates
@@ -44,6 +43,9 @@ public class FrmLogon extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +91,13 @@ public class FrmLogon extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Tên đăng nhập");
+
+        jLabel2.setText("Mật Khẩu");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setText("ĐĂNG NHẬP");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,30 +106,43 @@ public class FrmLogon extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton2))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(125, 125, 125)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtPassword)
-                                    .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)))))
+                                .addComponent(jLabel1)
+                                .addGap(67, 67, 67)
+                                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(94, 94, 94)
+                                .addComponent(txtPassword))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(244, 244, 244)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))))
                 .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(127, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -142,18 +164,33 @@ public class FrmLogon extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
-            if (Cl_Client.c.checkLogin(txtUsername.getText(), txtPassword.getText()) || 1==1 )
+            if (Cl_Client.c.checkLogin(txtUsername.getText().trim(), txtPassword.getText()) )
             {
-                Users u = Cl_Client.c.getUserByUserName(User.username);
+                Users u = Cl_Client.c.getUserByUserName(txtUsername.getText().trim());
                 Session.user = u ;
-                
-                //Frm_SinhVien a = new Frm_SinhVien();
-                //Frm_GiaoVien a=  new Frm_GiaoVien();
-                Frm_Admin a=  new Frm_Admin();
+                JOptionPane.showMessageDialog(null, u);
+                if (u.getGroupUserID() == null){
+                    Frm_Admin a=  new Frm_Admin();
+                    a.show();
+                } else {
+                    Long idGroup = u.getGroupUserID();
+                    JOptionPane.showMessageDialog(null, idGroup);
+                    GroupUser gu = Cl_Client.c.getGroupByID(idGroup);
+                    if (gu != null) 
+                    if (gu.getGroupName().contains("Giáo")){
+                        Frm_GiaoVien a=  new Frm_GiaoVien();
+                        a.show();
+                    } else if (gu.getGroupName().contains("Admin")){
+                        Frm_Admin a=  new Frm_Admin();
+                        a.show();
+                    } else {
+                        Frm_SinhVien a = new Frm_SinhVien();
+                        a.show();
+                    }
+                }
                 //GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(a);
                 //a.setSize(getMaximumSize());	
-                a.show();
-                //JOptionPane.showInputDialog("Dang nhap thanh cong");
+                this.dispose();
             }
             else JOptionPane.showInputDialog("Dang nhap sai");
         } catch (RemoteException ex) {
@@ -199,6 +236,9 @@ public class FrmLogon extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField txtPassword;
