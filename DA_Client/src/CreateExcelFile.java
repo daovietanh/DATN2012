@@ -84,15 +84,11 @@ public class CreateExcelFile {
                                 row.createCell((short) j).setCellValue(c1);
                             } else if (f[j].getType().equals(byte[].class)) {
                                 Object s = f[j].get(obj);
-                                row.createCell((short) j).setCellValue(f[j].get(obj) + "");
-//                            } else if (f[j].getType().equals(Long.class)) {
-//                                //JOptionPane.showMessageDialog(null, " Long"+ c);
-//                                if (f[j].get(obj) == null) {
-//                                    row.createCell((short) j).setCellValue("");
-//                                } else {
-//                                    long idLong = f[j].getLong(obj);
-//                                    row.createCell((short) j).setCellValue(idLong);
-//                                }
+                                if (s instanceof byte[]){
+                                    byte[] bs= (byte[]) s;
+                                    String str = new String(bs);
+                                    row.createCell((short) j).setCellValue(str);
+                                }
                             } else if (f[j].getType().equals(Boolean.TYPE)) {
                                 boolean b = (boolean) f[j].getBoolean(obj);
                                 row.createCell((short) j).setCellValue(b);

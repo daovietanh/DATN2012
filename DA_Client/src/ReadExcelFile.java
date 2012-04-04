@@ -7,11 +7,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.JOptionPane;
-import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -64,7 +61,7 @@ public class ReadExcelFile {
                         try {
                             int idInteger = Integer.parseInt(myRow.getCell(j).toString().trim());
                             f[j].set(obj, idInteger);
-                        } catch (NumberFormatException ex) {
+                        } catch (Exception ex) {
                             f[j].set(obj, 0);
                         }
                     } else if (f[j].getType().equals(Double.TYPE)) {
@@ -94,14 +91,14 @@ public class ReadExcelFile {
                         } catch (Exception ex) {
                             f[j].set(obj, null);
                         }
-//                    } else if (f[j].getType().equals(Byte.class) ) {
-//                        try {
-//                            String s = myRow.getCell(j).getStringCellValue();
-//                            List<Object> list = this.getListFromString(s);
-//                            f[j].set(obj, list);
-//                        } catch (NumberFormatException ex) {
-//                            f[j].set(obj, 0);
-//                        }
+                    } else if (f[j].getType().isArray() ) {
+                        try {
+                            String s = myRow.getCell(j).getStringCellValue();
+                            byte[] bs = s.getBytes();
+                            f[j].set(obj, bs);
+                        } catch (Exception ex) {
+                            f[j].set(obj, null);
+                        }
                     } else {
                         if (myRow.getCell(j) == null) {
                             f[j].set(obj, null);
