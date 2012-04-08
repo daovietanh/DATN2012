@@ -57,6 +57,11 @@ public class Pnl_DoKho extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jCbGroupS = new javax.swing.JComboBox();
+        jLabel29 = new javax.swing.JLabel();
+        txtIdGroupS = new javax.swing.JTextField();
+        txtNameGroupS = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -164,7 +169,7 @@ public class Pnl_DoKho extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtIdDoKho)
                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +187,29 @@ public class Pnl_DoKho extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Nhóm Người Dùng"));
 
-        jLabel20.setText("jLabel20");
+        jLabel20.setText("Quyền Quản Lý");
+
+        jLabel28.setText("Tên Nhóm");
+
+        jCbGroupS.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCbGroupSItemStateChanged(evt);
+            }
+        });
+
+        jLabel29.setText("ID Nhóm");
+
+        txtIdGroupS.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtIdGroupSCaretUpdate(evt);
+            }
+        });
+
+        txtNameGroupS.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtNameGroupSCaretUpdate(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -190,26 +217,45 @@ public class Pnl_DoKho extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(59, 59, 59)
-                .addComponent(jLabel20)
-                .addContainerGap(294, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel29)
+                    .addComponent(jLabel28))
+                .addGap(57, 57, 57)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNameGroupS, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtIdGroupS)
+                        .addComponent(jCbGroupS, 0, 119, Short.MAX_VALUE)))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addComponent(jLabel20)
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(jCbGroupS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(txtIdGroupS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel28)
+                    .addComponent(txtNameGroupS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -283,9 +329,9 @@ public class Pnl_DoKho extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel16)
@@ -301,7 +347,6 @@ public class Pnl_DoKho extends javax.swing.JPanel {
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(8, 8, 8)))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -807,13 +852,13 @@ public class Pnl_DoKho extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -822,8 +867,8 @@ public class Pnl_DoKho extends javax.swing.JPanel {
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -1104,6 +1149,40 @@ public class Pnl_DoKho extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jCbGroupSItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCbGroupSItemStateChanged
+        // TODO add your handling code here:
+        String quyenQl = evt.getItem().toString();
+        if (quyenQl.equals("-- Lựa Chọn --") ){
+            quyenQl ="";
+        }
+        jTGroupUser.setFilters(new FilterPipeline(
+             new Filter[] { new PatternFilter(quyenQl+".*", 0, 1), new PatternFilter(txtIdGroupS.getText() +".*", 0, 0), new PatternFilter(txtNameGroupS.getText().toString()+".*", 0, 1) }));
+
+        
+    }//GEN-LAST:event_jCbGroupSItemStateChanged
+
+    private void txtIdGroupSCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtIdGroupSCaretUpdate
+        // TODO add your handling code here:
+        String quyenQl = jCbGroupS.getSelectedItem().toString();
+        if (quyenQl.equals("-- Lựa Chọn --") ){
+            quyenQl ="";
+        }
+        jTGroupUser.setFilters(new FilterPipeline(
+             new Filter[] { new PatternFilter(quyenQl+".*", 0, 1), new PatternFilter(txtIdGroupS.getText() +".*", 0, 0), new PatternFilter(txtNameGroupS.getText().toString()+".*", 0, 1) }));
+
+    }//GEN-LAST:event_txtIdGroupSCaretUpdate
+
+    private void txtNameGroupSCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtNameGroupSCaretUpdate
+        // TODO add your handling code here:
+         String quyenQl = jCbGroupS.getSelectedItem().toString();
+        if (quyenQl.equals("-- Lựa Chọn --") ){
+            quyenQl ="";
+        }
+        jTGroupUser.setFilters(new FilterPipeline(
+             new Filter[] { new PatternFilter(quyenQl+".*", 0, 1), new PatternFilter(txtIdGroupS.getText() +".*", 0, 0), new PatternFilter(txtNameGroupS.getText().toString()+".*", 0, 1) }));
+
+    }//GEN-LAST:event_txtNameGroupSCaretUpdate
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnSua;
@@ -1116,6 +1195,7 @@ public class Pnl_DoKho extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JCheckBox jCb;
+    private javax.swing.JComboBox jCbGroupS;
     private javax.swing.JCheckBox jCbU;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1137,6 +1217,8 @@ public class Pnl_DoKho extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1169,6 +1251,7 @@ public class Pnl_DoKho extends javax.swing.JPanel {
     private javax.swing.JTextField txtGroupNameU;
     private javax.swing.JTextField txtIDDoKhoU;
     private javax.swing.JTextField txtIdDoKho;
+    private javax.swing.JTextField txtIdGroupS;
     private javax.swing.JTextField txtIdGroupU;
     private javax.swing.JTextField txtKho;
     private javax.swing.JTextField txtKhoU;
@@ -1176,6 +1259,7 @@ public class Pnl_DoKho extends javax.swing.JPanel {
     private javax.swing.JTextArea txtMoTa1;
     private javax.swing.JTextArea txtMoTa1U;
     private javax.swing.JTextArea txtMoTaU;
+    private javax.swing.JTextField txtNameGroupS;
     private javax.swing.JTextField txtTb;
     private javax.swing.JTextField txtTbU;
     private javax.swing.JTextField txtTen;
@@ -1226,17 +1310,24 @@ public class Pnl_DoKho extends javax.swing.JPanel {
     private void InitData() {
         jCb.setSelected(false);
         cbxManager.removeAllItems();
-        cbxManager.addItem("Lựa Chọn");
+        cbxManager.addItem("-- Lựa Chọn --");
         cbxManager.addItem(ADMIN);
         cbxManager.addItem(TEACHER);
         cbxManager.addItem(STUDENT);
         
         jCbU.setSelected(false);
         cbxManagerU.removeAllItems();
-        cbxManagerU.addItem("Lựa Chọn");
+        cbxManagerU.addItem("-- Lựa Chọn --");
         cbxManagerU.addItem(ADMIN);
         cbxManagerU.addItem(TEACHER);
         cbxManagerU.addItem(STUDENT);
+        
+        jCbGroupS.removeAllItems();
+        jCbGroupS.addItem("-- Lựa Chọn --");
+        jCbGroupS.addItem(ADMIN);
+        jCbGroupS.addItem(TEACHER);
+        jCbGroupS.addItem(STUDENT);
+          
     }
 
     private void resetGroupUser() {

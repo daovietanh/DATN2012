@@ -21,10 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import org.jdesktop.swingx.decorator.*;
 import vn.com.dva.entities.Subject;
 import vn.com.dva.entities.Users;
@@ -163,7 +160,7 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(jButton1)))
-                .addContainerGap(540, Short.MAX_VALUE))
+                .addContainerGap(799, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,6 +318,11 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
         });
 
         jButton4.setText("Hủy Bỏ");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         cbxTrangThaiU.setText("  Kích Hoạt");
 
@@ -336,9 +338,9 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
 
         jLabel14.setText("Nhóm Môn Học");
 
-        jCbNhomMonHocU.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtUserName.setEnabled(false);
 
-        jLabel15.setText("Teen Người Tạo");
+        jLabel15.setText("Tên Người Tạo");
 
         jButton6.setText("Xóa");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -451,7 +453,7 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTabbedPane3, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -489,16 +491,10 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
                     tt= true ;
                 }
                 
-                String usernameCreate = User.username ;
-                Long idUser = null ;
-                    try {
-                        Users u = Cl_Client.c.getUserByUserName(usernameCreate);
-                        idUser = u.getUserID();
-                    } catch (Exception e) {
-                        idUser = null ;
-                    }
+                Users user = Session.user  ;
                 
-                Subject subject = new Subject(tenMonHoc , idParent , mota , tt , idUser,dateCreate);
+                
+                Subject subject = new Subject(tenMonHoc , idParent , mota , tt , user.getUserID() ,dateCreate);
                 if (Cl_Client.c.insertSubject(subject)){
                     loadTable();
                     loadPanel();
@@ -553,7 +549,15 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
                 if (s.getSubjectState()) cbxTrangThaiU.setSelected(true);
                 else cbxTrangThaiU.setSelected(false);
                 txtNgayTaoU.setText(s.getDateCreate());
-
+                if (s.getSubjectParent() != null){
+                    int index= -1;
+                    Subject parent = Cl_Client.c.getSubjectByID(s.getSubjectParent());
+                    for (int i=1;i< jCbNhomMonHocU.getItemCount();i++){
+                        Subject bean = (Subject) jCbNhomMonHocU.getItemAt(i);
+                        if (bean.getSubjecId().equals(parent.getSubjecId())) index = i;
+                    }
+                    jCbNhomMonHocU.setSelectedIndex(index);
+                }
             } catch (RemoteException ex) {
                 Logger.getLogger(Pnl_MonHoc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -584,6 +588,7 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
             Long idParent = null  ;
             if (jCbNhomMonHocU.getSelectedIndex() != 0){
                 idParent = ((Subject)jCbNhomMonHocU.getSelectedItem()).getSubjecId();
+                if (idParent == id) idParent = null;
             }
             boolean tt = false ;
             if (cbxTrangThaiU.isSelected()) {
@@ -596,7 +601,7 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
                 if (Cl_Client.c.updateSubject(subject)){
                     loadTable();
                 }
-                else Cl_Client.ShowError("Sua thất bại !");
+                else Cl_Client.ShowError("Sửa thất bại !");
         } catch (RemoteException ex) {
             Logger.getLogger(Pnl_MonHoc.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -605,24 +610,22 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
     private void txtDSIdMonHocCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtDSIdMonHocCaretUpdate
         // TODO add your handling code here:
         String tt = jCbDSTrangThai.getSelectedItem().toString();
-        if (tt.equals("Lựa Chọn"))
-        {
+        if (tt.equals("-- Lựa Chọn --")) {
             tt = "";
         }
         jTMonHoc.setFilters(new FilterPipeline(
-                    new Filter[] { new PatternFilter(txtDSIdMonHoc.getText()+".*", 0, 0), new PatternFilter(txtDSTenMonHoc.getText() +".*", 0, 1), new PatternFilter(tt+".*", 0, 2) }));
+                    new Filter[] { new PatternFilter(txtDSIdMonHoc.getText()+".*", 0, 0), new PatternFilter(txtDSTenMonHoc.getText() +".*", 0, 1), new PatternFilter(tt+".*", 0, 6) }));
 
     }//GEN-LAST:event_txtDSIdMonHocCaretUpdate
 
     private void jCbDSTrangThaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCbDSTrangThaiItemStateChanged
         // TODO add your handling code here:
         String tt = evt.getItem().toString();
-        if (tt.equals("Lựa Chọn"))
-        {
+        if (tt.equals("-- Lựa Chọn --"))        {
             tt = "";
         }
         jTMonHoc.setFilters(new FilterPipeline(
-                    new Filter[] {new PatternFilter(tt+".*", 0, 2), new PatternFilter(txtDSIdMonHoc.getText()+".*", 0, 0), new PatternFilter(txtDSTenMonHoc.getText() +".*", 0, 1) }));
+                    new Filter[] {new PatternFilter(tt+".*", 0, 6), new PatternFilter(txtDSIdMonHoc.getText()+".*", 0, 0), new PatternFilter(txtDSTenMonHoc.getText() +".*", 0, 1) }));
 
 
     }//GEN-LAST:event_jCbDSTrangThaiItemStateChanged
@@ -630,18 +633,17 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
     private void txtDSTenMonHocCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtDSTenMonHocCaretUpdate
         // TODO add your handling code here:
         String tt = jCbDSTrangThai.getSelectedItem().toString();
-        if (tt.equals("Lựa Chọn"))
-        {
+        if (tt.equals("-- Lựa Chọn --")) {
             tt = "";
         }
         jTMonHoc.setFilters(new FilterPipeline(
-                    new Filter[] { new PatternFilter(txtDSIdMonHoc.getText()+".*", 0, 0), new PatternFilter(txtDSTenMonHoc.getText() +".*", 0, 1), new PatternFilter(tt+".*", 0, 2) }));
+                    new Filter[] { new PatternFilter(txtDSIdMonHoc.getText()+".*", 0, 0), new PatternFilter(txtDSTenMonHoc.getText() +".*", 0, 1), new PatternFilter(tt+".*", 0, 6) }));
 
     }//GEN-LAST:event_txtDSTenMonHocCaretUpdate
 
 private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 // TODO add your handling code here:
-    txtTenMonHoc.setText("");
+    reset();
 }//GEN-LAST:event_jButton5ActionPerformed
 
 private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -661,6 +663,12 @@ private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     loadTable();
     
 }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        jTMonHoc.clearSelection();
+        resetUpdate();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -731,7 +739,7 @@ private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             jTMonHoc.setHighlighters(highlighters);
 
         jCbDSTrangThai.removeAllItems();
-        jCbDSTrangThai.addItem("Lựa Chọn");
+        jCbDSTrangThai.addItem("-- Lựa Chọn --");
         jCbDSTrangThai.addItem("Đã Duyệt");
         jCbDSTrangThai.addItem("Chưa Duyệt");
 
@@ -752,11 +760,37 @@ private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Logger.getLogger(Pnl_MonHoc.class.getName()).log(Level.SEVERE, null, ex);
         }
         JCheckBox j = new JCheckBox("OK", true);
-        
-        
-        //jTMonHoc.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(j));
-        
+                
     }
 
+    private void reset() {
+        txtTenMonHoc.setText("");
+        txtMoTa.setText("");
+        jCbNhomMonHocU.removeAllItems();
+        jCbNhomMonHocU.addItem("--  Lựa Chọn  --");
+        try {
+            List<Subject> allSubject = Cl_Client.c.getAllSubject();
+            if (! allSubject.isEmpty())
+                for (Subject s: allSubject ) {
+                    jCbNhomMonHoc.addItem(s);
+                    jCbNhomMonHocU.addItem(s);
+                }
+        } catch (RemoteException ex) {
+            Logger.getLogger(Pnl_MonHoc.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        cbxTrangThai.setSelected(false);
+    }
 
+    
+    private void resetUpdate() {
+        txtTenMonHocU.setText("");
+        txtMoTaU.setText("");
+        cbxTrangThaiU.setSelected(false);
+        txtIdMonHoc.setText("");
+        jCbNhomMonHocU.setSelectedIndex(-1);
+        txtNguoiTao.setText("");
+        txtUserName.setText("");
+        txtNgayTaoU.setText("");
+    }
+    
 }

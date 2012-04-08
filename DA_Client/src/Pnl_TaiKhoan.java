@@ -1294,6 +1294,9 @@ private void lblPhotoUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
                 
                 
             List<GroupUser> list = Cl_Client.c.getAllGroup();
+            jCbNhom.removeAllItems();
+            jCbNhomU.removeAllItems();
+            jCbDSNhom.removeAllItems();
             jCbNhom.addItem("---  Chọn 1 ---");
             jCbNhomU.addItem("---  Chọn 1 ---");
             jCbDSNhom.addItem("--  Tất Cả  --");
@@ -1303,7 +1306,8 @@ private void lblPhotoUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
                 jCbDSNhom.addItem(g);
             }
             
-
+            jCbCity.removeAllItems();
+            jCbCityU.removeAllItems();
             jCbCity.addItem("Lựa Chọn");
             jCbCity.addItem("Hà Nội");
             jCbCity.addItem("TP. Hồ Chí Minh");

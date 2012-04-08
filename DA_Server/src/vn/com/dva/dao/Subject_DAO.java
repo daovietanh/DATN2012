@@ -80,8 +80,15 @@ public class Subject_DAO {
        if (! listObject.isEmpty())
            for (int i=0;i< listObject.size();i++){
                Subject s = (Subject) listObject.get(i);
-               Long idUser = s.getUserID() ;
-               Users u = User_Dao.getUserByID(idUser);
+               Users u ;
+               try {
+                   Long idUser = s.getUserID() ;
+                   u = User_Dao.getUserByID(idUser);
+               } catch(Exception ex){
+                   u = new Users();
+                   u.setUserID(0L);
+                   u.setUserName("");
+               }
                Long idSubjectParent;
                String p ="";
                try {
@@ -92,8 +99,9 @@ public class Subject_DAO {
                 } catch(Exception e){
                    p = "Ko";
                 }
-
-               mode.addRow(new Object[]{s.getSubjecId() , s.getSubjectName() , p , s.getDateCreate() , u.getUserID() , u.getUserName() , s.getSubjectState()});
+               String trangthai = "Chưa Duyệt";
+               if (s.getSubjectState()) trangthai = "Đã Duyệt";
+               mode.addRow(new Object[]{s.getSubjecId() , s.getSubjectName() , p , s.getDateCreate() , u.getUserID() , u.getUserName() , trangthai});
            }
        return mode; 
     }
