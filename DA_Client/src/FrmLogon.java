@@ -17,12 +17,12 @@ import vn.com.dva.entities.Users;
  *
  * Created on Jul 27, 2011, 3:36:53 PM
  */
-
 /**
  *
  * @author VietAnh
  */
 public class FrmLogon extends javax.swing.JFrame {
+
     /** Creates new form FrmLogon */
     public FrmLogon() {
         LookAndFeel.Windows();
@@ -165,25 +165,28 @@ public class FrmLogon extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
-            if (Cl_Client.c.checkLogin(txtUsername.getText().trim(), txtPassword.getText()) )
-            {
+            if (Cl_Client.c.checkLogin(txtUsername.getText().trim(), txtPassword.getText())) {
                 checkGroupUser();
                 Users u = Cl_Client.c.getUserByUserName(txtUsername.getText().trim());
-                Session.user = u ;
-                if (u.getGroupUserID() == null){
-                    Frm_Admin a=  new Frm_Admin();
-                    a.show();
+                Session.user = u;
+                if (u.getGroupUserID() == null) {
+                    Frm_SinhVien a = new Frm_SinhVien();
+                        a.show();
                 } else {
                     Long idGroup = u.getGroupUserID();
                     GroupUser gu = Cl_Client.c.getGroupByID(idGroup);
                     //JOptionPane.showMessageDialog(null, gu);
-                    if (gu != null) 
-                    if (gu.getGroupName().contains("Giáo")){
-                        Frm_GiaoVien a=  new Frm_GiaoVien();
-                        a.show();
-                    } else if (gu.getGroupName().contains("Admin")){
-                        Frm_Admin a=  new Frm_Admin();
-                        a.setVisible(true);
+                    if (gu != null) {
+                        if (gu.getGroupName().contains("Giáo")) {
+                            Frm_GiaoVien a = new Frm_GiaoVien();
+                            a.show();
+                        } else if (gu.getGroupName().contains("Admin")) {
+                            Frm_Admin a = new Frm_Admin();
+                            a.setVisible(true);
+                        } else {
+                            Frm_SinhVien a = new Frm_SinhVien();
+                            a.show();
+                        }
                     } else {
                         Frm_SinhVien a = new Frm_SinhVien();
                         a.show();
@@ -192,13 +195,14 @@ public class FrmLogon extends javax.swing.JFrame {
                 //GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(a);
                 //a.setSize(getMaximumSize());	
                 this.dispose();
+            } else {
+                JOptionPane.showInputDialog("Dang nhap sai");
             }
-            else JOptionPane.showInputDialog("Dang nhap sai");
         } catch (RemoteException ex) {
             Logger.getLogger(FrmLogon.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -220,20 +224,20 @@ public class FrmLogon extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-       System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new FrmLogon().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -248,7 +252,7 @@ public class FrmLogon extends javax.swing.JFrame {
 
     private void checkGroupUser() throws RemoteException {
         List<GroupUser> lst = Cl_Client.c.getAllGroup();
-        if (lst.isEmpty()){
+        if (lst.isEmpty()) {
             GroupUser gu = new GroupUser();
             gu.setAccessManager(0);
             gu.setGroupDescription("Quản lý");
@@ -257,5 +261,4 @@ public class FrmLogon extends javax.swing.JFrame {
             Cl_Client.c.insertGroupUser(gu);
         }
     }
-
 }

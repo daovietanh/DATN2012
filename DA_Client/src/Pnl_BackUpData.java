@@ -9,7 +9,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRootPane;
+import javax.swing.JTabbedPane;
 import org.h2.tools.RunScript;
 import org.h2.tools.Script;
 
@@ -195,9 +199,10 @@ public class Pnl_BackUpData extends javax.swing.JPanel {
                 }
                 RunScript.execute(urlJDBC, "sa", "", filePath, null, true);
                 JOptionPane.showMessageDialog(null, " Restore thành công. Vui lòng đăng nhập lại");
-//                new FrmLogon().show();
-//                JFrame frame = (JFrame) this.getParent();
-//                frame.dispose();
+                new FrmLogon().show();
+                JRootPane rp = this.getRootPane();
+                JFrame frame = (JFrame) rp.getParent();
+                frame.dispose();
             }
         } catch (SQLException ex) {
             System.out.print(ex);

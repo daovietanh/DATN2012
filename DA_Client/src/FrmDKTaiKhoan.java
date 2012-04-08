@@ -28,6 +28,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import vn.com.dva.entities.GroupUser;
 import vn.com.dva.entities.Users;
 
 public class FrmDKTaiKhoan extends javax.swing.JFrame {
@@ -399,8 +400,13 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
             Date d = new Date();
             String dateJoint = sdf.format(d);
             Long idGroup = null;
+            if (checkGroup()){
+                GroupUser gr = Cl_Client.c.getAllGroup().get(0);
+                idGroup = gr.getGroupID();
+            }
+            
             Users u = new Users(txtUsername.getText().trim(), pass.getText(), idGroup, fullName, birthday, address, city,
-                    email, phone, image, dateJoint, dateJoint, true, cauhoi, traloi);
+                    email, phone, image, dateJoint, dateJoint, true , cauhoi, traloi);
             if (Cl_Client.c.insertUser(u)) {
                 JOptionPane.showMessageDialog(null, "Đăng ký thành công . Vui lòng đăng nhập ! ");
                 resetAll();
@@ -409,7 +415,7 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Đăng ký lỗi ");
             }
-        } catch (RemoteException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Pnl_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -616,5 +622,30 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
 
     public void setDataImages(byte[] dataImages) {
         this.dataImages = dataImages;
+    }
+
+    private boolean checkGroup() {
+        try {
+            int totalGroup = Cl_Client.c.getAllGroup().size();
+            if (totalGroup == 0) {
+                insertAdminGroup();
+                return true;
+            } else return false;
+        } catch (RemoteException ex) {
+            Logger.getLogger(FrmDKTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    private void insertAdminGroup() {
+        GroupUser bean = new GroupUser();
+        bean.setGroupName("Admin");
+        bean.setStatus(true);
+        bean.setGroupDescription("Admin");
+        try {
+            Cl_Client.c.insertGroupUser(bean);
+        } catch (RemoteException ex) {
+            Logger.getLogger(FrmDKTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
