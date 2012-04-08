@@ -14,6 +14,7 @@ public interface IGenericAPI<E> {
     public boolean insertData(E ob);
     public boolean updateData(E ob);
     public boolean removeData(Class T, Long id);
+    public boolean dropAllTable();
     public List<E> getAllData(Class T) ;
     public List<E> getData(Class T, String field);
     public List<E> getData1Field(Class T, Object field1 , Object key);

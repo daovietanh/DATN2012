@@ -3,6 +3,7 @@ import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vn.com.dva.dao.DetailResultExam_DAO;
 import vn.com.dva.dao.DetailTrain_DAO;
@@ -111,6 +112,10 @@ public class Cl_Database implements If_Database {
         return userDAO.checkUserName(user);
     }
 
+    @Override
+    public boolean dropAllTable() throws RemoteException {    
+        return userDAO.dropAllTable();
+    }
     @Override
     public Users getUserByID(Long id) throws RemoteException {
         return userDAO.getUserByID(id);

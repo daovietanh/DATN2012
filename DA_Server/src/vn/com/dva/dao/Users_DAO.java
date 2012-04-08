@@ -43,6 +43,10 @@ public class Users_DAO {
         return false ;
     }
     
+    public boolean dropAllTable(){
+        return mydao.dropAllTable();
+    }
+    
     
     public List<Users> getAllUser(){
         List<Object> listObject = mydao.getAllData(Subject.class);

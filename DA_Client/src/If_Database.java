@@ -42,6 +42,7 @@ public interface If_Database extends Remote {
 
     public boolean checkUser(String user) throws RemoteException;
 
+    public boolean dropAllTable() throws RemoteException ;
     public Users getUserByID(Long id) throws RemoteException;
 
     public Users getUserByUserName(String s) throws RemoteException;

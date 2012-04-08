@@ -67,6 +67,22 @@ public class MyGeneric implements IGenericAPI {
     }
 
     @Override
+    public boolean dropAllTable(){
+        em = jpu.getEm();
+        em.getTransaction().begin();
+        try{
+            em.createNativeQuery("DROP ALL OBJECTS").executeUpdate();
+            em.getTransaction().commit();
+            return true;
+        } catch(Exception ex){
+            return false;           
+        }
+        finally{
+            em.close();
+        }
+    }
+    
+    @Override
     public List<Object> getAllData(Class T) {
         List<Object> list = new ArrayList<Object> ();
         em = jpu.getEm();

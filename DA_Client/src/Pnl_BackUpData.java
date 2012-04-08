@@ -1,3 +1,18 @@
+
+import java.awt.FileDialog;
+import java.awt.Frame;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import org.h2.tools.RunScript;
+import org.h2.tools.Script;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -13,6 +28,9 @@
  * @author VietAnh
  */
 public class Pnl_BackUpData extends javax.swing.JPanel {
+    private String urlJDBC="jdbc:h2:tcp://localhost/~/TESTONLINE";
+    private StringBuilder builder;
+    private String filePath;
 
     /** Creates new form Pnl_BackUpData */
     public Pnl_BackUpData() {
@@ -31,6 +49,10 @@ public class Pnl_BackUpData extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        lbl = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
 
         jButton1.setText("Export");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -53,26 +75,65 @@ public class Pnl_BackUpData extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setText("Backup SQL");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Chọn File");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        lbl.setText("Chưa chọn file nào");
+
+        jButton6.setText("Restore");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton5)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(111, 111, 111)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(lbl))
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
+                    .addComponent(jButton4)
+                    .addComponent(jButton6)
                     .addComponent(jButton3))
                 .addContainerGap(166, Short.MAX_VALUE))
         );
@@ -96,9 +157,82 @@ public class Pnl_BackUpData extends javax.swing.JPanel {
         cf.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        openFileDialog();
+        try {
+            Script.execute(urlJDBC, "sa", "", builder.toString());
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser("C:");
+        fileChooser.setVisible(true);
+        fileChooser.showOpenDialog(this);
+        File file = fileChooser.getSelectedFile();
+        if (file == null) {
+            return;
+        }
+        if (file.getPath().endsWith("sql")) {
+            filePath = file.getPath();
+            lbl.setText("Bạn đã chọn file : "+ filePath);
+        }
+
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        try {
+            // TODO add your handling code here:
+            if (!"".equals(filePath)){
+                try {
+                    Cl_Client.c.dropAllTable();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(Pnl_BackUpData.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                RunScript.execute(urlJDBC, "sa", "", filePath, null, true);
+                JOptionPane.showMessageDialog(null, " Restore thành công. Vui lòng đăng nhập lại");
+//                new FrmLogon().show();
+//                JFrame frame = (JFrame) this.getParent();
+//                frame.dispose();
+            }
+        } catch (SQLException ex) {
+            System.out.print(ex);
+        }
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel lbl;
     // End of variables declaration//GEN-END:variables
+
+    private void openFileDialog() {
+        FileDialog fileDialog = new FileDialog(new Frame(), "Save", FileDialog.SAVE);
+        fileDialog.setFilenameFilter(new FilenameFilter() {
+
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".sql");
+            }
+        });
+        fileDialog.setFile("backup.sql");
+        fileDialog.setVisible(true);
+        String str = fileDialog.getDirectory() + fileDialog.getFile();
+        builder = new StringBuilder(str);
+        int j = 1;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == '\\') {
+                builder.insert(i + j++, '\\');
+            }
+        }
+    }
 }
