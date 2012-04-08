@@ -3,7 +3,6 @@ import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vn.com.dva.dao.DetailResultExam_DAO;
 import vn.com.dva.dao.DetailTrain_DAO;
@@ -139,7 +138,6 @@ public class Cl_Database implements If_Database {
 
     @Override
     public boolean updateUser(Users u) throws RemoteException {
-        JOptionPane.showMessageDialog(null, "Update DAO " + u.getUserName());
         return userDAO.updateUser(u);
     }
 
@@ -161,6 +159,7 @@ public class Cl_Database implements If_Database {
         return groupDAO.getGroupByID(id);
     }
     
+    @Override
     public boolean checkNameGroup(String s) throws RemoteException {
         return groupDAO.checkNameGroup(s);
     }

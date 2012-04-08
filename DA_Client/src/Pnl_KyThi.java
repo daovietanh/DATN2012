@@ -113,6 +113,11 @@ public class Pnl_KyThi extends javax.swing.JPanel {
         jTKyThi = new org.jdesktop.swingx.JXTable();
 
         jPanel2.setPreferredSize(new java.awt.Dimension(1100, 650));
+        jPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanel2ComponentShown(evt);
+            }
+        });
 
         jTabbedPane2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -280,12 +285,11 @@ public class Pnl_KyThi extends javax.swing.JPanel {
                                                     .addComponent(txtThoiGianLamBai, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(txtSoCauHoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jLabel8)))
-                                        .addGap(45, 45, 45))
+                                                .addComponent(jLabel8))))
                                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jCbDoKho, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(txtTenKyThi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)))))
-                        .addGap(9, 9, 9)
+                        .addGap(54, 54, 54)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -467,22 +471,20 @@ public class Pnl_KyThi extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblDe1)))
                         .addGap(90, 90, 90))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel14)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel23)
-                                .addGap(72, 72, 72)
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtUserName, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtThoiGianLamBaiE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel17))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(chkU)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtSoCauHoiU)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel14)
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addComponent(jLabel23)
+                            .addGap(72, 72, 72)
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtUserName, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtThoiGianLamBaiE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel17))
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addComponent(chkU)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtSoCauHoiU))))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
@@ -876,6 +878,11 @@ private void jCbXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         else txtSoCauHoi.setVisible(false);
         this.repaint();
     }//GEN-LAST:event_chkStateChanged
+
+    private void jPanel2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentShown
+        // TODO add your handling code here:
+        loadPanel();
+    }//GEN-LAST:event_jPanel2ComponentShown
 
     @SuppressWarnings("static-access")
     public void loadform() {

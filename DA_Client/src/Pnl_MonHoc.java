@@ -501,6 +501,7 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
                 Subject subject = new Subject(tenMonHoc , idParent , mota , tt , idUser,dateCreate);
                 if (Cl_Client.c.insertSubject(subject)){
                     loadTable();
+                    loadPanel();
                 }
                 else Cl_Client.ShowError("Thêm thất bại !");
             } catch (RemoteException ex) {

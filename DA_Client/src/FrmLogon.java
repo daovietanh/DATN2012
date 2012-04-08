@@ -1,5 +1,6 @@
 
 import java.rmi.RemoteException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -166,23 +167,23 @@ public class FrmLogon extends javax.swing.JFrame {
             // TODO add your handling code here:
             if (Cl_Client.c.checkLogin(txtUsername.getText().trim(), txtPassword.getText()) )
             {
+                checkGroupUser();
                 Users u = Cl_Client.c.getUserByUserName(txtUsername.getText().trim());
                 Session.user = u ;
-                JOptionPane.showMessageDialog(null, u);
                 if (u.getGroupUserID() == null){
                     Frm_Admin a=  new Frm_Admin();
                     a.show();
                 } else {
                     Long idGroup = u.getGroupUserID();
-                    JOptionPane.showMessageDialog(null, idGroup);
                     GroupUser gu = Cl_Client.c.getGroupByID(idGroup);
+                    //JOptionPane.showMessageDialog(null, gu);
                     if (gu != null) 
                     if (gu.getGroupName().contains("Giáo")){
                         Frm_GiaoVien a=  new Frm_GiaoVien();
                         a.show();
                     } else if (gu.getGroupName().contains("Admin")){
                         Frm_Admin a=  new Frm_Admin();
-                        a.show();
+                        a.setVisible(true);
                     } else {
                         Frm_SinhVien a = new Frm_SinhVien();
                         a.show();
@@ -244,5 +245,17 @@ public class FrmLogon extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    private void checkGroupUser() throws RemoteException {
+        List<GroupUser> lst = Cl_Client.c.getAllGroup();
+        if (lst.isEmpty()){
+            GroupUser gu = new GroupUser();
+            gu.setAccessManager(0);
+            gu.setGroupDescription("Quản lý");
+            gu.setStatus(true);
+            gu.setGroupName("Admin");
+            Cl_Client.c.insertGroupUser(gu);
+        }
+    }
 
 }

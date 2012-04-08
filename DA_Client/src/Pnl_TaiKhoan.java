@@ -38,8 +38,8 @@ import vn.com.dva.entities.Users;
  */
 public class Pnl_TaiKhoan extends javax.swing.JPanel {
 
-    private byte[] dataImages;
-    private byte[] dataImagesU ;
+    private byte[] dataImages = null;
+    private byte[] dataImagesU =null;
     
     public byte[] getDataImages() {
         return dataImages;
@@ -154,6 +154,11 @@ public class Pnl_TaiKhoan extends javax.swing.JPanel {
         txtIDU = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(1100, 650));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jTTaiKhoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -321,7 +326,7 @@ public class Pnl_TaiKhoan extends javax.swing.JPanel {
                     .addComponent(jCbCity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtDiaChi)
                     .addComponent(txtHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(339, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -895,8 +900,7 @@ public class Pnl_TaiKhoan extends javax.swing.JPanel {
             {
                 JOptionPane.showConfirmDialog(null, "Vui lòng chọn 1 hàng ở dưới","Lỗi",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE );
                 return ;
-            }
-            
+            }            
 
             if ( passU.getText().equals("")|| pass2U.getText().equals("") || txtHoTenU.getText().equals("")) {
                 Cl_Client.ShowError("Hãy nhập đầy đủ thông tin !");
@@ -934,8 +938,19 @@ public class Pnl_TaiKhoan extends javax.swing.JPanel {
             String dateUpdate = sdf.format(d);
             
             
-            Users bean = new Users(u.getUserID(),u.getUserName(), g.getGroupID(),password , hoten , date  , dc , city , 
-                    email , phone , image , u.getJoinDate() ,dateUpdate , enable ,u.getQuestion() , u.getAnserQuestion());
+            Users bean = Cl_Client.c.getUserByID(idUser);
+            bean.setGroupUserID(g.getGroupID());
+            bean.setPassword(password);
+            bean.setFullName(hoten);
+            bean.setBirthday(date);
+            bean.setAddress(dc);
+            bean.setCity(city);
+            bean.setEmail(email);
+            bean.setMobile(phone);
+            bean.setPhoto(image);
+            bean.setLastLoginDate(dateUpdate);
+            bean.setEnable(enable);
+            
             
             if (Cl_Client.c.updateUser(bean)) {
                 resetAll();
@@ -943,7 +958,8 @@ public class Pnl_TaiKhoan extends javax.swing.JPanel {
             } else {
                 Cl_Client.ShowError("Update lỗi rồi");
             }
-        } catch (RemoteException ex) {
+        } catch (Exception ex) {
+            System.out.print(ex.getMessage());
             Logger.getLogger(Pnl_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -1122,6 +1138,11 @@ private void lblPhotoUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
         loadImageU();
     }
 }//GEN-LAST:event_lblPhotoUMouseClicked
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        loadPanel();
+    }//GEN-LAST:event_formComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1377,7 +1398,7 @@ private void lblPhotoUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(bi, "jpg", baos);
             dataImagesU = baos.toByteArray();
-            showImage();
+            showImageUpdate();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Khong luu duoc anh");
             return;

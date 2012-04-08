@@ -25,7 +25,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jTabbedPane3" alignment="0" min="0" pref="0" max="32767" attributes="2"/>
-                  <Component id="jScrollPane1" alignment="0" pref="821" max="32767" attributes="1"/>
+                  <Component id="jScrollPane1" alignment="0" pref="1080" max="32767" attributes="1"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -137,7 +137,7 @@
                               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="540" max="32767" attributes="0"/>
+                      <EmptySpace pref="799" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

@@ -6,7 +6,6 @@ package vn.com.dva.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vn.com.dva.entities.GroupUser;
 import vn.com.dva.entities.Subject;
@@ -97,7 +96,9 @@ public class Users_DAO {
                if (u.getEnable() == true) trangthai ="OK";
                     else trangthai = "Cấm";
                GroupUser group = groupDao.getGroupByID(u.getGroupUserID());
-               mode.addRow(new Object[]{u.getUserID() , u.getUserName() , u.getFullName(), u.getBirthday() , group.getGroupName(), u.getJoinDate() , u.getAddress(), trangthai});
+               try{
+                   mode.addRow(new Object[]{u.getUserID() , u.getUserName() , u.getFullName(), u.getBirthday() , group.getGroupName(), u.getJoinDate() , u.getAddress(), trangthai});
+               } catch(Exception ex){}
            }
        return mode; 
     }
