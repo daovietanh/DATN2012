@@ -420,7 +420,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
 
         txtConLaiKT.setEditable(false);
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12));
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("Ngày BĐ");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12));
@@ -435,8 +435,9 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         jLabel15.setText("Số câu");
 
         txtSocau.setText("10");
+        txtSocau.setEnabled(false);
 
-        jCKyThi.setFont(new java.awt.Font("Tahoma", 0, 12));
+        jCKyThi.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCKyThi.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCKyThiItemStateChanged(evt);
@@ -491,14 +492,17 @@ public class Frm_SinhVien extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(lblLuotLam, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel14))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                                .addComponent(jLabel15)
+                                .addComponent(jLabel14)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dateStart, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(dateStart, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addComponent(dateStartsd, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                             .addComponent(txtSocau, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -556,16 +560,17 @@ public class Frm_SinhVien extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
+                        .addComponent(dateStartsd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(dateStartsd)
-                            .addComponent(dateStart)))
+                            .addComponent(dateStart)
+                            .addComponent(jLabel11)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(dateEnd))))
-                .addGap(23, 23, 23)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLTrangthai)
@@ -833,6 +838,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
 
     private void jbVaoThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVaoThiActionPerformed
         // TODO add your handling code here:
+        if (isTest == true) return;
         isTest = true;
         // TODO add your handling code here:
         Exam exam;
@@ -858,7 +864,6 @@ public class Frm_SinhVien extends javax.swing.JFrame {
 
         FrmThi a = new FrmThi();
         a.setVisible(true);
-        //}
     }//GEN-LAST:event_jbVaoThiActionPerformed
 
     private void jbVaoThiVaothi(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVaoThiVaothi
@@ -868,9 +873,11 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             if (evt.getItem() == null) {
+                resetPanelExam();
                 return;
             }
             if (jCKyThi.getSelectedIndex() == 0) {
+                resetPanelExam();
                 return;
             }
             Exam e = (Exam) jCKyThi.getSelectedItem();
@@ -883,7 +890,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
             // So cau hoi lay ra tu table kythi-cauhoi
             txtSocau.setText(e.getNumberOfTest() + "");
             lblLuotLam.setText(e.getNumberOfTest() + "");
-            lblTongSoLuotLam.setText(e.getTotalOfTest() + "");
+            lblTongSoLuotLam.setText(Cl_Client.c.getTotalTestOfExam(e)+"");
 
         } catch (RemoteException ex) {
             Logger.getLogger(Frm_SinhVien.class.getName()).log(Level.SEVERE, null, ex);
@@ -1234,7 +1241,16 @@ public class Frm_SinhVien extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 
-    
+    private void resetPanelExam(){
+        txtMonThiKT.setText("");
+        dateStart.setText("");
+        dateEnd.setText("");
+        txtThoiGianKT.setText("");
+        txtConLaiKT.setText("");
+        txtSocau.setText("");
+        lblLuotLam.setText("");
+        lblTongSoLuotLam.setText("");
+    }
 
 
 

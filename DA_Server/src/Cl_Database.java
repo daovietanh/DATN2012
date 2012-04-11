@@ -113,9 +113,10 @@ public class Cl_Database implements If_Database {
     }
 
     @Override
-    public boolean dropAllTable() throws RemoteException {    
+    public boolean dropAllTable() throws RemoteException {
         return userDAO.dropAllTable();
     }
+
     @Override
     public Users getUserByID(Long id) throws RemoteException {
         return userDAO.getUserByID(id);
@@ -152,8 +153,7 @@ public class Cl_Database implements If_Database {
     public List<GroupUser> getAllGroup() throws RemoteException {
         return groupDAO.getAllGroup();
     }
-    
-    
+
     @Override
     public DefaultTableModel getAllGroupUsertoTable() throws RemoteException {
         return groupDAO.getAllGroupUsertoTable();
@@ -163,23 +163,21 @@ public class Cl_Database implements If_Database {
     public GroupUser getGroupByID(Long id) throws RemoteException {
         return groupDAO.getGroupByID(id);
     }
-    
+
     @Override
     public boolean checkNameGroup(String s) throws RemoteException {
         return groupDAO.checkNameGroup(s);
     }
-    
-        @Override
+
+    @Override
     public boolean insertGroupUser(GroupUser s) throws RemoteException {
         return groupDAO.insertGroupUser(s);
     }
-    
+
     @Override
     public boolean updateGroupUser(GroupUser s) throws RemoteException {
         return groupDAO.updateGroupUser(s);
     }
-
-
 
     @Override
     public boolean removeGroupUser(Long id) throws RemoteException {
@@ -327,6 +325,16 @@ public class Cl_Database implements If_Database {
     @Override
     public List<Exam> getCurrentExam() throws RemoteException {
         return examDAO.getCurrentExam();
+    }
+
+    @Override
+    public int getTotalTestOfExam(Exam e) throws RemoteException{
+        return examDAO.getTotalTestOfExam(e);
+    }
+
+    @Override
+    public int getTotalTestExamOfUser(Exam e, Users u) throws RemoteException{
+        return examDAO.getTotalTestExamOfUser(e, u);
     }
 
     @Override

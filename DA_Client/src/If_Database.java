@@ -42,7 +42,8 @@ public interface If_Database extends Remote {
 
     public boolean checkUser(String user) throws RemoteException;
 
-    public boolean dropAllTable() throws RemoteException ;
+    public boolean dropAllTable() throws RemoteException;
+
     public Users getUserByID(Long id) throws RemoteException;
 
     public Users getUserByUserName(String s) throws RemoteException;
@@ -132,6 +133,10 @@ public interface If_Database extends Remote {
     public List<Exam> getAllExam() throws RemoteException;
 
     public List<Exam> getCurrentExam() throws RemoteException;
+
+    public int getTotalTestOfExam(Exam e) throws RemoteException;
+
+    public int getTotalTestExamOfUser(Exam e, Users u) throws RemoteException;
 
     public boolean insertExam(Exam e) throws RemoteException;
 
@@ -238,6 +243,4 @@ public interface If_Database extends Remote {
     public boolean updateNews(News n) throws RemoteException;
 
     public boolean removeNews(Long id) throws RemoteException;
-
-    
 }

@@ -10,8 +10,9 @@ import java.util.Calendar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import vn.com.dva.entities.Exam;
-import vn.com.dva.entities.Question;
+import vn.com.dva.entities.ResultExam;
 import vn.com.dva.entities.Subject;
+import vn.com.dva.entities.Users;
 import vn.com.dva.generic.spi.MyGeneric;
 
 /**
@@ -99,6 +100,20 @@ public class Exam_DAO {
        return mode; 
     }     
      
+     
+     
+    public int getTotalTestOfExam(Exam e){
+        List<Object> lst = mydao.getData1Field(ResultExam.class, "ExamID", e.getExamID());
+        if (! lst.isEmpty())
+           return lst.size();
+        return 0;
+    }
+     
+    public int getTotalTestExamOfUser(Exam e, Users u){
+        List<ResultExam> lst = mydao.getData2Field(ResultExam.class, "ExamID", "UserID", e.getExamID(), u.getUserID());
+        return lst.size();
+    }
+    
     public boolean insertExam(Exam u){
         return mydao.insertData(u);
     }

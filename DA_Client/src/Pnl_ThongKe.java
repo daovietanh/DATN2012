@@ -42,7 +42,7 @@ public class Pnl_ThongKe extends javax.swing.JPanel {
     private List<ResultExam> list;
     private Users user;
     ChartFrame frame = null;
-
+    Calculate calculate = new Calculate();
     /** Creates new form Pnl_ThongKe */
     public Pnl_ThongKe() {
         initComponents();
@@ -301,14 +301,14 @@ public class Pnl_ThongKe extends javax.swing.JPanel {
         }
         String header[] = {"Xếp Hạng ", "Tên Đăng Nhập", "Tên ", "Môn Thi", "Thời Gian Làm", "Ngày Thi", "Số Câu Hỏi", "Điểm"};
         DefaultTableModel model = new DefaultTableModel(header, 0);
-        List<ResultExam> lst = this.getTopHighScore(exam, 3);
+        List<ResultExam> lst = calculate.getTopHighScore(exam);
         for (int i = 0; i < lst.size(); i++) {
             try {
                 ResultExam bean = lst.get(i);
                 Users u = Cl_Client.c.getUserByID(bean.getUserID());
                 Exam e = Cl_Client.c.getExamByID(bean.getExamID());
                 Subject s = Cl_Client.c.getSubjectByID(e.getSubjectID());
-                SimpleDateFormat sdf = new SimpleDateFormat("đ-MM-yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 String date = sdf.format(bean.getDateTest().getTime());
                 model.addRow(new Object[]{i + 1, u, u.getFullName(), s, bean.getTimes(), date, e.getNumberQuestion(), bean.getScore()});
             } catch (RemoteException ex) {
@@ -381,20 +381,7 @@ public class Pnl_ThongKe extends javax.swing.JPanel {
         this.repaint();
     }
 
-    private List<ResultExam> getTopHighScore(Exam exam, int n) {
-        List<ResultExam> listTop = new ArrayList<ResultExam>();
-        try {
-            listTop = Cl_Client.c.getAllResultExamByExamIDSortScore(exam.getExamID());
-        } catch (RemoteException ex) {
-            Logger.getLogger(Pnl_ThongKe.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        List<ResultExam> listResult = new ArrayList<ResultExam>();
-        for (int i = 0; i < n; i++) {
-            listResult.add(listTop.get(i));
-        }
-        return listResult;
-
-    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bg;
     private javax.swing.JButton btnSelection;

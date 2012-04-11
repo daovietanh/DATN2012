@@ -45,7 +45,7 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
     List<Question> list = new ArrayList<Question>();
     List<String> choose = new ArrayList<String>();
     List<String> answerRandom = new ArrayList<String>();
-
+    Calculate calculate = new Calculate();
     /** Creates new form FrmThi */
     public FrmThi() {
         t = new Timer(1000, this);
@@ -107,8 +107,11 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
         jButton3 = new javax.swing.JButton();
         lbl1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -494,7 +497,7 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "so cau hoi = " + list.size());
             for (Question q : list) {
                 JOptionPane.showMessageDialog(null, " id = " + q.getQuestionID());
-                String s = this.randomAnswer();
+                String s = calculate.randomAnswer();
                 answerRandom.add(s);
                 choose.add("");
             }
@@ -509,15 +512,12 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
         lblTongSo.setText("/" + n);
         Question q = list.get(cs);
         jTpNoiDung.setText(q.getContent());
-//        jTpA.setText(q.getChooseA());
-//        jTpB.setText(q.getChooseB());
-//        jTpC.setText(q.getChooseC());
-//        jTpD.setText(q.getChooseD());
+
         String s = answerRandom.get(cs);
-        jTpA.setText(getChoose(q, s.charAt(0)));
-        jTpB.setText(getChoose(q, s.charAt(1)));
-        jTpC.setText(getChoose(q, s.charAt(2)));
-        jTpD.setText(getChoose(q, s.charAt(3)));
+        jTpA.setText(calculate.getChoose(q, s.charAt(0)));
+        jTpB.setText(calculate.getChoose(q, s.charAt(1)));
+        jTpC.setText(calculate.getChoose(q, s.charAt(2)));
+        jTpD.setText(calculate.getChoose(q, s.charAt(3)));
 
         // Nếu xem lại , đã điền đáp án
         if (choose.get(cs).equals("A")) {
@@ -611,7 +611,7 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
         int dung = 0;
         int sai = 0;
         for (int i = 0; i < list.size(); i++) {
-            if (this.getActualAnswer(list.get(i), answerRandom.get(i)).equals(choose.get(i))) {
+            if (calculate.getActualAnswer(list.get(i), answerRandom.get(i)).equals(choose.get(i))) {
                 dung++;
             } else {
                 sai++;
@@ -657,8 +657,8 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
             for (int i = 0; i < list.size(); i++) {
                 listIdQuestion.add(list.get(i).getQuestionID());
                 listAnswer.add(choose.get(i));
-                listTrueAnswer.add(this.getActualAnswer(list.get(i), answerRandom.get(i)));
-                JOptionPane.showMessageDialog(null, "Add Id = " + list.get(i).getQuestionID() + ", Answer = " + choose.get(i) + ", Answer true= " + this.getActualAnswer(list.get(i), answerRandom.get(i)));
+                listTrueAnswer.add(calculate.getActualAnswer(list.get(i), answerRandom.get(i)));
+                JOptionPane.showMessageDialog(null, "Add Id = " + list.get(i).getQuestionID() + ", Answer = " + choose.get(i) + ", Answer true= " + calculate.getActualAnswer(list.get(i), answerRandom.get(i)));
             }
             bean1.setListIdQuestion(listIdQuestion);
             bean1.setListIdAnswer(listAnswer);
@@ -710,8 +710,8 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
                 for (int i = 0; i < list.size(); i++) {
                     listIdQuestion.add(list.get(i).getQuestionID());
                     listAnswer.add(choose.get(i));
-                    listTrueAnswer.add(this.getActualAnswer(list.get(i), answerRandom.get(i)));
-                    JOptionPane.showMessageDialog(null, "Add Id = " + list.get(i).getQuestionID() + ", Answer = " + choose.get(i) + ", Answer true= " + this.getActualAnswer(list.get(i), answerRandom.get(i)));
+                    listTrueAnswer.add(calculate.getActualAnswer(list.get(i), answerRandom.get(i)));
+                    JOptionPane.showMessageDialog(null, "Add Id = " + list.get(i).getQuestionID() + ", Answer = " + choose.get(i) + ", Answer true= " + calculate.getActualAnswer(list.get(i), answerRandom.get(i)));
                 }
                 bean.setListIdQuestion(listIdQuestion);
                 bean.setListIdAnswer(listAnswer);
@@ -745,8 +745,7 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
         jScrollPane1.removeAll();
         jScrollPane1.setSize(100, 100);
         jScrollPane1.setPreferredSize(new Dimension(200, 200));
-//        jTpNoiDung.setPreferredSize(new Dimension(200, 200));
-       //jScrollPane1.add(jTpNoiDung);
+
         this.repaint();
        this.jScrollPane1.setVisible(true);
        //this.add(jScrollPane1);
@@ -755,6 +754,11 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
         pack();
 
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        Frm_SinhVien.isTest = false;
+    }//GEN-LAST:event_formWindowClosed
 
     public void resetLuachon() {
         btg.clearSelection();
@@ -837,46 +841,4 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
         }
     }
 
-    // Doi vi tri cac cau tra loi
-    private String randomAnswer() {
-        char[] ch = "ABCD".toCharArray();
-        List<Integer> lst = new ArrayList<Integer>();
-        Random r = new Random();
-        while (lst.size() < 4) {
-            int next = r.nextInt(4);
-            if (!lst.contains(next)) {
-                lst.add(next);
-            }
-        }
-        String s = "";
-        for (int i = 0; i < lst.size(); i++) {
-            s += ch[lst.get(i)];
-        }
-        return s;
-    }
-
-    // Load danh sach cau hoi va cac dap an sau khi trao doi dap an
-    private String getChoose(Question q, char ch) {
-        if (ch == 'A') {
-            return q.getChooseA();
-        }
-        if (ch == 'B') {
-            return q.getChooseB();
-        }
-        if (ch == 'C') {
-            return q.getChooseC();
-        }
-        if (ch == 'D') {
-            return q.getChooseD();
-        }
-        return "";
-    }
-
-    // Lay dap an dung sau khi da trao doi vi tri cau tra loi
-    private String getActualAnswer(Question q, String s) {
-        int i = s.indexOf(q.getAnswer());
-        String trueAnswer = "ABCD".charAt(i) + "";
-        return trueAnswer;
-
-    }
 }

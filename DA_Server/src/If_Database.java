@@ -132,6 +132,10 @@ public interface If_Database extends Remote {
     public List<Exam> getAllExam() throws RemoteException;
 
     public List<Exam> getCurrentExam() throws RemoteException;
+    
+    public int getTotalTestOfExam(Exam e) throws RemoteException;
+            
+    public int getTotalTestExamOfUser(Exam e, Users u) throws RemoteException;
 
     public boolean insertExam(Exam e) throws RemoteException;
 
