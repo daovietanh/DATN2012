@@ -40,7 +40,6 @@ public class CriticalStream {
                 // syntax transmit in line
                 String syntax = string_write;
                 Obj_writer.println(syntax);
-                //logger.WriteLogger("WRITE:"+syntax);
             }
         } catch (Exception e) {
         }

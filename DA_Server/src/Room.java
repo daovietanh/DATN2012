@@ -13,7 +13,6 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,7 +42,6 @@ public class Room extends Thread{
             // broadcast account leave room
             Broadcast_State_OutRoom(obj, obj.getNameElement());
         }
-
     }
     private void Broadcast_State_OutRoom(RoomElement User_OutRoom,String Name_User ){
         String Message = "Login" +"User "+ Name_User + " sign out";
@@ -74,23 +72,6 @@ public class Room extends Thread{
                         // checking exist this room
                         String subMessage = message.replaceFirst("Login", "");
                         this.addElement(accept, subMessage);
-//                        String[] splits = subMessage.split(Const.SAPERATOR);
-//                        if (splits.length == 2){
-//                            String name_Room = splits[0];
-//                            String account = splits[1];
-//                            Room temp_Room = checking_existRoom(name_Room);
-//                            if (temp_Room != null){
-//                                CriticalStream.WriterStream(writer, Const.ROOM_SEND_REQUEST_ACCEPT_JOIN_ROOM, temp_Room.name_Room);
-//                                message = CriticalStream.ReaderStream(reader);
-//                                if (message.startsWith(Const.ROOM_SEND_CONNECTED)){
-//                                    temp_Room.addElement(this, accept, account);
-//                                }
-//
-//                            }else{
-//                                CriticalStream.WriterStream(writer, Const.ROOM_SEND_REQUEST_NOT_ACCEPT_JOIN_ROOM, "");
-//                            }
-//                        }
-
 
                     }else{
                         //do something else

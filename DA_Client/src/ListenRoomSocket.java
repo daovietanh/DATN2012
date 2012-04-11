@@ -1,9 +1,5 @@
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -12,8 +8,6 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyleContext;
@@ -42,8 +36,8 @@ public class ListenRoomSocket extends Thread {
             sock_Listen = new Socket("localhost", 1990);
             reader = new BufferedReader(new InputStreamReader(sock_Listen.getInputStream()));
             writer = new PrintWriter(new OutputStreamWriter(sock_Listen.getOutputStream()),true);
-            //String reply = CriticalStream.ReaderStream(reader);
-            CriticalStream.WriterStream(writer, "Login", User.username);
+
+            CriticalStream.WriterStream(writer, "Login", Session.user.getUserName());
             this.start();
 
 
