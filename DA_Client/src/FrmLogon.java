@@ -50,14 +50,14 @@ public class FrmLogon extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txtUsername.setText("admin");
+        txtUsername.setText("SinhVien");
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
             }
         });
 
-        txtPassword.setText("123");
+        txtPassword.setText("1234");
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
@@ -96,7 +96,7 @@ public class FrmLogon extends javax.swing.JFrame {
 
         jLabel2.setText("Mật Khẩu");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24));
         jLabel3.setText("ĐĂNG NHẬP");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
