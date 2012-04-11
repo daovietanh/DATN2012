@@ -3,6 +3,7 @@ import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +41,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
     /** Creates new form Frm_SinhVien */
     public Frm_SinhVien() {
         initComponents();
-        RoomChat = new ListenRoomSocket(User.username);
+        RoomChat = new ListenRoomSocket(Session.user.getUserName());
         RoomChat.setTextPanelView(View);
     }
     
@@ -62,9 +63,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         lbl = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
         txtDiaChi = new javax.swing.JTextField();
-        jCbLop = new javax.swing.JComboBox();
         jLabel19 = new javax.swing.JLabel();
         pass = new javax.swing.JPasswordField();
         jButton2 = new javax.swing.JButton();
@@ -72,7 +71,11 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         cbx = new javax.swing.JCheckBox();
         jCbQuyenHan = new javax.swing.JComboBox();
         jLabel25 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDate = new com.toedter.calendar.JDateChooser();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        txtLastLogin = new javax.swing.JTextField();
         jPanelThi = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
@@ -135,6 +138,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -154,13 +158,11 @@ public class Frm_SinhVien extends javax.swing.JFrame {
 
         jLabel18.setText("Tên Đăng Nhập");
 
-        lbl.setText("lbl");
+        lbl.setText("                 ");
 
         jLabel20.setText("Ngày Sinh");
 
         jLabel21.setText("Địa Chỉ");
-
-        jLabel22.setText("Lớp");
 
         jLabel19.setText("Mật Khẩu");
 
@@ -180,51 +182,67 @@ public class Frm_SinhVien extends javax.swing.JFrame {
 
         jLabel25.setText("Quyền hạn");
 
+        jLabel27.setText("TEST ONLINE Version 1.02");
+
+        jLabel28.setText("Develop by .....");
+
+        jLabel22.setText("Lần đăng nhập cuối");
+
         javax.swing.GroupLayout jPanelThongTinLayout = new javax.swing.GroupLayout(jPanelThongTin);
         jPanelThongTin.setLayout(jPanelThongTinLayout);
         jPanelThongTinLayout.setHorizontalGroup(
             jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelThongTinLayout.createSequentialGroup()
+                .addContainerGap(800, Short.MAX_VALUE)
+                .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel28)
+                    .addComponent(jLabel27))
+                .addContainerGap())
             .addGroup(jPanelThongTinLayout.createSequentialGroup()
+                .addGap(237, 237, 237)
                 .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelThongTinLayout.createSequentialGroup()
-                        .addGap(357, 357, 357)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel22)
+                        .addContainerGap())
                     .addGroup(jPanelThongTinLayout.createSequentialGroup()
-                        .addGap(284, 284, 284)
                         .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelThongTinLayout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addGap(88, 88, 88)
-                                .addComponent(lbl, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
-                            .addGroup(jPanelThongTinLayout.createSequentialGroup()
+                            .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanelThongTinLayout.createSequentialGroup()
+                                    .addGap(73, 73, 73)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel17)
-                                    .addComponent(jLabel20)
-                                    .addComponent(jLabel21)
-                                    .addComponent(jLabel22)
-                                    .addComponent(jLabel19)
-                                    .addComponent(jLabel25))
-                                .addGap(83, 83, 83)
-                                .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                                    .addComponent(jCbQuyenHan, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jCbLop, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbx)
-                                    .addComponent(txtDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                                    .addComponent(pass, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                                    .addComponent(txtHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
-                                .addGap(62, 62, 62))
-                            .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE))))
-                .addGap(471, 471, 471))
-            .addGroup(jPanelThongTinLayout.createSequentialGroup()
-                .addGap(393, 393, 393)
-                .addComponent(jButton2)
-                .addContainerGap(445, Short.MAX_VALUE))
+                                    .addGroup(jPanelThongTinLayout.createSequentialGroup()
+                                        .addComponent(jLabel18)
+                                        .addGap(88, 88, 88)
+                                        .addComponent(lbl, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
+                                    .addGroup(jPanelThongTinLayout.createSequentialGroup()
+                                        .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel17)
+                                            .addComponent(jLabel20)
+                                            .addComponent(jLabel21)
+                                            .addComponent(jLabel19)
+                                            .addComponent(jLabel25))
+                                        .addGap(83, 83, 83)
+                                        .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jDate, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                            .addComponent(jCbQuyenHan, 0, 165, Short.MAX_VALUE)
+                                            .addComponent(cbx)
+                                            .addComponent(txtDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                            .addComponent(pass, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                            .addComponent(txtHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                            .addComponent(txtLastLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
+                                        .addGap(62, 62, 62))
+                                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)))
+                            .addGroup(jPanelThongTinLayout.createSequentialGroup()
+                                .addGap(109, 109, 109)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(310, 310, 310))))
         );
         jPanelThongTinLayout.setVerticalGroup(
             jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelThongTinLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel13)
                 .addGap(48, 48, 48)
                 .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -241,16 +259,16 @@ public class Frm_SinhVien extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(jCbLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtLastLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
                     .addComponent(jCbQuyenHan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -260,7 +278,11 @@ public class Frm_SinhVien extends javax.swing.JFrame {
                 .addComponent(jLabel24)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jLabel27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel28)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thông Tin", new javax.swing.ImageIcon(getClass().getResource("/resource/Profile.png")), jPanelThongTin); // NOI18N
@@ -776,7 +798,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -822,9 +844,6 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         //dang lam do . quay lai sau
         Session.kythi = exam;
         // Ngay
-        //Date now =new Date(System.currentTimeMillis());
-        //SimpleDateFormat dayFormat= new SimpleDateFormat("dd-MM-yyyy");
-        //String d=dayFormat.format(now.getTime());
         Calendar c = Calendar.getInstance();
         
         Session.ngaythi = c;
@@ -836,13 +855,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
             Logger.getLogger(Frm_SinhVien.class.getName()).log(Level.SEVERE, null, ex);
         }
         Session.thoigian = exam.getTimes();
-        //
-//            String[] idCH = Cl_Client.c.getIdCauHoi(Session.monthi, Session.socauhoi);
-//            String idKyThi = Cl_Client.c.getItemKyThi(kythi, 1);
-//            String[] idCH = Cl_Client.c.getIdCauHoiKyThi(idKyThi);
-        //if (idCH.length < Session.socauhoi) {
-        //    Cl_Client.ShowError("Không đủ câu hỏi");
-        //} else {
+
         FrmThi a = new FrmThi();
         a.setVisible(true);
         //}
@@ -934,34 +947,40 @@ public class Frm_SinhVien extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-//        String user = User.username;
-//        String id="";
-//        try {
-//            id = Cl_Client.c.getIDUser(user);
-//        } catch (RemoteException ex) {
-//            Logger.getLogger(Frm_SinhVien.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        if (pass.getText().equals("") || txtHoTen.getText().equals(""))
-//        {
-//            Cl_Client.ShowError("Hãy nhập đầy đủ thông tin !");
-//            return;
-//        }
-//        String[] r = jCbThang.getSelectedItem().toString().split(" ");
-//        String ngaysinh = jCbNam.getSelectedItem().toString() + "-" + r[1] + "-" + jCbNgay.getSelectedItem().toString();
-//        String ok = "0";
-//        if (cbx.isSelected()) {
-//            ok = "1";
-//        }
-//        try {
-//            boolean k = Cl_Client.c.editTaiKhoan(id, user, pass.getText().toString(), jCbQuyenHan.getSelectedItem().toString(), ok, txtHoTen.getText(), ngaysinh, txtDiaChi.getText(), jCbLop.getSelectedItem().toString());
-//            if (k) {
-//                Cl_Client.ShowSuccess("Cập nhật thành công");
-//            } else {
-//                Cl_Client.ShowError("Lỗi rồi");
-//            }
-//        } catch (RemoteException ex) {
-//            Logger.getLogger(Pnl_CauHoi.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        SimpleDateFormat sdf= new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            String diachi = txtDiaChi.getText();
+            String birthday;
+            try {
+                birthday = sdf.format(jDate.getCalendar().getTime());
+            } catch(Exception ex){
+                birthday = "";
+            }
+            String password = pass.getText();
+            if (password.length()  <= 3) {
+                JOptionPane.showMessageDialog(null, " Mật khẩu quá ngắn");
+                return;
+            }
+            String name = txtHoTen.getText();
+            if (name.length() <3 ) {
+                JOptionPane.showMessageDialog(null, " Vui lòng điền tên thật của bạn ");
+                return;
+            }
+            Users bean = Session.user ;
+            bean.setAddress(diachi);
+            bean.setPassword(password);
+            bean.setBirthday(birthday);
+            bean.setFullName(name);
+            boolean k = Cl_Client.c.updateUser(bean);
+            if (k) {
+                Cl_Client.ShowSuccess("Cập nhật thành công");
+                
+            } else {
+                Cl_Client.ShowError("Lỗi rồi");
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(Pnl_CauHoi.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1045,12 +1064,13 @@ public class Frm_SinhVien extends javax.swing.JFrame {
     
     public void loadform() {
         try {
-            idUser = Session.user.getUserID();
+            Users user = Session.user;
+            idUser = user.getUserID();
             // --------------- load table 
+            // Lich su thi
             jTableLichSu.setModel(Cl_Client.c.getAllTrainToTable());
             // ------------------  Tab Thi  --------------------------
-            Cl_Client c = new Cl_Client();
-            String username = User.username;
+            String username = user.getUserName();
             //String id = Cl_Client.c.getIDUser(user);
 
             // Add mon thi
@@ -1078,10 +1098,6 @@ public class Frm_SinhVien extends javax.swing.JFrame {
             for (int i = 2; i <= 20; i++) {
                 jCbSoCau.addItem(i);
             }
-            // Thoi gian
-
-            // Lich su thi
-            //            /jTableLichSu.setModel(Cl_Client.c.getLichSuThi(id));
 
             // Ky Thi dang dien ra
             List<Exam> currentExam = Cl_Client.c.getCurrentExam();
@@ -1094,7 +1110,6 @@ public class Frm_SinhVien extends javax.swing.JFrame {
 
             // ------------  Tab Thông Tin Tài Khoản  ------------------
             // Hien thị thông tin sinh viên lên
-            Users user = Session.user;
             if (user.getEnable()) {
                 cbx.setSelected(true);
             } else {
@@ -1104,6 +1119,19 @@ public class Frm_SinhVien extends javax.swing.JFrame {
             // Thông tin cá nhân
             lbl.setText(username);
             txtHoTen.setText(user.getFullName());
+            txtLastLogin.setText(user.getLastLoginDate());
+            try {
+                String dateString = user.getBirthday();
+                String s[] = dateString.split("-");
+                int year = Integer.parseInt(s[2])-1900;
+                int month = Integer.parseInt(s[1])- 1;
+                int date = Integer.parseInt(s[0]);
+                Date d = new Date(year, month, date);
+                jDate.setDate(d);
+            } catch(Exception e){
+                
+            }
+            txtDiaChi.setText(user.getAddress());
         } catch (RemoteException ex) {
             Logger.getLogger(Frm_SinhVien.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1136,11 +1164,10 @@ public class Frm_SinhVien extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jCKyThi;
     private javax.swing.JComboBox jCbDoKho;
-    private javax.swing.JComboBox jCbLop;
     private javax.swing.JComboBox jCbMonThi;
     private javax.swing.JComboBox jCbQuyenHan;
     private javax.swing.JComboBox jCbSoCau;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDate;
     private javax.swing.JLabel jLTrangthai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1161,6 +1188,8 @@ public class Frm_SinhVien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1197,9 +1226,17 @@ public class Frm_SinhVien extends javax.swing.JFrame {
     private javax.swing.JTextField txtConLaiKT;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtHoTen;
+    private javax.swing.JTextField txtLastLogin;
     private javax.swing.JTextField txtMonThiKT;
     private javax.swing.JTextField txtSocau;
     private javax.swing.JTextField txtThoiGian;
     private javax.swing.JTextField txtThoiGianKT;
     // End of variables declaration//GEN-END:variables
+
+
+    
+
+
+
+
 }
