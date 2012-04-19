@@ -29,13 +29,15 @@ import vn.com.dva.entities.Subject;
  * @author VietAnh
  */
 public class Frm_GiaoVien extends javax.swing.JFrame {
-
+    private final ListenRoomSocket RoomChat;
     //static List<Question> questionExam  = new ArrayList<Question>();
     DefaultListModel model = new DefaultListModel();
     DefaultListModel model1 = new DefaultListModel();
     /** Creates new form Frm_GiaoVien */
     public Frm_GiaoVien() {
         initComponents();
+        RoomChat = new ListenRoomSocket(Session.user.getUserName());
+        RoomChat.setTextPanelView(View);
     }
 
     /** This method is called from within the constructor to
@@ -50,6 +52,12 @@ public class Frm_GiaoVien extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel8 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        View = new javax.swing.JTextPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        chat = new javax.swing.JTextPane();
+        btnGui = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -98,17 +106,71 @@ public class Frm_GiaoVien extends javax.swing.JFrame {
         });
 
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14));
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Giao Tiếp"));
+
+        jScrollPane1.setViewportView(View);
+
+        chat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                chatKeyTyped(evt);
+            }
+        });
+        jScrollPane2.setViewportView(chat);
+
+        btnGui.setText("Gửi");
+        btnGui.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuiActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGui)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(btnGui, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 832, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(410, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(" Trang Chủ  ", new javax.swing.ImageIcon(getClass().getResource("/resource/home1.png")), jPanel8); // NOI18N
@@ -649,6 +711,34 @@ public class Frm_GiaoVien extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
+        private void btnGuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiActionPerformed
+        // TODO add your handling code here:
+        String Message = chat.getText();
+        RoomChat.writeMessage_on_panelView("Me" + ": " + Message + "\n");
+        chat.setText("");
+        try {
+            RoomChat.Chatting(Message + "\n");
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnGuiActionPerformed
+
+    private void chatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chatKeyTyped
+        // TODO add your handling code here:
+         if (evt.getKeyChar() == '\n') {
+            if (evt.isControlDown()) {
+                chat.setText(chat.getText() + "\n");
+            } else {
+                String Message = chat.getText();
+                RoomChat.writeMessage_on_panelView("Me" + ": " + Message);
+                chat.setText("");
+                try {
+                    RoomChat.Chatting(Message + "\n");
+                } catch (Exception e) {
+                }
+            }
+        }
+    }//GEN-LAST:event_chatKeyTyped
+
 
     public void loadList()
     {
@@ -686,6 +776,9 @@ public class Frm_GiaoVien extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextPane View;
+    private javax.swing.JButton btnGui;
+    private javax.swing.JTextPane chat;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -705,8 +798,11 @@ public class Frm_GiaoVien extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;

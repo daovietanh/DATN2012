@@ -143,7 +143,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         });
 
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14));
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 24));
         jLabel13.setText("Thông Tin Cá Nhân");
@@ -717,7 +717,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
 
         jPanel5 = new Pnl_ThongKe();
 
-        jTabbedPane1.addTab("Thống Kê", jPanel5);
+        jTabbedPane1.addTab("Thống Kê", new javax.swing.ImageIcon(getClass().getResource("/resource/Bar Chart.png")), jPanel5); // NOI18N
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
