@@ -7,7 +7,6 @@ package vn.com.dva.dao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import javax.swing.JOptionPane;
 import vn.com.dva.entities.Exam_Question;
 import vn.com.dva.entities.Question;
 import vn.com.dva.generic.spi.MyGeneric;
@@ -51,6 +50,12 @@ public class Exam_Question_DAO {
         return null;
     }
     
+    /**
+     * Hàm lấy danh sách câu hỏi theo kỳ thi
+     * @param id
+     * @param n : Số câu hỏi muốn lấy
+     * @return : Ko thỏa mãn trả giá trị null
+     */
     public List<Question> getListQuestionByExam(Long id ,int n){
         List<Question> list = new ArrayList<Question>();
         Random r = new Random();
@@ -68,7 +73,12 @@ public class Exam_Question_DAO {
     }
     
     
-    
+    /**
+     * Hàm lấy danh sách n câu hỏi theo môn học
+     * @param id
+     * @param n
+     * @return 
+     */
     public List<Question> getListQuestionBySubject(Long id , int n){
         List<Question> list = new ArrayList<Question>();
         Random r = new Random();
@@ -85,6 +95,11 @@ public class Exam_Question_DAO {
         return list;
     }
     
+    /**
+     * Hàm lấy danh sách tất cả các câu hỏi theo kỳ thi
+     * @param id
+     * @return 
+     */
     public List<Exam_Question> getAllExamQuestionByExam(Long id){
         List<Object> listObject = mydao.getData1Field(Exam_Question.class, "ExamID",id);
         List<Exam_Question> list = new ArrayList<Exam_Question>();

@@ -905,6 +905,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         }
         try {
             // TODO add your handling code here:
+            isTest = false;
             if (jCbMonThi.getSelectedIndex() == 0 || jCbDoKho.getSelectedIndex() == 0 || jCbSoCau.getSelectedIndex() == 0) {
                 return;
             }
@@ -912,7 +913,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
             int socau = Integer.parseInt(jCbSoCau.getSelectedItem().toString());
             String thoigian = txtThoiGian.getText();
             LevelAll dokho = (LevelAll) jCbDoKho.getSelectedItem();
-            //
+            // Lưu lại các thông tin
             Session.monthi = monthi;
             Session.socauhoi = socau;
             Session.thoigian = Integer.parseInt(thoigian);
@@ -927,7 +928,6 @@ public class Frm_SinhVien extends javax.swing.JFrame {
                 Cl_Client.ShowError("Không đủ câu hỏi");
                 return;
             }
-            //List<Question> list = Cl_Client.c.getListQuestionBySubject(monthi.getSubjecId(), socau);
             this.dispose();
             FrmThi a = new FrmThi();
             FrmThi.isOpen = true;

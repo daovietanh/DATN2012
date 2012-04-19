@@ -6,7 +6,6 @@ package vn.com.dva.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import vn.com.dva.entities.DetailTrain;
 import vn.com.dva.generic.spi.MyGeneric;
 

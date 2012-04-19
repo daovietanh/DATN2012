@@ -87,11 +87,8 @@ public class Question_DAO {
                
                String level = "Khó";
                if (q.getLevelID() == 1) level = "Dễ" ;
-               else if (q.getLevelID() == 2 ) level = "Trung Bình" ;
-               
+               else if (q.getLevelID() == 2 ) level = "Trung Bình" ;          
 
-               
-               
                mode.addRow(new Object[]{q.getQuestionID() , q.getQuestionTitle() , q.getUserID(), nameUser, level , q.getContent(), q.getDateCreate()});
            }
        return mode; 

@@ -59,6 +59,10 @@ public class ResultExam_DAO {
         return list;
     }
 
+    /**
+     * Hàm lấy danh sách các kết quả kỳ thi
+     * @return 
+     */
     public List<ResultExam> getAllResultExam() {
         List<Object> listObject = mydao.getAllData(ResultExam.class);
         List<ResultExam> list = new ArrayList<ResultExam>();
@@ -70,6 +74,11 @@ public class ResultExam_DAO {
         return list;
     }
 
+    /**
+     * Hàm lấy danh sách kết quả của kỳ thi đã biết sắp xếp theo điểm giảm dần
+     * @param id
+     * @return 
+     */
     public List<ResultExam> getAllResultExamByExamIDSortScore(Long id) {
         Object[] listObject =mydao.getData1Field(ResultExam.class, "ExamID", id).toArray();
         ResultExam a[];

@@ -463,12 +463,10 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
         lblUser.setText(user.getUserName());
         lblHoTen.setText(user.getFullName());
         lblNgaySinh.setText(user.getBirthday());
-        //lblLop.setText();
         // Ky thi
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         lblNgayThi.setText(sdf.format(new Date()));
         if (Session.kythi != null) {
-            JOptionPane.showMessageDialog(null, "Ky thi = " + Session.kythi.getExamName());
             lblKyThi.setText(Session.kythi.getExamName());
             lblLanThi.setText("");
         } else {
@@ -476,22 +474,27 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
         }
 
         lblMonThi.setText(Session.monthi.getSubjectName());
-
-        // tai 1 cau hoi
+        
         loadDSCauHoi();
+        // tai 1 cau hoi đầu tiên
         tai1cauhoi(0);
 
     }//GEN-LAST:event_formWindowOpened
 
     public void loadDSCauHoi() {
         try {
+            // Nếu test (ko phải thi )
             if (!Frm_SinhVien.isTest) {
-                list = Cl_Client.c.getListQuestionBySubject(Session.monthi.getSubjecId(), Session.socauhoi);
+                // Lấy danh sách câu hỏi theo môn thi thử
+                list = Cl_Client.c.getAllQuestionBySubject(Session.monthi.getSubjecId());
+                // Lọc danh sách câu hỏi lây số câu hỏi theo độ khó 
+                list = Calculate.getListNQuestionByLevel(list, n, Session.dokho);                
             } else {
                 list = Cl_Client.c.getListQuestionByExam(Session.kythi.getExamID(), n);
             }
             if (list == null) {
-                JOptionPane.showMessageDialog(null, "Ko du cau hoi");
+                JOptionPane.showMessageDialog(null, "Không đủ câu hỏi để làm");
+                return;
             }
             JOptionPane.showMessageDialog(null, "so cau hoi = " + list.size());
             for (Question q : list) {
@@ -510,6 +513,7 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
         lblSo.setText((cs + 1) + "");
         lblTongSo.setText("/" + n);
         Question q = list.get(cs);
+        JOptionPane.showMessageDialog(null, "Độ khó = "+ q.getLevelID());
         jTpNoiDung.setText(q.getContent());
 
         String s = answerRandom.get(cs);

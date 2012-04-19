@@ -58,7 +58,10 @@ public class Exam_DAO {
         return list;
     }
      
-     
+    /**
+      * Hàm lấy danh sách các kỳ thi đang diễn ra
+      * @return 
+      */ 
     public List<Exam> getCurrentExam(){
         List<Object> listObject = mydao.getAllData(Exam.class);
         List<Exam> list = new ArrayList<Exam>();
@@ -77,8 +80,7 @@ public class Exam_DAO {
     }
      
      
-     public DefaultTableModel getAllSubjecttoTable() {
-       
+     public DefaultTableModel getAllSubjecttoTable() {       
        DefaultTableModel mode = new DefaultTableModel();
        mode.addColumn("ID");
        mode.addColumn("Tên Kỳ Thi");       
@@ -101,7 +103,11 @@ public class Exam_DAO {
     }     
      
      
-     
+    /**
+      * Hàm lấy tổng số lần đã làm của 1 kỳ thi
+      * @param e
+      * @return 
+      */ 
     public int getTotalTestOfExam(Exam e){
         List<Object> lst = mydao.getData1Field(ResultExam.class, "ExamID", e.getExamID());
         if (! lst.isEmpty())
@@ -109,6 +115,12 @@ public class Exam_DAO {
         return 0;
     }
      
+    /**
+     * Hàm lấy tổng số lần đã làm 1 kỳ thi của 1 người dùng
+     * @param e
+     * @param u
+     * @return 
+     */
     public int getTotalTestExamOfUser(Exam e, Users u){
         List<ResultExam> lst = mydao.getData2Field(ResultExam.class, "ExamID", "UserID", e.getExamID(), u.getUserID());
         return lst.size();
