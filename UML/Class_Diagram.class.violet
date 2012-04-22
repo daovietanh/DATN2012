@@ -103,7 +103,7 @@ LevelName
 LevelDecription
 Percent_Easy
 Percent_Normal
-Percent_Hard</string> 
+</string> 
      </void> 
     </void> 
     <void property="methods"> 
@@ -120,8 +120,8 @@ Percent_Hard</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>775.0</double> 
-     <double>203.0</double> 
+     <double>777.0</double> 
+     <double>181.0</double> 
     </void> 
    </object> 
   </void> 
@@ -152,8 +152,8 @@ DateCreate
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>956.0</double> 
-     <double>327.0</double> 
+     <double>903.0</double> 
+     <double>305.0</double> 
     </void> 
    </object> 
   </void> 
@@ -203,7 +203,7 @@ SubjectID
 Date_Start
 Date_End
 Time
-Total_UserDo
+isTotalQuestion
 Total_DcLam</string> 
      </void> 
     </void> 
@@ -221,7 +221,7 @@ Total_DcLam</string>
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
      <double>608.0</double> 
-     <double>186.0</double> 
+     <double>185.0</double> 
     </void> 
    </object> 
   </void> 
@@ -259,8 +259,7 @@ QuestionID</string>
       <string>ResultID
 ExamID
 UserID
-Total_RightQuestion
-Total_WrongQuestion
+Time
 Date_Test</string> 
      </void> 
     </void> 
@@ -288,9 +287,9 @@ Date_Test</string>
      <void property="text"> 
       <string>DetailID
 ResultID
-List_Question
-List_Answer
-List_TrueAnswer</string> 
+Question
+Answer
+TrueAnswer</string> 
      </void> 
     </void> 
     <void property="methods"> 
@@ -307,7 +306,7 @@ List_TrueAnswer</string>
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
      <double>782.0</double> 
-     <double>16.0</double> 
+     <double>15.0</double> 
     </void> 
    </object> 
   </void> 
@@ -395,8 +394,8 @@ Other
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>947.0</double> 
-     <double>186.0</double> 
+     <double>922.0</double> 
+     <double>164.0</double> 
     </void> 
    </object> 
   </void> 
@@ -406,9 +405,9 @@ Other
      <void property="text"> 
       <string>DetailTrainID
 TrainID
-List_Question
-List_Answer
-List_TrueAnswer</string> 
+QuestionID
+Answer
+Comment</string> 
      </void> 
     </void> 
     <void property="methods"> 
@@ -424,8 +423,8 @@ List_TrueAnswer</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>860.0</double> 
-     <double>493.0</double> 
+     <double>844.0</double> 
+     <double>501.0</double> 
     </void> 
    </object> 
   </void> 

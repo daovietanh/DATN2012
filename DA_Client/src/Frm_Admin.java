@@ -51,6 +51,7 @@ public class Frm_Admin extends javax.swing.JFrame {
 
         tabMain.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         tabMain.setFont(new java.awt.Font("Tahoma", 0, 14));
+        tabMain.setPreferredSize(new java.awt.Dimension(893, 562));
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
@@ -60,7 +61,7 @@ public class Frm_Admin extends javax.swing.JFrame {
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 606, Short.MAX_VALUE)
         );
 
         tabMain.addTab("Trang Chủ", new javax.swing.ImageIcon(getClass().getResource("/resource/home1.png")), jPanelMain); // NOI18N
@@ -73,7 +74,7 @@ public class Frm_Admin extends javax.swing.JFrame {
         );
         jPTaiKhoanLayout.setVerticalGroup(
             jPTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 606, Short.MAX_VALUE)
         );
 
         jPTaiKhoan = new Pnl_TaiKhoan();
@@ -88,7 +89,7 @@ public class Frm_Admin extends javax.swing.JFrame {
         );
         jPMonHocLayout.setVerticalGroup(
             jPMonHocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 606, Short.MAX_VALUE)
         );
 
         jPMonHoc = new Pnl_MonHoc();
@@ -103,7 +104,7 @@ public class Frm_Admin extends javax.swing.JFrame {
         );
         jPCauHoiLayout.setVerticalGroup(
             jPCauHoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 606, Short.MAX_VALUE)
         );
 
         jPCauHoi = new Pnl_CauHoi();
@@ -118,7 +119,7 @@ public class Frm_Admin extends javax.swing.JFrame {
         );
         jPKyThiLayout.setVerticalGroup(
             jPKyThiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 606, Short.MAX_VALUE)
         );
 
         tabMain.addTab("Kỳ Thi", new javax.swing.ImageIcon(getClass().getResource("/resource/Ky Thi.png")), jPKyThi); // NOI18N
@@ -131,7 +132,7 @@ public class Frm_Admin extends javax.swing.JFrame {
         );
         jPDoKhoLayout.setVerticalGroup(
             jPDoKhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 606, Short.MAX_VALUE)
         );
 
         jPDoKho = new Pnl_DoKho();
@@ -146,23 +147,25 @@ public class Frm_Admin extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 606, Short.MAX_VALUE)
         );
 
         jPanel3 = new Pnl_BackUpData();
 
-        tabMain.addTab("Chat", new javax.swing.ImageIcon(getClass().getResource("/resource/Comment.png")), jPanel3); // NOI18N
+        tabMain.addTab("BackUp", new javax.swing.ImageIcon(getClass().getResource("/resource/Comment.png")), jPanel3); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabMain, javax.swing.GroupLayout.DEFAULT_SIZE, 993, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabMain, javax.swing.GroupLayout.PREFERRED_SIZE, 993, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tabMain, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                .addComponent(tabMain, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

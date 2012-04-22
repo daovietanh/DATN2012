@@ -498,7 +498,7 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
             }
             JOptionPane.showMessageDialog(null, "so cau hoi = " + list.size());
             for (Question q : list) {
-                JOptionPane.showMessageDialog(null, " id = " + q.getQuestionID());
+                //JOptionPane.showMessageDialog(null, " id = " + q.getQuestionID());
                 String s = calculate.randomAnswer();
                 answerRandom.add(s);
                 choose.add("");
@@ -623,8 +623,8 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
         Session.diemso = (dung * 100 / (dung + sai));
         Session.socaudung = dung;
         Session.socausai = sai;
-        JOptionPane.showMessageDialog(null, "So cau dung = " + dung);
-        JOptionPane.showMessageDialog(null, "So cau sai = " + sai);
+        //JOptionPane.showMessageDialog(null, "So cau dung = " + dung);
+        //JOptionPane.showMessageDialog(null, "So cau sai = " + sai);
         FrmKetQuaThi kq = new FrmKetQuaThi(list, choose, answerRandom,Session.monthi,list.size(),dung, false);
         kq.setVisible(true);
         t.stop();
@@ -648,7 +648,7 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
             bean.setDate_Train(sdf.format(new Date()));
             bean.setScore(Session.diemso);
             bean = Cl_Client.c.insertTrainGetId(bean);
-            JOptionPane.showMessageDialog(null, "Train ID =  " + bean.getTrainID());
+            //JOptionPane.showMessageDialog(null, "Train ID =  " + bean.getTrainID());
 
             // Luu chi tiet thi
             DetailTrain bean1 = new DetailTrain();
@@ -661,15 +661,15 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
                 listIdQuestion.add(list.get(i).getQuestionID());
                 listAnswer.add(choose.get(i));
                 listTrueAnswer.add(calculate.getActualAnswer(list.get(i), answerRandom.get(i)));
-                JOptionPane.showMessageDialog(null, "Add Id = " + list.get(i).getQuestionID() + ", Answer = " + choose.get(i) + ", Answer true= " + calculate.getActualAnswer(list.get(i), answerRandom.get(i)));
+                //JOptionPane.showMessageDialog(null, "Add Id = " + list.get(i).getQuestionID() + ", Answer = " + choose.get(i) + ", Answer true= " + calculate.getActualAnswer(list.get(i), answerRandom.get(i)));
             }
             bean1.setListIdQuestion(listIdQuestion);
             bean1.setListIdAnswer(listAnswer);
             bean1.setListAnswerRandom(answerRandom);
             if (Cl_Client.c.insertDetailTrain(bean1)) {
-                JOptionPane.showMessageDialog(null, "Insert ok");
+                //JOptionPane.showMessageDialog(null, "Insert ok");
             } else {
-                JOptionPane.showMessageDialog(null, "Insert faild");
+                //JOptionPane.showMessageDialog(null, "Insert faild");
             }
         } catch (RemoteException ex) {
             Logger.getLogger(FrmThi.class.getName()).log(Level.SEVERE, null, ex);
@@ -714,15 +714,15 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
                     listIdQuestion.add(list.get(i).getQuestionID());
                     listAnswer.add(choose.get(i));
                     listTrueAnswer.add(calculate.getActualAnswer(list.get(i), answerRandom.get(i)));
-                    JOptionPane.showMessageDialog(null, "Add Id = " + list.get(i).getQuestionID() + ", Answer = " + choose.get(i) + ", Answer true= " + calculate.getActualAnswer(list.get(i), answerRandom.get(i)));
+                    //JOptionPane.showMessageDialog(null, "Add Id = " + list.get(i).getQuestionID() + ", Answer = " + choose.get(i) + ", Answer true= " + calculate.getActualAnswer(list.get(i), answerRandom.get(i)));
                 }
                 bean.setListIdQuestion(listIdQuestion);
                 bean.setListIdAnswer(listAnswer);
                 bean.setListAnswerRandom(answerRandom);
                 if (Cl_Client.c.insertDetailResultExam(bean)){
-                    JOptionPane.showMessageDialog(null, "Insert ok");
+                    //JOptionPane.showMessageDialog(null, "Insert ok");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Insert faild");
+                    //JOptionPane.showMessageDialog(null, "Insert faild");
                 }
         } catch (RemoteException ex) {
             Logger.getLogger(FrmThi.class.getName()).log(Level.SEVERE, null, ex);
@@ -738,7 +738,7 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
 //       jScrollPane1.setSize(30, 100);
 //       jScrollPane1.removeAll();
 //        jTpNoiDung.setVisible(false);
-        JOptionPane.showMessageDialog(null, "click");
+        //JOptionPane.showMessageDialog(null, "click");
 //        jScrollPane1.resize(100, 120);
         //jScrollPane1.re
        // jTpNoiDung.setSize(100, 100);
