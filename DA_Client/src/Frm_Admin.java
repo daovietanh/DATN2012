@@ -122,6 +122,8 @@ public class Frm_Admin extends javax.swing.JFrame {
             .addGap(0, 606, Short.MAX_VALUE)
         );
 
+        jPKyThi = new Pnl_KyThi();
+
         tabMain.addTab("Kỳ Thi", new javax.swing.ImageIcon(getClass().getResource("/resource/Ky Thi.png")), jPKyThi); // NOI18N
 
         javax.swing.GroupLayout jPDoKhoLayout = new javax.swing.GroupLayout(jPDoKho);

@@ -1,8 +1,5 @@
 
 import java.rmi.Naming;
-import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import vn.com.dva.entities.config;

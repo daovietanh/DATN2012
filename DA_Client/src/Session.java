@@ -15,6 +15,10 @@ import vn.com.dva.entities.Users;
  * @author VietAnh
  */
 public class Session {
+    public final static String ADMIN = "Admin";
+    public final static String TEACHER = "Giáo Viên";
+    public final static String STUDENT = "Sinh Viên";
+    
     public static Users user ;
     public static Exam kythi ;
     public static Calendar ngaythi;

@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.decorator.*;
 import vn.com.dva.entities.Exam;
+import vn.com.dva.entities.GroupUser;
 import vn.com.dva.entities.LevelAll;
 import vn.com.dva.entities.Subject;
 import vn.com.dva.entities.Users;
@@ -30,10 +31,14 @@ import vn.com.dva.entities.Users;
  */
 public class Pnl_KyThi extends javax.swing.JPanel {
 
+    public final String ADMIN = "Admin";
+    public final String TEACHER = "Giáo Viên";
+    public final String STUDENT = "Sinh Viên";
     /** Creates new form Pnl_KyThi */
     public Pnl_KyThi() {
         initComponents();
         loadPanel();
+        setEnableComponent();
     }
 
     /** This method is called from within the constructor to
@@ -106,7 +111,7 @@ public class Pnl_KyThi extends javax.swing.JPanel {
         jLabel24 = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
         txtTotal = new javax.swing.JTextField();
-        jCbXoa = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
         txtSoCauHoiU = new javax.swing.JTextField();
         chkU = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -432,10 +437,10 @@ public class Pnl_KyThi extends javax.swing.JPanel {
         txtTotal.setText("0");
         txtTotal.setEnabled(false);
 
-        jCbXoa.setText("Xóa");
-        jCbXoa.addActionListener(new java.awt.event.ActionListener() {
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCbXoaActionPerformed(evt);
+                btnXoaActionPerformed(evt);
             }
         });
 
@@ -492,7 +497,7 @@ public class Pnl_KyThi extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCbXoa))
+                        .addComponent(btnXoa))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18)
@@ -553,7 +558,7 @@ public class Pnl_KyThi extends javax.swing.JPanel {
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButton4)
                                     .addComponent(jButton3)
-                                    .addComponent(jCbXoa)))
+                                    .addComponent(btnXoa)))
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel9)
@@ -852,7 +857,7 @@ public class Pnl_KyThi extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtDSMonThiCaretUpdate
 
-private void jCbXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbXoaActionPerformed
+private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
 // TODO add your handling code here:
     Long id = Main.client.getIDTable(jTKyThi);
     if (!id.equals("") || id != -1) {
@@ -864,7 +869,7 @@ private void jCbXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             Logger.getLogger(Pnl_KyThi.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-}//GEN-LAST:event_jCbXoaActionPerformed
+}//GEN-LAST:event_btnXoaActionPerformed
 
     private void chkUStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkUStateChanged
         // TODO add your handling code here:\
@@ -896,6 +901,7 @@ private void jCbXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnXoa;
     private javax.swing.JCheckBox chk;
     private javax.swing.JCheckBox chkU;
     private com.toedter.calendar.JDateChooser dateEnd;
@@ -912,7 +918,6 @@ private void jCbXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private javax.swing.JComboBox jCbMonThiE;
     private javax.swing.JComboBox jCbSoLuotLam;
     private javax.swing.JComboBox jCbSoLuotLamE;
-    private javax.swing.JButton jCbXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1058,4 +1063,34 @@ private void jCbXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         chk.setSelected(false);
 
     }
+
+    // Phan quyen dang nhap bang cach set enable cac component 
+    private void setEnableComponent() {
+        try {
+            Users user = Session.user;
+            GroupUser group = Cl_Client.c.getGroupByID(user.getGroupUserID());
+            setEnableComponent(group);
+        } catch(Exception ex){
+            return ;
+        }
+    }
+
+    // set enable the user dang nhap
+    private void setEnableComponent(GroupUser group) {
+        if (group.getGroupName().equals(ADMIN)){
+            setEnableAllComponent(false);
+        }
+        else setEnableAllComponent(true);
+    }
+    
+    // set true
+
+    private void setEnableAllComponent(boolean b) {
+        jButton1.setEnabled(b);
+        jButton2.setEnabled(b);
+        jButton3.setEnabled(b);
+        jButton4.setEnabled(b);
+        btnXoa.setEnabled(b);
+    }
+    
 }

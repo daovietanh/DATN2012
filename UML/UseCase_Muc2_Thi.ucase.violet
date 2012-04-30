@@ -50,8 +50,8 @@
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>380.0</double> 
-     <double>252.0</double> 
+     <double>606.0</double> 
+     <double>181.0</double> 
     </void> 
    </object> 
   </void> 
@@ -100,10 +100,16 @@
   <void method="connect"> 
    <object class="com.horstmann.violet.UseCaseRelationshipEdge"> 
     <void property="endArrowHead"> 
-     <object class="com.horstmann.violet.ArrowHead" field="TRIANGLE"/> 
+     <object class="com.horstmann.violet.ArrowHead" field="V"/> 
+    </void> 
+    <void property="lineStyle"> 
+     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/> 
+    </void> 
+    <void property="middleLabel"> 
+     <string>«extend»</string> 
     </void> 
    </object> 
-   <object idref="ActorNode0"/> 
+   <object idref="UseCaseNode1"/> 
    <object idref="UseCaseNode2"/> 
   </void> 
  </object> 

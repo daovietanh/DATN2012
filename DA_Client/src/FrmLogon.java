@@ -23,6 +23,9 @@ import vn.com.dva.entities.Users;
  */
 public class FrmLogon extends javax.swing.JFrame {
 
+    private final String ADMIN = "Admin";
+    private final String TEACHER = "Giáo Viên";
+    private final String STUDENT = "Sinh Viên";
     /** Creates new form FrmLogon */
     public FrmLogon() {
         LookAndFeel.Windows();
@@ -50,14 +53,14 @@ public class FrmLogon extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txtUsername.setText("SinhVien");
+        txtUsername.setText("admin");
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
             }
         });
 
-        txtPassword.setText("1234");
+        txtPassword.setText("123");
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
@@ -169,6 +172,7 @@ public class FrmLogon extends javax.swing.JFrame {
                 checkGroupUser();
                 Users u = Cl_Client.c.getUserByUserName(txtUsername.getText().trim());
                 Session.user = u;
+                JOptionPane.showMessageDialog(null, "idGroup = "+ u.getGroupUserID());
                 if (u.getGroupUserID() == null) {
                     Frm_SinhVien a = new Frm_SinhVien();
                         a.show();
@@ -177,10 +181,10 @@ public class FrmLogon extends javax.swing.JFrame {
                     GroupUser gu = Cl_Client.c.getGroupByID(idGroup);
                     //JOptionPane.showMessageDialog(null, gu);
                     if (gu != null) {
-                        if (gu.getGroupName().contains("Giáo")) {
+                        if (gu.getGroupName().equals(TEACHER)) {
                             Frm_GiaoVien a = new Frm_GiaoVien();
                             a.show();
-                        } else if (gu.getGroupName().contains("Admin")) {
+                        } else if (gu.getGroupName().equals(ADMIN)) {
                             Frm_Admin a = new Frm_Admin();
                             a.setVisible(true);
                         } else {
@@ -188,7 +192,9 @@ public class FrmLogon extends javax.swing.JFrame {
                             a.show();
                         }
                     } else {
-                        Frm_SinhVien a = new Frm_SinhVien();
+                        JOptionPane.showMessageDialog(null, "idGroup null = ");
+                        Frm_Admin a = new Frm_Admin();
+                        //Frm_SinhVien a = new Frm_SinhVien();
                         a.show();
                     }
                 }
