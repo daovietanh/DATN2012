@@ -1,4 +1,5 @@
 
+import java.awt.GridLayout;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,6 +8,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import vn.com.dva.entities.DetailResultExam;
 import vn.com.dva.entities.DetailTrain;
@@ -128,6 +132,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
 
@@ -143,7 +148,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         });
 
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 24));
         jLabel13.setText("Thông Tin Cá Nhân");
@@ -208,7 +213,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
                                     .addGroup(jPanelThongTinLayout.createSequentialGroup()
                                         .addComponent(jLabel18)
                                         .addGap(88, 88, 88)
-                                        .addComponent(lbl, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
+                                        .addComponent(lbl, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
                                     .addGroup(jPanelThongTinLayout.createSequentialGroup()
                                         .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel17)
@@ -218,19 +223,19 @@ public class Frm_SinhVien extends javax.swing.JFrame {
                                             .addComponent(jLabel25))
                                         .addGap(83, 83, 83)
                                         .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jDate, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                                            .addComponent(jCbQuyenHan, 0, 165, Short.MAX_VALUE)
+                                            .addComponent(jDate, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                            .addComponent(jCbQuyenHan, 0, 159, Short.MAX_VALUE)
                                             .addComponent(cbx)
-                                            .addComponent(txtDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                                            .addComponent(pass, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                                            .addComponent(txtHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                                            .addComponent(txtLastLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
+                                            .addComponent(txtDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                            .addComponent(pass, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                            .addComponent(txtHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                            .addComponent(txtLastLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
                                         .addGap(62, 62, 62))
-                                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)))
+                                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)))
                             .addGroup(jPanelThongTinLayout.createSequentialGroup()
                                 .addGap(109, 109, 109)
                                 .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(310, 310, 310))))
         );
         jPanelThongTinLayout.setVerticalGroup(
@@ -659,6 +664,13 @@ public class Frm_SinhVien extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton3.setText("Danh sách Online");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelThiLayout = new javax.swing.GroupLayout(jPanelThi);
         jPanelThi.setLayout(jPanelThiLayout);
         jPanelThiLayout.setHorizontalGroup(
@@ -672,7 +684,8 @@ public class Frm_SinhVien extends javax.swing.JFrame {
                         .addGroup(jPanelThiLayout.createSequentialGroup()
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(btnGui))))
+                            .addComponent(btnGui)))
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelThiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -693,9 +706,11 @@ public class Frm_SinhVien extends javax.swing.JFrame {
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelThiLayout.createSequentialGroup()
                                 .addGap(31, 31, 31)
-                                .addComponent(btnGui, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btnGui, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(12, 12, 12)
                 .addGroup(jPanelThiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -894,12 +909,12 @@ public class Frm_SinhVien extends javax.swing.JFrame {
 
     private void btnGuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiActionPerformed
         // TODO add your handling code here:
-        if (!Calculate.isChat()){
+        if (!Calculate.isChat()) {
             JOptionPane.showMessageDialog(null, " Tài khoản bị cấm giao tiếp !");
             return;
         }
         String Message = chat.getText();
-        RoomChat.writeMessage_on_panelView("Me" + ": " + Message +"\n");
+        RoomChat.writeMessage_on_panelView("Me" + ": " + Message + "\n");
         chat.setText("");
         try {
             RoomChat.Chatting(Message + "\n");
@@ -1020,11 +1035,11 @@ public class Frm_SinhVien extends javax.swing.JFrame {
 
     private void chatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chatKeyTyped
         // TODO add your handling code here:
-        if (!Calculate.isChat()){
-            JOptionPane.showMessageDialog(null, " Tài khoản bị cấm giao tiếp !");
-            return;
-        }
         if (evt.getKeyChar() == '\n') {
+            if (!Calculate.isChat()) {
+                JOptionPane.showMessageDialog(null, " Tài khoản bị cấm giao tiếp !");
+                return;
+            }
             if (evt.isControlDown()) {
                 chat.setText(chat.getText() + "\n");
             } else {
@@ -1038,6 +1053,11 @@ public class Frm_SinhVien extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_chatKeyTyped
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new Frm_Online().show();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     public void loadform() {
         try {
@@ -1134,6 +1154,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
     private javax.swing.JLabel dateStartsd;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;

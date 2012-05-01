@@ -21,6 +21,11 @@ public class Session {
     public final static String TEACHER = "Giáo Viên";
     public final static String STUDENT = "Sinh Viên";
     
+    public final static int ADMIN_ICON = 1;
+    public final static int TEACHER_ICON = 2;
+    public final static int STUDENT_ICON = 3;
+    public final static int BAN_ICON = 4;
+    
     public static Users user ;
     public static Exam kythi ;
     public static Calendar ngaythi;
