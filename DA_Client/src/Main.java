@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -24,6 +27,8 @@ public class Main {
     public static void runApp() {
         if (client.checkConnect()) {
             new FrmLogon().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Server không hoạt động ! Vui lòng thử lại sau ít phút nữa !");
         }
     }
 }

@@ -243,4 +243,19 @@ public interface If_Database extends Remote {
     public boolean updateNews(News n) throws RemoteException;
 
     public boolean removeNews(Long id) throws RemoteException;
+ 
+//////////////////////////////////////////////////////////////////////////////////
+////------------------------ Online ----------------------------------------------    
+    
+    public void addUserOnline(Long id) throws RemoteException ;
+    
+    public void removeUserOnline(Long id) throws RemoteException ;
+    
+    public List<Long> getAllUserOnline() throws RemoteException ;
+    
+    public List<Boolean> getAllIsChat() throws RemoteException ;    
+    
+    public void banChat(Long id) throws RemoteException ;
+    
+    public void allowChat(Long id) throws RemoteException ;
 }

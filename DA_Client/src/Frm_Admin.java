@@ -64,6 +64,8 @@ public class Frm_Admin extends javax.swing.JFrame {
             .addGap(0, 606, Short.MAX_VALUE)
         );
 
+        jPanelMain = new Pnl_MainForm();
+
         tabMain.addTab("Trang Chủ", new javax.swing.ImageIcon(getClass().getResource("/resource/home1.png")), jPanelMain); // NOI18N
 
         javax.swing.GroupLayout jPTaiKhoanLayout = new javax.swing.GroupLayout(jPTaiKhoan);

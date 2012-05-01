@@ -171,8 +171,7 @@ public class FrmLogon extends javax.swing.JFrame {
             if (Cl_Client.c.checkLogin(txtUsername.getText().trim(), txtPassword.getText())) {
                 checkGroupUser();
                 Users u = Cl_Client.c.getUserByUserName(txtUsername.getText().trim());
-                Session.user = u;
-                JOptionPane.showMessageDialog(null, "idGroup = "+ u.getGroupUserID());
+                Session.user = u;                
                 if (u.getGroupUserID() == null) {
                     Frm_SinhVien a = new Frm_SinhVien();
                         a.show();
@@ -207,11 +206,10 @@ public class FrmLogon extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(FrmLogon.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
+    
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
         this.dispose();
@@ -267,4 +265,6 @@ public class FrmLogon extends javax.swing.JFrame {
             Cl_Client.c.insertGroupUser(gu);
         }
     }
+    
+
 }

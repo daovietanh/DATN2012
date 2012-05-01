@@ -95,7 +95,7 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
-                                              <Component id="lbl" pref="227" max="32767" attributes="1"/>
+                                              <Component id="lbl" pref="221" max="32767" attributes="1"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
@@ -107,23 +107,23 @@
                                               </Group>
                                               <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jDate" pref="165" max="32767" attributes="0"/>
-                                                  <Component id="jCbQuyenHan" alignment="0" pref="165" max="32767" attributes="1"/>
+                                                  <Component id="jDate" pref="159" max="32767" attributes="0"/>
+                                                  <Component id="jCbQuyenHan" alignment="0" pref="159" max="32767" attributes="1"/>
                                                   <Component id="cbx" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="txtDiaChi" alignment="0" pref="165" max="32767" attributes="1"/>
-                                                  <Component id="pass" alignment="0" pref="165" max="32767" attributes="1"/>
-                                                  <Component id="txtHoTen" alignment="0" pref="165" max="32767" attributes="1"/>
-                                                  <Component id="txtLastLogin" alignment="0" pref="165" max="32767" attributes="0"/>
+                                                  <Component id="txtDiaChi" alignment="0" pref="159" max="32767" attributes="1"/>
+                                                  <Component id="pass" alignment="0" pref="159" max="32767" attributes="1"/>
+                                                  <Component id="txtHoTen" alignment="0" pref="159" max="32767" attributes="1"/>
+                                                  <Component id="txtLastLogin" alignment="0" pref="159" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="jLabel24" alignment="0" pref="390" max="32767" attributes="0"/>
+                                          <Component id="jLabel24" alignment="0" pref="384" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
                                       <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="182" max="-2" attributes="0"/>
+                                      <EmptySpace pref="176" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="310" max="-2" attributes="0"/>

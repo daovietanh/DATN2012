@@ -894,6 +894,10 @@ public class Frm_SinhVien extends javax.swing.JFrame {
 
     private void btnGuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiActionPerformed
         // TODO add your handling code here:
+        if (!Calculate.isChat()){
+            JOptionPane.showMessageDialog(null, " Tài khoản bị cấm giao tiếp !");
+            return;
+        }
         String Message = chat.getText();
         RoomChat.writeMessage_on_panelView("Me" + ": " + Message +"\n");
         chat.setText("");
@@ -1016,6 +1020,10 @@ public class Frm_SinhVien extends javax.swing.JFrame {
 
     private void chatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chatKeyTyped
         // TODO add your handling code here:
+        if (!Calculate.isChat()){
+            JOptionPane.showMessageDialog(null, " Tài khoản bị cấm giao tiếp !");
+            return;
+        }
         if (evt.getKeyChar() == '\n') {
             if (evt.isControlDown()) {
                 chat.setText(chat.getText() + "\n");

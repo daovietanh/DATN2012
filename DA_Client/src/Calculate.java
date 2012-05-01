@@ -7,9 +7,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import vn.com.dva.entities.Exam;
+import vn.com.dva.entities.GroupUser;
 import vn.com.dva.entities.LevelAll;
 import vn.com.dva.entities.Question;
 import vn.com.dva.entities.ResultExam;
+import vn.com.dva.entities.Users;
 
 /*
  * To change this template, choose Tools | Templates
@@ -151,5 +153,55 @@ public class Calculate {
             }
         }
         return list;
+    }
+    
+    // Kiểm tra có được chat ko
+    public static boolean isChat(){
+        try {
+            // TODO add your handling code here:
+            Session.lstOnline = Cl_Client.c.getAllUserOnline();
+            Session.lstIsChat = Cl_Client.c.getAllIsChat();
+        } catch (RemoteException ex) {
+            Logger.getLogger(Pnl_MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        List<Long> lstOnline = Session.lstOnline;
+        List<Boolean> lstIsChat = Session.lstIsChat;        
+        int i = lstOnline.indexOf(Session.user.getUserID());
+        if (i == -1) return false ;
+        return lstIsChat.get(i) ;
+    }
+    
+    /**
+     * Check tài khoản này có được phép cấm chát tài khoản khác ko ?
+     * @param id1 : Tài khoản ban
+     * @param id2 : Tài khoản bị ban
+     * @return false : Ko có quyền
+     */
+    public static boolean isBanChat(Long id1, Long id2){
+        try {
+            Users user1 = Cl_Client.c.getUserByID(id1);
+            GroupUser gr1 = Cl_Client.c.getGroupByID(user1.getGroupUserID());
+            
+            Users user2 = Cl_Client.c.getUserByID(id2);
+            GroupUser gr2 = Cl_Client.c.getGroupByID(user2.getGroupUserID());
+            // Nếu admin - admin : Ko đc .
+            // Khác : được
+            if (gr1.getGroupName().equals(Session.ADMIN)){
+               if (gr2.getGroupName().equals(Session.ADMIN)) return false;
+               if (!gr2.getGroupName().equals(Session.ADMIN)) return true;
+            }
+            
+            // Nếu Giáo viên vs Sinh viên : đc 
+            // Khác : Ko đc 
+            if (gr1.getGroupName().equals(Session.TEACHER) && gr2.getGroupName().equals(Session.STUDENT)){
+                return true;
+            }
+            return false;
+                
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(Calculate.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 }

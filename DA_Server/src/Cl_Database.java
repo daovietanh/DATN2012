@@ -3,7 +3,6 @@ import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vn.com.dva.dao.DetailResultExam_DAO;
 import vn.com.dva.dao.DetailTrain_DAO;
@@ -583,4 +582,60 @@ public class Cl_Database implements If_Database {
     }
 /////////////////////////////////////////////////////////////////////////////////////////////
 // --------------------------------  table New  ------------------------------------------ 
+
+    @Override
+    public void addUserOnline(Long id) throws RemoteException {
+        Session.lstOnline.add(id);
+        Session.lstIsChat.add(Boolean.TRUE);
+    }
+
+    @Override
+    public void removeUserOnline(Long id) throws RemoteException {
+        int i =-1;
+        try {
+            i = Session.lstOnline.indexOf(id);
+        } catch(Exception ex){
+            i = -1;
+        }
+        if (i != -1 && i < Session.lstOnline.size()){
+            Session.lstOnline.remove(i);
+            Session.lstIsChat.remove(i);
+        }        
+    }
+
+    @Override
+    public List<Long> getAllUserOnline() throws RemoteException {
+        return Session.lstOnline ;
+    }
+    
+    @Override
+    public List<Boolean> getAllIsChat() throws RemoteException {
+        return Session.lstIsChat;
+    }
+
+    @Override
+    public void banChat(Long id) throws RemoteException {
+        int i =-1;
+        try {
+            i = Session.lstOnline.indexOf(id);
+        } catch(Exception ex){
+            i = -1;
+        }
+        if (i != -1 && i < Session.lstOnline.size()){
+            Session.lstIsChat.set(i, Boolean.FALSE);
+        }        
+    }
+    
+    @Override
+    public void allowChat(Long id) throws RemoteException{
+        int i =-1;
+        try {
+            i = Session.lstOnline.indexOf(id);
+        } catch(Exception ex){
+            i = -1;
+        }
+        if (i != -1 && i < Session.lstOnline.size()){
+            Session.lstIsChat.set(i, Boolean.TRUE);
+        }        
+    }
 }

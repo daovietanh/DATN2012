@@ -1,5 +1,7 @@
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import vn.com.dva.entities.Exam;
 import vn.com.dva.entities.LevelAll;
 import vn.com.dva.entities.Subject;
@@ -33,5 +35,10 @@ public class Session {
     public static String tb ;
     public static String kho ;
     public static int thoigian ;
+    
+    // Online
+    public static List<Long> lstOnline = new ArrayList<Long>() ;
+    public static List<Boolean> lstIsChat = new ArrayList<Boolean>() ;
+    
 
 }

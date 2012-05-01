@@ -12,7 +12,12 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import vn.com.dva.dao.Users_DAO;
+import vn.com.dva.entities.Users;
 
 /**
  *
@@ -36,6 +41,7 @@ public class Room extends Thread{
         if(My_Name==null) name="Guest";
         Chatting(-1, "Login" +"User "+name + " joined to room ");
         //element.put(My_Name,new RoomElement(this, Sock, My_Name);
+        addUserOnline (My_Name);
     }
     public void removeElement(RoomElement obj){
         if (element.remove(obj)){
@@ -51,6 +57,7 @@ public class Room extends Thread{
             }
         }
         element.remove(User_OutRoom);
+        removeUserOnline(Name_User);
     }
     public void Chatting(long ID_User_Chatting, String Message){
         for (int i =0 ; i<element.size();i++) {
@@ -84,5 +91,47 @@ public class Room extends Thread{
                 e.printStackTrace();
             }
         }
+    }
+    
+    
+        private void removeUserOnline(String Name_User) {
+        Users_DAO dao = new Users_DAO();
+        Cl_Database cl = new Cl_Database();
+        Long id = null;
+        try{
+            Users u = dao.getUserByUserName(Name_User);
+            id = u.getUserID();
+        } catch(Exception ex){
+            id=null ;
+        }
+        
+        if (id != null){
+            try {
+                cl.removeUserOnline(id);
+            } catch (RemoteException ex) {
+                Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void addUserOnline(String My_Name) {
+        Users_DAO dao = new Users_DAO();
+        Cl_Database cl = new Cl_Database();
+        Long id = null;
+        try{
+            Users u = dao.getUserByUserName(My_Name);
+            id = u.getUserID();
+        } catch(Exception ex){
+            id=null ;
+        }
+        
+        if (id != null){
+            try {
+                cl.addUserOnline(id);
+            } catch (RemoteException ex) {
+                Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    
     }
 }
