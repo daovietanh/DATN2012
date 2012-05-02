@@ -106,15 +106,15 @@ public class Subject_DAO {
        return mode; 
     }
     
-    public boolean insertUser(Subject u){
+    public boolean insertSubject(Subject u){
         return mydao.insertData(u);
     }
     
-    public boolean updateUser(Subject u){
+    public boolean updateSubject(Subject u){
         return mydao.updateData(u);
     }
     
-    public boolean removeUser(Long id){
+    public boolean removeSubject(Long id){
         return mydao.removeData(Subject.class, id);
     }
     

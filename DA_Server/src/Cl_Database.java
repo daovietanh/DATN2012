@@ -74,8 +74,8 @@ public class Cl_Database implements If_Database {
         try {
             String url = "jdbc:h2:tcp://" + serverName + "/" + "~/" + database;
             Class.forName("org.h2.Driver").newInstance();
-            conn = (Connection) DriverManager.getConnection(url, userName, password);
-            System.out.print("\n Server gui tra thong diep bao ket noi thanh cong aaaa");
+            conn = (Connection) DriverManager.getConnection(url, userName, password) ;
+            System.out.print("\n Server gui tra thong diep bao ket noi thanh cong ");
         } catch (Exception e) {
             System.out.print("Server khong ket noi dc");
             return false;
@@ -202,12 +202,12 @@ public class Cl_Database implements If_Database {
 
     @Override
     public boolean insertSubject(Subject s) throws RemoteException {
-        return subjectDAO.insertUser(s);
+        return subjectDAO.insertSubject(s);
     }
 
     @Override
     public boolean updateSubject(Subject s) throws RemoteException {
-        return subjectDAO.updateUser(s);
+        return subjectDAO.updateSubject(s);
     }
 
     @Override
@@ -217,7 +217,7 @@ public class Cl_Database implements If_Database {
 
     @Override
     public boolean removeSubject(Long id) throws RemoteException {
-        return subjectDAO.removeUser(id);
+        return subjectDAO.removeSubject(id);
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////

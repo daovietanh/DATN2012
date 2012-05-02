@@ -49,7 +49,7 @@ public class Users_DAO {
     
     
     public List<Users> getAllUser(){
-        List<Object> listObject = mydao.getAllData(Subject.class);
+        List<Object> listObject = mydao.getAllData(Users.class);
         List<Users> list = new ArrayList<Users>();
         if (!listObject.isEmpty())
         for (int i=0;i< listObject.size() ; i++ ){

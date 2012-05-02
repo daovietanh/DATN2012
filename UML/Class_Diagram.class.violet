@@ -5,130 +5,6 @@
    <object id="ClassNode0" class="com.horstmann.violet.ClassNode"> 
     <void property="attributes"> 
      <void property="text"> 
-      <string>UserID
-UserName
-Password
-FullName
-Birthday
-Address
-City
-Email
-Mobile
-Photo
-Join_Date
-LastLogin_Date
-User_Enable
-Private_Question
-Answer_Question</string> 
-     </void> 
-    </void> 
-    <void property="methods"> 
-     <void property="text"> 
-      <string>&lt;&lt; Method &gt;&gt;</string> 
-     </void> 
-    </void> 
-    <void property="name"> 
-     <void property="text"> 
-      <string>TO_USERS</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>347.0</double> 
-     <double>160.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object id="ClassNode1" class="com.horstmann.violet.ClassNode"> 
-    <void property="attributes"> 
-     <void property="text"> 
-      <string>GroupID
-GroupName
-GroupDecription
-Access_Manager</string> 
-     </void> 
-    </void> 
-    <void property="methods"> 
-     <void property="text"> 
-      <string>&lt;&lt; Method &gt;&gt;</string> 
-     </void> 
-    </void> 
-    <void property="name"> 
-     <void property="text"> 
-      <string>TO_GROUP</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>148.0</double> 
-     <double>29.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object id="ClassNode2" class="com.horstmann.violet.ClassNode"> 
-    <void property="attributes"> 
-     <void property="text"> 
-      <string>GroupID
-UserID</string> 
-     </void> 
-    </void> 
-    <void property="methods"> 
-     <void property="text"> 
-      <string>&lt;&lt; Method &gt;&gt;</string> 
-     </void> 
-    </void> 
-    <void property="name"> 
-     <void property="text"> 
-      <string>TO_GROUP_USER</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>340.0</double> 
-     <double>15.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object id="ClassNode3" class="com.horstmann.violet.ClassNode"> 
-    <void property="attributes"> 
-     <void property="text"> 
-      <string>LevelID
-LevelName
-LevelDecription
-Percent_Easy
-Percent_Normal
-</string> 
-     </void> 
-    </void> 
-    <void property="methods"> 
-     <void property="text"> 
-      <string>&lt;&lt; Method &gt;&gt;
-</string> 
-     </void> 
-    </void> 
-    <void property="name"> 
-     <void property="text"> 
-      <string>TO_LEVEL</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>777.0</double> 
-     <double>181.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object id="ClassNode4" class="com.horstmann.violet.ClassNode"> 
-    <void property="attributes"> 
-     <void property="text"> 
       <string>SubjectID
 SubjectName
 Subject_Parent_ID
@@ -152,49 +28,13 @@ DateCreate
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>903.0</double> 
-     <double>305.0</double> 
+     <double>312.0</double> 
+     <double>257.0</double> 
     </void> 
    </object> 
   </void> 
   <void method="addNode"> 
-   <object id="ClassNode5" class="com.horstmann.violet.ClassNode"> 
-    <void property="attributes"> 
-     <void property="text"> 
-      <string>QuestionID
-Qusetion_Title
-UserID(Create)
-LevelID
-Content
-Answer
-ChooseA
-ChooseB
-ChooseC
-ChooseD
-DateCreate
-Picture</string> 
-     </void> 
-    </void> 
-    <void property="methods"> 
-     <void property="text"> 
-      <string>&lt;&lt; Method &gt;&gt;</string> 
-     </void> 
-    </void> 
-    <void property="name"> 
-     <void property="text"> 
-      <string>TO_QUESTIONS</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>192.0</double> 
-     <double>352.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object id="ClassNode6" class="com.horstmann.violet.ClassNode"> 
+   <object id="ClassNode1" class="com.horstmann.violet.ClassNode"> 
     <void property="attributes"> 
      <void property="text"> 
       <string>ExamID
@@ -220,105 +60,19 @@ Total_DcLam</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>608.0</double> 
-     <double>185.0</double> 
+     <double>451.0</double> 
+     <double>137.0</double> 
     </void> 
    </object> 
   </void> 
   <void method="addNode"> 
-   <object id="ClassNode7" class="com.horstmann.violet.ClassNode"> 
-    <void property="attributes"> 
-     <void property="text"> 
-      <string>ExamQuestionID
-ExamID
-QuestionID</string> 
-     </void> 
-    </void> 
-    <void property="methods"> 
-     <void property="text"> 
-      <string>&lt;&lt; Method &gt;&gt;</string> 
-     </void> 
-    </void> 
-    <void property="name"> 
-     <void property="text"> 
-      <string>TO_EXAM_QUESTION</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>483.0</double> 
-     <double>507.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object id="ClassNode8" class="com.horstmann.violet.ClassNode"> 
-    <void property="attributes"> 
-     <void property="text"> 
-      <string>ResultID
-ExamID
-UserID
-Time
-Date_Test</string> 
-     </void> 
-    </void> 
-    <void property="methods"> 
-     <void property="text"> 
-      <string>&lt;&lt; Method &gt;&gt;</string> 
-     </void> 
-    </void> 
-    <void property="name"> 
-     <void property="text"> 
-      <string>TO_RESULTS</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>558.0</double> 
-     <double>7.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object id="ClassNode9" class="com.horstmann.violet.ClassNode"> 
-    <void property="attributes"> 
-     <void property="text"> 
-      <string>DetailID
-ResultID
-Question
-Answer
-TrueAnswer</string> 
-     </void> 
-    </void> 
-    <void property="methods"> 
-     <void property="text"> 
-      <string>&lt;&lt; Method &gt;&gt;</string> 
-     </void> 
-    </void> 
-    <void property="name"> 
-     <void property="text"> 
-      <string>TO_DETAIL_RESULT_EXAM</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>782.0</double> 
-     <double>15.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object id="ClassNode10" class="com.horstmann.violet.ClassNode"> 
+   <object id="ClassNode2" class="com.horstmann.violet.ClassNode"> 
     <void property="attributes"> 
      <void property="text"> 
       <string>TrainID
 SubjectID
 LevelID
 UserID
-Total_Question
 Time
 Score
 Date_Train</string> 
@@ -337,19 +91,48 @@ Date_Train</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>706.0</double> 
-     <double>386.0</double> 
+     <double>186.0</double> 
+     <double>413.0</double> 
     </void> 
    </object> 
   </void> 
   <void method="addNode"> 
-   <object id="ClassNode11" class="com.horstmann.violet.ClassNode"> 
+   <object id="ClassNode3" class="com.horstmann.violet.ClassNode"> 
     <void property="attributes"> 
      <void property="text"> 
-      <string>SaveID
-UserID
-Content
-Date_Save</string> 
+      <string>DetailTrainID
+TrainID
+ListQuestionID
+ListAnswer
+Comment</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>&lt;&lt; Menthod &gt;&gt;</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_DETAIL_TRAIN</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>482.0</double> 
+     <double>374.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object id="ClassNode4" class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>GroupID
+GroupName
+GroupDecription
+Access_Manager</string> 
      </void> 
     </void> 
     <void property="methods"> 
@@ -359,14 +142,45 @@ Date_Save</string>
     </void> 
     <void property="name"> 
      <void property="text"> 
-      <string>TO_SAVE</string> 
+      <string>TO_GROUP</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>116.0</double> 
-     <double>202.0</double> 
+     <double>33.0</double> 
+     <double>23.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object id="ClassNode5" class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>LevelID
+LevelName
+LevelDecription
+Percent_Easy
+Percent_Normal
+</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>&lt;&lt; Method &gt;&gt;
+</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_LEVEL</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>660.0</double> 
+     <double>456.0</double> 
     </void> 
    </object> 
   </void> 
@@ -394,37 +208,197 @@ Other
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>922.0</double> 
-     <double>164.0</double> 
+     <double>804.0</double> 
+     <double>5.0</double> 
     </void> 
    </object> 
   </void> 
   <void method="addNode"> 
-   <object id="ClassNode12" class="com.horstmann.violet.ClassNode"> 
+   <object id="ClassNode6" class="com.horstmann.violet.ClassNode"> 
     <void property="attributes"> 
      <void property="text"> 
-      <string>DetailTrainID
-TrainID
-QuestionID
-Answer
-Comment</string> 
+      <string>UserID
+UserName
+Password
+GroupID
+FullName
+Birthday
+Address
+City
+Email
+Mobile
+Photo
+Join_Date
+LastLogin_Date
+User_Enable
+Private_Question
+Answer_Question</string> 
      </void> 
     </void> 
     <void property="methods"> 
      <void property="text"> 
-      <string>&lt;&lt; Menthod &gt;&gt;</string> 
+      <string>&lt;&lt; Method &gt;&gt;</string> 
      </void> 
     </void> 
     <void property="name"> 
      <void property="text"> 
-      <string>TO_DETAIL_TRAIN</string> 
+      <string>TO_USERS</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>844.0</double> 
-     <double>501.0</double> 
+     <double>178.0</double> 
+     <double>22.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object id="ClassNode7" class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>QuestionID
+Qusetion_Title
+SubjectID
+UserID(Create)
+LevelID
+Content
+Answer
+ChooseA
+ChooseB
+ChooseC
+ChooseD
+DateCreate
+Picture</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>&lt;&lt; Method &gt;&gt;</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_QUESTIONS</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>794.0</double> 
+     <double>241.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object id="ClassNode8" class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>ResultID
+ExamID
+UserID
+Time
+Date_Test</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>&lt;&lt; Method &gt;&gt;</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_RESULTS</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>442.0</double> 
+     <double>5.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object id="ClassNode9" class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>SaveID
+UserID
+Content
+Date_Save</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>&lt;&lt; Method &gt;&gt;</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_SAVE</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>38.0</double> 
+     <double>219.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object id="ClassNode10" class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>DetailID
+ResultID
+QuestionID
+Answer</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>&lt;&lt; Method &gt;&gt;</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_DETAIL_RESULT_EXAM</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>593.0</double> 
+     <double>12.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object id="ClassNode11" class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>ExamQuestionID
+ExamID
+QuestionID</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>&lt;&lt; Method &gt;&gt;</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_EXAM_QUESTION</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>607.0</double> 
+     <double>203.0</double> 
     </void> 
    </object> 
   </void> 
@@ -438,19 +412,7 @@ Comment</string>
     </void> 
    </object> 
    <object idref="ClassNode1"/> 
-   <object idref="ClassNode2"/> 
-  </void> 
-  <void method="connect"> 
-   <object class="com.horstmann.violet.ClassRelationshipEdge"> 
-    <void property="bentStyle"> 
-     <object class="com.horstmann.violet.BentStyle" field="HVH"/> 
-    </void> 
-    <void property="endArrowHead"> 
-     <object class="com.horstmann.violet.ArrowHead" field="V"/> 
-    </void> 
-   </object> 
-   <object idref="ClassNode0"/> 
-   <object idref="ClassNode2"/> 
+   <object idref="ClassNode8"/> 
   </void> 
   <void method="connect"> 
    <object class="com.horstmann.violet.ClassRelationshipEdge"> 
@@ -473,43 +435,7 @@ Comment</string>
      <object class="com.horstmann.violet.ArrowHead" field="V"/> 
     </void> 
    </object> 
-   <object idref="ClassNode0"/> 
    <object idref="ClassNode8"/> 
-  </void> 
-  <void method="connect"> 
-   <object class="com.horstmann.violet.ClassRelationshipEdge"> 
-    <void property="bentStyle"> 
-     <object class="com.horstmann.violet.BentStyle" field="HVH"/> 
-    </void> 
-    <void property="endArrowHead"> 
-     <object class="com.horstmann.violet.ArrowHead" field="V"/> 
-    </void> 
-   </object> 
-   <object idref="ClassNode8"/> 
-   <object idref="ClassNode9"/> 
-  </void> 
-  <void method="connect"> 
-   <object class="com.horstmann.violet.ClassRelationshipEdge"> 
-    <void property="bentStyle"> 
-     <object class="com.horstmann.violet.BentStyle" field="HVH"/> 
-    </void> 
-    <void property="endArrowHead"> 
-     <object class="com.horstmann.violet.ArrowHead" field="V"/> 
-    </void> 
-   </object> 
-   <object idref="ClassNode4"/> 
-   <object idref="ClassNode10"/> 
-  </void> 
-  <void method="connect"> 
-   <object class="com.horstmann.violet.ClassRelationshipEdge"> 
-    <void property="bentStyle"> 
-     <object class="com.horstmann.violet.BentStyle" field="HVH"/> 
-    </void> 
-    <void property="endArrowHead"> 
-     <object class="com.horstmann.violet.ArrowHead" field="V"/> 
-    </void> 
-   </object> 
-   <object idref="ClassNode3"/> 
    <object idref="ClassNode10"/> 
   </void> 
   <void method="connect"> 
@@ -522,19 +448,7 @@ Comment</string>
     </void> 
    </object> 
    <object idref="ClassNode0"/> 
-   <object idref="ClassNode10"/> 
-  </void> 
-  <void method="connect"> 
-   <object class="com.horstmann.violet.ClassRelationshipEdge"> 
-    <void property="bentStyle"> 
-     <object class="com.horstmann.violet.BentStyle" field="HVH"/> 
-    </void> 
-    <void property="endArrowHead"> 
-     <object class="com.horstmann.violet.ArrowHead" field="V"/> 
-    </void> 
-   </object> 
-   <object idref="ClassNode6"/> 
-   <object idref="ClassNode7"/> 
+   <object idref="ClassNode2"/> 
   </void> 
   <void method="connect"> 
    <object class="com.horstmann.violet.ClassRelationshipEdge"> 
@@ -546,7 +460,7 @@ Comment</string>
     </void> 
    </object> 
    <object idref="ClassNode5"/> 
-   <object idref="ClassNode7"/> 
+   <object idref="ClassNode2"/> 
   </void> 
   <void method="connect"> 
    <object class="com.horstmann.violet.ClassRelationshipEdge"> 
@@ -557,7 +471,19 @@ Comment</string>
      <object class="com.horstmann.violet.ArrowHead" field="V"/> 
     </void> 
    </object> 
-   <object idref="ClassNode0"/> 
+   <object idref="ClassNode6"/> 
+   <object idref="ClassNode2"/> 
+  </void> 
+  <void method="connect"> 
+   <object class="com.horstmann.violet.ClassRelationshipEdge"> 
+    <void property="bentStyle"> 
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/> 
+    </void> 
+    <void property="endArrowHead"> 
+     <object class="com.horstmann.violet.ArrowHead" field="V"/> 
+    </void> 
+   </object> 
+   <object idref="ClassNode1"/> 
    <object idref="ClassNode11"/> 
   </void> 
   <void method="connect"> 
@@ -569,8 +495,8 @@ Comment</string>
      <object class="com.horstmann.violet.ArrowHead" field="V"/> 
     </void> 
    </object> 
-   <object idref="ClassNode10"/> 
-   <object idref="ClassNode12"/> 
+   <object idref="ClassNode7"/> 
+   <object idref="ClassNode11"/> 
   </void> 
   <void method="connect"> 
    <object class="com.horstmann.violet.ClassRelationshipEdge"> 
@@ -581,8 +507,68 @@ Comment</string>
      <object class="com.horstmann.violet.ArrowHead" field="V"/> 
     </void> 
    </object> 
-   <object idref="ClassNode5"/> 
+   <object idref="ClassNode6"/> 
+   <object idref="ClassNode9"/> 
+  </void> 
+  <void method="connect"> 
+   <object class="com.horstmann.violet.ClassRelationshipEdge"> 
+    <void property="bentStyle"> 
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/> 
+    </void> 
+    <void property="endArrowHead"> 
+     <object class="com.horstmann.violet.ArrowHead" field="V"/> 
+    </void> 
+   </object> 
+   <object idref="ClassNode2"/> 
    <object idref="ClassNode3"/> 
+  </void> 
+  <void method="connect"> 
+   <object class="com.horstmann.violet.ClassRelationshipEdge"> 
+    <void property="bentStyle"> 
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/> 
+    </void> 
+    <void property="endArrowHead"> 
+     <object class="com.horstmann.violet.ArrowHead" field="V"/> 
+    </void> 
+   </object> 
+   <object idref="ClassNode7"/> 
+   <object idref="ClassNode5"/> 
+  </void> 
+  <void method="connect"> 
+   <object class="com.horstmann.violet.ClassRelationshipEdge"> 
+    <void property="bentStyle"> 
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/> 
+    </void> 
+    <void property="endArrowHead"> 
+     <object class="com.horstmann.violet.ArrowHead" field="V"/> 
+    </void> 
+   </object> 
+   <object idref="ClassNode7"/> 
+   <object idref="ClassNode0"/> 
+  </void> 
+  <void method="connect"> 
+   <object class="com.horstmann.violet.ClassRelationshipEdge"> 
+    <void property="bentStyle"> 
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/> 
+    </void> 
+    <void property="endArrowHead"> 
+     <object class="com.horstmann.violet.ArrowHead" field="V"/> 
+    </void> 
+   </object> 
+   <object idref="ClassNode10"/> 
+   <object idref="ClassNode7"/> 
+  </void> 
+  <void method="connect"> 
+   <object class="com.horstmann.violet.ClassRelationshipEdge"> 
+    <void property="bentStyle"> 
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/> 
+    </void> 
+    <void property="endArrowHead"> 
+     <object class="com.horstmann.violet.ArrowHead" field="V"/> 
+    </void> 
+   </object> 
+   <object idref="ClassNode4"/> 
+   <object idref="ClassNode6"/> 
   </void> 
  </object> 
 </java> 
