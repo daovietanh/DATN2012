@@ -9,12 +9,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import vn.com.dva.entities.DetailResultExam;
 import vn.com.dva.entities.DetailTrain;
 import vn.com.dva.entities.Exam;
+import vn.com.dva.entities.Exam_Question;
 import vn.com.dva.entities.LevelAll;
 import vn.com.dva.entities.Question;
 import vn.com.dva.entities.ResultExam;
@@ -144,6 +146,11 @@ public class Frm_SinhVien extends javax.swing.JFrame {
             }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
+            }
+        });
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
             }
         });
 
@@ -499,15 +506,18 @@ public class Frm_SinhVien extends javax.swing.JFrame {
                             .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTongSoLuotLam, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                            .addComponent(txtSocau, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                            .addComponent(txtThoiGianKT, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(dateStart, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCKyThi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTongSoLuotLam, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                                    .addComponent(txtSocau, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                                    .addComponent(txtThoiGianKT, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                                    .addComponent(dateStart))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jCKyThi, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
@@ -798,10 +808,9 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         Calendar c = Calendar.getInstance();
 
         Session.ngaythi = c;
-        Session.socauhoi = exam.getNumberQuestion();
+        Session.socauhoi = Integer.parseInt(txtSocau.getText());
         try {
             Session.monthi = Cl_Client.c.getSubjectByID(exam.getSubjectID());
-            Session.dokho = Cl_Client.c.getLeveltByID(exam.getLevelID());
         } catch (RemoteException ex) {
             Logger.getLogger(Frm_SinhVien.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -846,7 +855,12 @@ public class Frm_SinhVien extends javax.swing.JFrame {
             txtThoiGianKT.setText(e.getTimes() + "");
             txtConLaiKT.setText("Đang tính");
             // So cau hoi lay ra tu table kythi-cauhoi
-            txtSocau.setText(e.getNumberOfTest() + "");
+            if (e.getNumberQuestion() == 0) {
+                List<Exam_Question> lst = Cl_Client.c.getAllExamQuestionByExam(e.getExamID());
+                txtSocau.setText(lst.size()+""); 
+            } else {
+                txtSocau.setText(e.getNumberQuestion() + "");
+            }
             lblLuotLam.setText(e.getNumberOfTest() + "");
             lblTongSoLuotLam.setText(Cl_Client.c.getTotalTestOfExam(e) + "");
             lblDaLam.setText(Cl_Client.c.getTotalTestExamOfUser(e, Session.user) + "");
@@ -856,7 +870,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jCKyThiItemStateChanged
-
+       
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (FrmThi.isOpen == true) {
             JOptionPane.showMessageDialog(null, "Đang luyện tập");
@@ -887,11 +901,10 @@ public class Frm_SinhVien extends javax.swing.JFrame {
                 Cl_Client.ShowError("Không đủ câu hỏi");
                 return;
             }
-            this.dispose();
+            
             FrmThi a = new FrmThi();
             FrmThi.isOpen = true;
-            a.setVisible(true);
-
+            a.show();
         } catch (RemoteException ex) {
             Logger.getLogger(Frm_SinhVien.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1004,8 +1017,8 @@ public class Frm_SinhVien extends javax.swing.JFrame {
             }
             choose = bean.getListIdAnswer();
             answerRandom = bean.getListAnswerRandom();
-            int trueQuestion = (int) (train.getScore() * train.getTotalQuestion());
-            FrmKetQuaThi kq = new FrmKetQuaThi(list, choose, answerRandom, subject, train.getTotalQuestion(), trueQuestion, true);
+            int trueQuestion = (int) (train.getScore() * train.getTotalQuestion()/100);
+            FrmKetQuaThi kq = new FrmKetQuaThi(list, choose, answerRandom, subject, train.getTotalQuestion(), trueQuestion, true,null);
             kq.setVisible(true);
         } catch (Exception ex) {
             System.out.print(ex);
@@ -1027,9 +1040,17 @@ public class Frm_SinhVien extends javax.swing.JFrame {
             choose = bean.getListIdAnswer();
             answerRandom = bean.getListAnswerRandom();
             int trueQuestion = (int) (re.getScore() * exam.getNumberQuestion() / 100);
-            FrmKetQuaThi kq = new FrmKetQuaThi(list, choose, answerRandom, subject, exam.getNumberQuestion(), trueQuestion, true);
+            FrmKetQuaThi kq;
+            if (exam.getNumberQuestion() != 0) 
+                kq = new FrmKetQuaThi(list, choose, answerRandom, subject, exam.getNumberQuestion(), trueQuestion, true,null);
+            else {
+                List<Exam_Question> listEQ = Cl_Client.c.getAllExamQuestionByExam(exam.getExamID());
+                trueQuestion = (int) (re.getScore() * listEQ.size() / 100);
+                kq = new FrmKetQuaThi(list, choose, answerRandom, subject, listEQ.size(), trueQuestion, true,exam);
+            }
             kq.setVisible(true);
         } catch (Exception ex) {
+            
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -1058,6 +1079,11 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Frm_Online().show();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        loadform();
+    }//GEN-LAST:event_formComponentShown
 
     public void loadform() {
         try {

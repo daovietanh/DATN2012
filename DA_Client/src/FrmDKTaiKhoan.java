@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -92,6 +93,8 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         lblCheck = new javax.swing.JLabel();
         btnHuy = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jCbNhom = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -230,6 +233,8 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
 
         btnHuy.setText("Hủy Bỏ");
 
+        jLabel4.setText("Nhóm");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -247,7 +252,8 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
                             .addComponent(jLabel23)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel24)
-                                .addComponent(lblCauHoi)))
+                                .addComponent(lblCauHoi)
+                                .addComponent(jLabel4)))
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -266,9 +272,10 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
                                 .addGap(20, 20, 20)
                                 .addComponent(lblCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jCbNhom, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jCbCauHoi, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtCauHoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                                .addComponent(txtTraLoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtTraLoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -322,7 +329,11 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(txtTraLoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel24))))))))
+                                            .addComponent(jLabel24))))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jCbNhom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnThem)
@@ -402,6 +413,9 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
             Long idGroup = null;
             if (checkGroup()){
                 GroupUser gr = Cl_Client.c.getAllGroup().get(0);
+                idGroup = gr.getGroupID();
+            } else {
+                GroupUser gr = (GroupUser) jCbNhom.getSelectedItem();
                 idGroup = gr.getGroupID();
             }
             
@@ -487,6 +501,7 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jCbCauHoi;
     private javax.swing.JComboBox jCbCity;
+    private javax.swing.JComboBox jCbNhom;
     private com.toedter.calendar.JDateChooser jDate;
     private com.toedter.calendar.JDayChooser jDayChooser1;
     private javax.swing.JLabel jLabel1;
@@ -496,6 +511,7 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -547,7 +563,21 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
     }
 
     private void loadPanel() {
+        // Thiết lập nhóm
+        jCbNhom.removeAllItems();
+        try {
+            List<GroupUser> lst = Cl_Client.c.getAllGroup();
+            for (GroupUser gr : lst){
+                if (gr.getAccessManager() == Session.STUDENT ){
+                    jCbNhom.addItem(gr);
+                }
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(FrmDKTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         // Tao table co so du lieu
+        jCbCity.removeAllItems();
         jCbCity.addItem("Lựa Chọn");
         jCbCity.addItem("Hà Nội");
         jCbCity.addItem("TP. Hồ Chí Minh");
@@ -555,6 +585,7 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
         jCbCity.addItem("Đà Nẵng");
         jCbCity.addItem("Hải Phòng");
         jCbCity.addItem("Bắc Giang");
+        jCbCity.addItem("Khác");
 
 
 

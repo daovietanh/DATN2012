@@ -49,6 +49,10 @@ public class Pnl_ThongKe extends javax.swing.JPanel {
     public Pnl_ThongKe() {
         initComponents();
         this.user = Session.user;
+        loadPanel();
+    }
+
+    private void loadPanel(){
         list = new ArrayList<ResultExam>();
         List<Exam> listExam = null;
         try {
@@ -78,7 +82,6 @@ public class Pnl_ThongKe extends javax.swing.JPanel {
 
         jTable = new JXTable(model);
     }
-
     private static CategoryDataset createDataset(List<ResultExam> lst, int n, boolean isDate) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         int k = lst.size() - n;
@@ -143,6 +146,12 @@ public class Pnl_ThongKe extends javax.swing.JPanel {
         btnSelection = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel = new javax.swing.JPanel();
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jButton1.setText("Điểm theo Kỳ Thi");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -321,6 +330,11 @@ public class Pnl_ThongKe extends javax.swing.JPanel {
             btnSelection.setEnabled(false);
         }
     }//GEN-LAST:event_rdb2ItemStateChanged
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        loadPanel();
+    }//GEN-LAST:event_formComponentShown
 
     private void showChart(boolean ok) {
         int n = cbo.getSelectedIndex();

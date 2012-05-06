@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import vn.com.dva.entities.Exam;
 import vn.com.dva.entities.Question;
 import vn.com.dva.entities.Subject;
 import vn.com.dva.entities.Users;
@@ -28,13 +29,15 @@ public class FrmKetQuaXemLai extends javax.swing.JFrame {
     List<String> choose = new ArrayList<String>();
     List<String> answerRandom = new ArrayList<String>();
     Subject monthi ;
+    Exam kythi ;
     /** Creates new form FrmKetQuaXemLai */
-    public FrmKetQuaXemLai(List<Question> list , List<String> da , List<String> ar, Subject s) {
+    public FrmKetQuaXemLai(List<Question> list , List<String> da , List<String> ar, Subject s,Exam e) {
         initComponents();
         this.list = list ;
         this.choose = da ;
         this.answerRandom = ar;
         monthi = s;
+        kythi = e;
         this.n = list.size();
         Init();
     }
@@ -52,7 +55,7 @@ public class FrmKetQuaXemLai extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        lblLop = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -94,15 +97,16 @@ public class FrmKetQuaXemLai extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
         jPanel1.setEnabled(false);
 
         jLabel1.setText("Họ Tên");
 
-        jLabel2.setText("Lớp");
+        jLabel2.setText("ID");
 
-        lblLop.setText("jLabel3");
+        lblID.setText("jLabel3");
 
         jLabel7.setText("Tên Đăng nhập");
 
@@ -121,37 +125,43 @@ public class FrmKetQuaXemLai extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(58, 58, 58)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jLabel9))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUser)
-                    .addComponent(lblNgaySinh))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLop))
-                .addGap(18, 18, 18))
+                    .addComponent(lblNgaySinh)
+                    .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(lblUser)
-                    .addComponent(jLabel1)
-                    .addComponent(lblHoTen))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(lblNgaySinh)
-                    .addComponent(jLabel2)
-                    .addComponent(lblLop))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(lblUser))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNgaySinh)
+                            .addComponent(jLabel9)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(lblID))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblHoTen)
+                            .addComponent(jLabel1))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -172,7 +182,7 @@ public class FrmKetQuaXemLai extends javax.swing.JFrame {
 
         jLabel5.setText("Lần Thi");
 
-        lblLanThi.setText("jLabel8");
+        lblLanThi.setText("                 ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -192,10 +202,10 @@ public class FrmKetQuaXemLai extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblKyThi, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLanThi))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblLanThi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblKyThi, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,7 +298,7 @@ public class FrmKetQuaXemLai extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,7 +329,7 @@ public class FrmKetQuaXemLai extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -466,6 +476,7 @@ public class FrmKetQuaXemLai extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        //new Frm_SinhVien().show();
 }//GEN-LAST:event_jButton3ActionPerformed
 
 
@@ -504,9 +515,9 @@ public class FrmKetQuaXemLai extends javax.swing.JFrame {
     public static javax.swing.JLabel lbl;
     public static javax.swing.JLabel lbl1;
     private javax.swing.JLabel lblHoTen;
+    private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblKyThi;
     private javax.swing.JLabel lblLanThi;
-    private javax.swing.JLabel lblLop;
     private javax.swing.JLabel lblMonThi;
     private javax.swing.JLabel lblNgaySinh;
     private javax.swing.JLabel lblNgayThi;
@@ -594,6 +605,7 @@ public class FrmKetQuaXemLai extends javax.swing.JFrame {
     private void Init() {        
             // Thoong tin
             Users u = Session.user ;
+            lblID.setText(u.getUserID()+"");
             lblUser.setText(u.getUserName());
             lblHoTen.setText(u.getFullName());
             lblNgaySinh.setText(u.getBirthday());
@@ -602,16 +614,16 @@ public class FrmKetQuaXemLai extends javax.swing.JFrame {
             // Ky thi
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             lblNgayThi.setText(sdf.format(new Date()));
-            if (Session.kythi != null)
-                lblKyThi.setText(Session.kythi.getExamName());
-            else
-                lblKyThi.setText("Luyện tập");
+            if (kythi != null) {
+                lblKyThi.setText(kythi.getExamName());
+                
+            }
+            else {
+                lblKyThi.setText("Luyện tập"); 
+                lblLanThi.setText("Không giới hạn");
+            }
             lblMonThi.setText(monthi.getSubjectName());
             
-//            if (Session.kythi.equals(""))
-//                lblLanThi.setText("0");
-//            else
-//                lblLanThi.setText("");
 
             lblSo.setText("1");
             lblTongSo.setText("/"+ n);

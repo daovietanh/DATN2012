@@ -53,7 +53,6 @@ public class Train_DAO {
        mode.addColumn("Độ Khó");
        mode.addColumn("Tổng Số Câu Hỏi");
        mode.addColumn("Thời Gian Thi");
-       mode.addColumn("TGian Làm");
        mode.addColumn("Ngày Làm");
        mode.addColumn("Điểm");
        List<Object> listObject;

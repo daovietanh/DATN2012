@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import vn.com.dva.entities.DetailResultExam;
 import vn.com.dva.entities.DetailTrain;
+import vn.com.dva.entities.Exam_Question;
 import vn.com.dva.entities.Question;
 import vn.com.dva.entities.ResultExam;
 import vn.com.dva.entities.Train;
@@ -35,7 +36,7 @@ import vn.com.dva.entities.Users;
  *
  * @author VietAnh
  */
-public class FrmThi extends javax.swing.JFrame implements ActionListener {
+public class FrmThi extends javax.swing.JDialog implements ActionListener {
 
     static boolean isOpen = false;
     static int c;
@@ -50,6 +51,7 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
         t = new Timer(1000, this);
         t.start();
         initComponents();
+        loadData();
     }
 
     /** This method is called from within the constructor to
@@ -106,7 +108,7 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
         jButton3 = new javax.swing.JButton();
         lbl1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -456,6 +458,11 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        loadData();
+
+    }//GEN-LAST:event_formWindowOpened
+
+    private void loadData(){
         this.n = Session.socauhoi;
         c = Session.thoigian * 60;
         // Thoong tin
@@ -468,7 +475,11 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
         lblNgayThi.setText(sdf.format(new Date()));
         if (Session.kythi != null) {
             lblKyThi.setText(Session.kythi.getExamName());
-            lblLanThi.setText("");
+            try {
+                lblLanThi.setText((Cl_Client.c.getTotalTestExamOfUser(Session.kythi, Session.user)+1)+"");
+            } catch (RemoteException ex) {
+                Logger.getLogger(FrmThi.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             lblKyThi.setText("Luyện tập");
         }
@@ -478,25 +489,31 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
         loadDSCauHoi();
         // tai 1 cau hoi đầu tiên
         tai1cauhoi(0);
-
-    }//GEN-LAST:event_formWindowOpened
-
+    }
     public void loadDSCauHoi() {
         try {
-            // Nếu test (ko phải thi )
-            if (!Frm_SinhVien.isTest) {
+            //JOptionPane.showMessageDialog(null, "Load ds cau hoi"); 
+            // Nếu train (ko phải thi )
+            if (Session.kythi == null) {
                 // Lấy danh sách câu hỏi theo môn thi thử
                 list = Cl_Client.c.getAllQuestionBySubject(Session.monthi.getSubjecId());
                 // Lọc danh sách câu hỏi lây số câu hỏi theo độ khó 
                 list = Calculate.getListNQuestionByLevel(list, n, Session.dokho);                
             } else {
+                list.clear();
+                if (Session.kythi.getNumberQuestion() == 0) {
+                    List<Exam_Question> lstEQ = Cl_Client.c.getAllExamQuestionByExam(Session.kythi.getExamID());
+                    for (Exam_Question eq: lstEQ){
+                        list.add(Cl_Client.c.getQuestiontByID(eq.getQuestionID()));
+                    } 
+                } else 
                 list = Cl_Client.c.getListQuestionByExam(Session.kythi.getExamID(), n);
             }
             if (list == null) {
                 JOptionPane.showMessageDialog(null, "Không đủ câu hỏi để làm");
                 return;
             }
-            JOptionPane.showMessageDialog(null, "so cau hoi = " + list.size());
+            //JOptionPane.showMessageDialog(null, "so cau hoi = " + list.size());
             for (Question q : list) {
                 //JOptionPane.showMessageDialog(null, " id = " + q.getQuestionID());
                 String s = calculate.randomAnswer();
@@ -509,11 +526,11 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
     }
 
     public void tai1cauhoi(int cs) {
-        JOptionPane.showMessageDialog(null, answerRandom.get(cs));
+        //JOptionPane.showMessageDialog(null, answerRandom.get(cs));
         lblSo.setText((cs + 1) + "");
         lblTongSo.setText("/" + n);
         Question q = list.get(cs);
-        JOptionPane.showMessageDialog(null, "Độ khó = "+ q.getLevelID());
+        //JOptionPane.showMessageDialog(null, "Độ khó = "+ q.getLevelID());
         jTpNoiDung.setText(q.getContent());
 
         String s = answerRandom.get(cs);
@@ -623,9 +640,8 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
         Session.diemso = (dung * 100 / (dung + sai));
         Session.socaudung = dung;
         Session.socausai = sai;
-        //JOptionPane.showMessageDialog(null, "So cau dung = " + dung);
-        //JOptionPane.showMessageDialog(null, "So cau sai = " + sai);
-        FrmKetQuaThi kq = new FrmKetQuaThi(list, choose, answerRandom,Session.monthi,list.size(),dung, false);
+ 
+        FrmKetQuaThi kq = new FrmKetQuaThi(list, choose, answerRandom,Session.monthi,list.size(),dung, false,Session.kythi);
         kq.setVisible(true);
         t.stop();
 
@@ -770,14 +786,7 @@ public class FrmThi extends javax.swing.JFrame implements ActionListener {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                new FrmThi().setVisible(true);
-            }
-        });
-    }
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btg;
     private javax.swing.JButton jButton1;

@@ -54,8 +54,8 @@ public class Frm_Online extends javax.swing.JFrame {
         listOnline = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridLayout());
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Các thành viên đang online"));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));

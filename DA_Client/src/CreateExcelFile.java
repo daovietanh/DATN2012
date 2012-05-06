@@ -26,8 +26,9 @@ public class CreateExcelFile {
     HSSFWorkbook hwb;
     HSSFSheet sheet;
 
-    public void startCreate(List<Object> listClass) {
-        String filename = "d:/backup.xls";
+    public void startCreate(List<Object> listClass, String url) {
+        //String filename = "d:/backup.xls";
+        String filename = url+".xls";
         hwb = new HSSFWorkbook();
 
         backup(listClass);

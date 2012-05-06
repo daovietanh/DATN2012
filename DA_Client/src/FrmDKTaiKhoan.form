@@ -36,6 +36,7 @@
                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                               <Component id="jLabel24" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="lblCauHoi" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -60,9 +61,10 @@
                               <Component id="lblCheck" min="-2" pref="70" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jCbNhom" alignment="0" max="32767" attributes="1"/>
                               <Component id="jCbCauHoi" alignment="0" max="32767" attributes="1"/>
                               <Component id="txtCauHoi" alignment="0" pref="185" max="32767" attributes="1"/>
-                              <Component id="txtTraLoi" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
+                              <Component id="txtTraLoi" alignment="0" pref="185" max="32767" attributes="1"/>
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -134,6 +136,11 @@
                                           <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCbNhom" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -395,6 +402,18 @@
     <Component class="javax.swing.JButton" name="btnHuy">
       <Properties>
         <Property name="text" type="java.lang.String" value="H&#x1ee7;y B&#x1ecf;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nh&#xf3;m"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jCbNhom">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

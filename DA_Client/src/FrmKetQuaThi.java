@@ -1,7 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
+import vn.com.dva.entities.Exam;
 import vn.com.dva.entities.Question;
 import vn.com.dva.entities.Subject;
 
@@ -25,15 +25,16 @@ public class FrmKetQuaThi extends javax.swing.JFrame {
     private List<String> choose = new ArrayList<String>();
     private List<String> answerRandom = new ArrayList<String>();
     private Subject monthi ;
+    private Exam kythi ;
     private int total ;
     private int countTrue ;
-    private boolean isReView;
+    private boolean isTrain;
     /** Creates new form FrmKetQuaThi */
     public FrmKetQuaThi() {
         initComponents();
     }
     
-    public FrmKetQuaThi(List<Question> q , List<String> da , List<String> ar , Subject s, int total, int t,boolean b){
+    public FrmKetQuaThi(List<Question> q , List<String> da , List<String> ar , Subject s, int total, int t,boolean b, Exam e){
         initComponents();
         this.list = q ;
         this.choose = da ;
@@ -41,7 +42,8 @@ public class FrmKetQuaThi extends javax.swing.JFrame {
         this.monthi = s ;
         this.total = total ;
         this.countTrue = t; 
-        this.isReView = b;
+        this.isTrain = b;
+        this.kythi = e;
     }
 
     /** This method is called from within the constructor to
@@ -74,7 +76,7 @@ public class FrmKetQuaThi extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -276,13 +278,13 @@ public class FrmKetQuaThi extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        JOptionPane.showMessageDialog(null, isReView);
-        if (!isReView) new Frm_SinhVien().show();
+        //JOptionPane.showMessageDialog(null, isReView);
+        //if (!isReView) new Frm_SinhVien().show();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        FrmKetQuaXemLai a = new FrmKetQuaXemLai(list,choose,answerRandom,monthi);
+        FrmKetQuaXemLai a = new FrmKetQuaXemLai(list,choose,answerRandom,monthi,kythi);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
