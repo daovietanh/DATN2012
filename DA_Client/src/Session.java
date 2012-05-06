@@ -17,9 +17,9 @@ import vn.com.dva.entities.Users;
  * @author VietAnh
  */
 public class Session {
-    public final static String ADMIN = "Admin";
-    public final static String TEACHER = "Giáo Viên";
-    public final static String STUDENT = "Sinh Viên";
+    public final static int ADMIN = 1;
+    public final static int TEACHER = 2;
+    public final static int STUDENT = 3 ;
     
     public final static int ADMIN_ICON = 1;
     public final static int TEACHER_ICON = 2;

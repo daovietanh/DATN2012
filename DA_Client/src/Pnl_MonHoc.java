@@ -8,12 +8,10 @@
  *
  * Created on Sep 2, 2011, 4:11:02 PM
  */
-
 /**
  *
  * @author VietAnh
  */
-
 import java.awt.Color;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
@@ -27,7 +25,9 @@ import org.jdesktop.swingx.decorator.*;
 import vn.com.dva.entities.GroupUser;
 import vn.com.dva.entities.Subject;
 import vn.com.dva.entities.Users;
+
 public class Pnl_MonHoc extends javax.swing.JPanel {
+
     /** Creates new form Pnl_MonHoc */
     public Pnl_MonHoc() {
         initComponents();
@@ -484,39 +484,38 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if (lbl.getText().equals("OK"))
-        {
+        if (lbl.getText().equals("OK")) {
             try {
-                boolean k= true;
+                boolean k = true;
                 String tenMonHoc = txtTenMonHoc.getText();
                 Date d = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 String dateCreate = sdf.format(d);
                 String mota = txtMoTa.getText();
-                Long idParent = null  ;
-                if (jCbNhomMonHoc.getSelectedIndex() != 0){
-                    idParent = ((Subject)jCbNhomMonHoc.getSelectedItem()).getSubjecId();
+                Long idParent = null;
+                if (jCbNhomMonHoc.getSelectedIndex() != 0) {
+                    idParent = ((Subject) jCbNhomMonHoc.getSelectedItem()).getSubjecId();
                 }
-                boolean tt = false ;
+                boolean tt = false;
                 if (cbxTrangThai.isSelected()) {
-                    tt= true ;
+                    tt = true;
                 }
-                
-                Users user = Session.user  ;
-                
-                
-                Subject subject = new Subject(tenMonHoc , idParent , mota , tt , user.getUserID() ,dateCreate);
-                if (Cl_Client.c.insertSubject(subject)){
+
+                Users user = Session.user;
+
+
+                Subject subject = new Subject(tenMonHoc, idParent, mota, tt, user.getUserID(), dateCreate);
+                if (Cl_Client.c.insertSubject(subject)) {
                     loadTable();
                     loadPanel();
+                    reset();
+                } else {
+                    Cl_Client.ShowError("Thêm thất bại !");
                 }
-                else Cl_Client.ShowError("Thêm thất bại !");
             } catch (RemoteException ex) {
                 Logger.getLogger(Pnl_MonHoc.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        else
-        {
+        } else {
             Cl_Client.ShowError("Đã tồn tại tên môn học");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -528,9 +527,7 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
             if (!Cl_Client.c.checkSubject(ten) || ten.length() <= 3) {
                 lbl.setForeground(Color.red);
                 lbl.setText("Đã tồn tại tên môn học !");
-            }
-            else
-            {
+            } else {
                 lbl.setForeground(Color.BLUE);
                 lbl.setText("OK");
             }
@@ -541,33 +538,39 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
 
     private void jTMonHocMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTMonHocMouseReleased
         // TODO add your handling code here:
-        Long id ;
+        Long id;
         try {
             id = Main.client.getIDTable(jTMonHoc);
         } catch (Exception ex) {
-            id=1L;
+            id = 1L;
         }
-        if (!id.equals(""))
-        {
+        if (!id.equals("")) {
             try {
                 Subject s = Cl_Client.c.getSubjectByID(id);
-                txtIdMonHoc.setText(s.getSubjecId()+"");
+                txtIdMonHoc.setText(s.getSubjecId() + "");
                 txtTenMonHocU.setText(s.getSubjectName());
                 txtMoTaU.setText(s.getSubjectDescription());
                 Users u = Cl_Client.c.getUserByID(s.getUserID());
-                txtNguoiTao.setText(u.getUserID()+"");
+                txtNguoiTao.setText(u.getUserID() + "");
                 txtUserName.setText(u.getUserName());
-                if (s.getSubjectState()) cbxTrangThaiU.setSelected(true);
-                else cbxTrangThaiU.setSelected(false);
+                if (s.getSubjectState()) {
+                    cbxTrangThaiU.setSelected(true);
+                } else {
+                    cbxTrangThaiU.setSelected(false);
+                }
                 txtNgayTaoU.setText(s.getDateCreate());
-                if (s.getSubjectParent() != null){
-                    int index= -1;
+                if (s.getSubjectParent() != null) {
+                    int index = -1;
                     Subject parent = Cl_Client.c.getSubjectByID(s.getSubjectParent());
-                    for (int i=1;i< jCbNhomMonHocU.getItemCount();i++){
+                    for (int i = 1; i < jCbNhomMonHocU.getItemCount(); i++) {
                         Subject bean = (Subject) jCbNhomMonHocU.getItemAt(i);
-                        if (bean.getSubjecId().equals(parent.getSubjecId())) index = i;
+                        if (bean.getSubjecId().equals(parent.getSubjecId())) {
+                            index = i;
+                        }
                     }
                     jCbNhomMonHocU.setSelectedIndex(index);
+                } else {
+                    jCbNhomMonHocU.setSelectedIndex(0);
                 }
             } catch (RemoteException ex) {
                 Logger.getLogger(Pnl_MonHoc.class.getName()).log(Level.SEVERE, null, ex);
@@ -582,37 +585,41 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
                 Cl_Client.ShowError("Vui lòng chọn 1 môn học !");
                 return;
             }
-            
-            Long id  = Long.parseLong(txtIdMonHoc.getText());
-            Subject s =  Cl_Client.c.getSubjectByID(id);
 
-            if (!Cl_Client.c.checkSubject(txtTenMonHocU.getText()) ) 
-            if (! s.getSubjectName().equals(txtTenMonHocU.getText())) {
-                Cl_Client.ShowError("Đã tồn tại tên môn học này !");
-                txtTenMonHocU.setText("");
-                return;
+            Long id = Long.parseLong(txtIdMonHoc.getText());
+            Subject s = Cl_Client.c.getSubjectByID(id);
+
+            if (!Cl_Client.c.checkSubject(txtTenMonHocU.getText())) {
+                if (!s.getSubjectName().equals(txtTenMonHocU.getText())) {
+                    Cl_Client.ShowError("Đã tồn tại tên môn học này !");
+                    txtTenMonHocU.setText("");
+                    return;
+                }
             }
-            
+
             String tenMonHoc = txtTenMonHocU.getText();
             String mota = txtMoTaU.getText();
-            
-            Long idParent = null  ;
-            if (jCbNhomMonHocU.getSelectedIndex() != 0){
-                idParent = ((Subject)jCbNhomMonHocU.getSelectedItem()).getSubjecId();
-                if (idParent == id) idParent = null;
+
+            Long idParent = null;
+            if (jCbNhomMonHocU.getSelectedIndex() != 0) {
+                idParent = ((Subject) jCbNhomMonHocU.getSelectedItem()).getSubjecId();
+                if (idParent == id) {
+                    idParent = null;
+                }
             }
-            boolean tt = false ;
+            boolean tt = false;
             if (cbxTrangThaiU.isSelected()) {
-                tt= true ;
+                tt = true;
             }
 
-     
-     
-            Subject subject = new Subject(s.getSubjecId(),tenMonHoc , idParent , mota , tt , s.getUserID() ,s.getDateCreate());
-                if (Cl_Client.c.updateSubject(subject)){
-                    loadTable();
-                }
-                else Cl_Client.ShowError("Sửa thất bại !");
+
+
+            Subject subject = new Subject(s.getSubjecId(), tenMonHoc, idParent, mota, tt, s.getUserID(), s.getDateCreate());
+            if (Cl_Client.c.updateSubject(subject)) {
+                loadTable();
+            } else {
+                Cl_Client.ShowError("Sửa thất bại !");
+            }
         } catch (RemoteException ex) {
             Logger.getLogger(Pnl_MonHoc.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -625,18 +632,18 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
             tt = "";
         }
         jTMonHoc.setFilters(new FilterPipeline(
-                    new Filter[] { new PatternFilter(txtDSIdMonHoc.getText()+".*", 0, 0), new PatternFilter(txtDSTenMonHoc.getText() +".*", 0, 1), new PatternFilter(tt+".*", 0, 6) }));
+                new Filter[]{new PatternFilter(txtDSIdMonHoc.getText() + ".*", 0, 0), new PatternFilter(txtDSTenMonHoc.getText() + ".*", 0, 1), new PatternFilter(tt + ".*", 0, 6)}));
 
     }//GEN-LAST:event_txtDSIdMonHocCaretUpdate
 
     private void jCbDSTrangThaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCbDSTrangThaiItemStateChanged
         // TODO add your handling code here:
         String tt = evt.getItem().toString();
-        if (tt.equals("-- Lựa Chọn --"))        {
+        if (tt.equals("-- Lựa Chọn --")) {
             tt = "";
         }
         jTMonHoc.setFilters(new FilterPipeline(
-                    new Filter[] {new PatternFilter(tt+".*", 0, 6), new PatternFilter(txtDSIdMonHoc.getText()+".*", 0, 0), new PatternFilter(txtDSTenMonHoc.getText() +".*", 0, 1) }));
+                new Filter[]{new PatternFilter(tt + ".*", 0, 6), new PatternFilter(txtDSIdMonHoc.getText() + ".*", 0, 0), new PatternFilter(txtDSTenMonHoc.getText() + ".*", 0, 1)}));
 
 
     }//GEN-LAST:event_jCbDSTrangThaiItemStateChanged
@@ -648,7 +655,7 @@ public class Pnl_MonHoc extends javax.swing.JPanel {
             tt = "";
         }
         jTMonHoc.setFilters(new FilterPipeline(
-                    new Filter[] { new PatternFilter(txtDSIdMonHoc.getText()+".*", 0, 0), new PatternFilter(txtDSTenMonHoc.getText() +".*", 0, 1), new PatternFilter(tt+".*", 0, 6) }));
+                new Filter[]{new PatternFilter(txtDSIdMonHoc.getText() + ".*", 0, 0), new PatternFilter(txtDSTenMonHoc.getText() + ".*", 0, 1), new PatternFilter(tt + ".*", 0, 6)}));
 
     }//GEN-LAST:event_txtDSTenMonHocCaretUpdate
 
@@ -659,20 +666,24 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 // TODO add your handling code here:
-    if (txtIdMonHoc.getText() == null || txtIdMonHoc.getText().length() < 3 ) return ;
+    if (txtIdMonHoc.getText() == null || txtIdMonHoc.getText().length() < 3) {
+        return;
+    }
     Long id = null;
     try {
         id = Long.parseLong(txtIdMonHoc.getText());
-    } catch(Exception e){
-        id= 1L;
+    } catch (Exception e) {
+        id = 1L;
     }
-        try {
-            Cl_Client.c.removeSubject(id);
-        } catch (RemoteException ex) {
-            Logger.getLogger(Pnl_MonHoc.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    try {
+        Cl_Client.c.removeSubject(id);
+        jTMonHoc.clearSelection();
+        resetUpdate();
+    } catch (RemoteException ex) {
+        Logger.getLogger(Pnl_MonHoc.class.getName()).log(Level.SEVERE, null, ex);
+    }
     loadTable();
-    
+
 }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -680,8 +691,6 @@ private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         jTMonHoc.clearSelection();
         resetUpdate();
     }//GEN-LAST:event_jButton4ActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox cbxTrangThai;
     private javax.swing.JCheckBox cbxTrangThaiU;
@@ -730,15 +739,15 @@ private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 
-    private void loadTable()
-    {
+    private void loadTable() {
         try {
             jTMonHoc.setModel(Cl_Client.c.getAllSubjectToTable());
         } catch (RemoteException ex) {
             Logger.getLogger(Pnl_MonHoc.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
         lbl.setText("");
     }
+
     private void loadPanel() {
         try {
             jTMonHoc.setModel(Cl_Client.c.getAllSubjectToTable());
@@ -746,8 +755,8 @@ private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Logger.getLogger(Pnl_MonHoc.class.getName()).log(Level.SEVERE, null, ex);
         }
         HighlighterPipeline highlighters = new HighlighterPipeline();
-            highlighters.addHighlighter(new AlternateRowHighlighter().linePrinter);
-            jTMonHoc.setHighlighters(highlighters);
+        highlighters.addHighlighter(new AlternateRowHighlighter().linePrinter);
+        jTMonHoc.setHighlighters(highlighters);
 
         jCbDSTrangThai.removeAllItems();
         jCbDSTrangThai.addItem("-- Lựa Chọn --");
@@ -757,42 +766,51 @@ private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         lbl.setText("");
         jCbNhomMonHoc.removeAllItems();
         jCbNhomMonHoc.addItem("--  Lựa Chọn  --");
-        
+
         jCbNhomMonHocU.removeAllItems();
         jCbNhomMonHocU.addItem("--  Lựa Chọn  --");
         try {
             List<Subject> allSubject = Cl_Client.c.getAllSubject();
-            if (! allSubject.isEmpty())
-                for (Subject s: allSubject ) {
-                    jCbNhomMonHoc.addItem(s);
-                    jCbNhomMonHocU.addItem(s);
+            if (!allSubject.isEmpty()) {
+                for (Subject s : allSubject) {
+                    if (s.getSubjectState()) {
+                        jCbNhomMonHoc.addItem(s);
+                        jCbNhomMonHocU.addItem(s);
+                    }
                 }
+            }
         } catch (RemoteException ex) {
             Logger.getLogger(Pnl_MonHoc.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JCheckBox j = new JCheckBox("OK", true);
-                
+        //JCheckBox j = new JCheckBox("OK", true);
+
     }
 
     private void reset() {
         txtTenMonHoc.setText("");
         txtMoTa.setText("");
+
+        jCbNhomMonHoc.removeAllItems();
+        jCbNhomMonHoc.addItem("--  Lựa Chọn  --");
+
         jCbNhomMonHocU.removeAllItems();
         jCbNhomMonHocU.addItem("--  Lựa Chọn  --");
         try {
             List<Subject> allSubject = Cl_Client.c.getAllSubject();
-            if (! allSubject.isEmpty())
-                for (Subject s: allSubject ) {
-                    jCbNhomMonHoc.addItem(s);
-                    jCbNhomMonHocU.addItem(s);
+            if (!allSubject.isEmpty()) {
+                for (Subject s : allSubject) {
+                    if (s.getSubjectState()) {
+                        jCbNhomMonHoc.addItem(s);
+                        jCbNhomMonHocU.addItem(s);
+                    }
                 }
+            }
         } catch (RemoteException ex) {
             Logger.getLogger(Pnl_MonHoc.class.getName()).log(Level.SEVERE, null, ex);
         }
         cbxTrangThai.setSelected(false);
     }
 
-    
     private void resetUpdate() {
         txtTenMonHocU.setText("");
         txtMoTaU.setText("");
@@ -803,29 +821,28 @@ private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         txtUserName.setText("");
         txtNgayTaoU.setText("");
     }
-    
-    
+
     // Phan quyen dang nhap bang cach set enable cac component 
     private void setEnableComponent() {
         try {
             Users user = Session.user;
             GroupUser group = Cl_Client.c.getGroupByID(user.getGroupUserID());
             setEnableComponent(group);
-        } catch(Exception ex){
-            return ;
+        } catch (Exception ex) {
+            return;
         }
     }
 
     // set enable the user dang nhap
     private void setEnableComponent(GroupUser group) {
-        if (group.getGroupName().equals(Session.ADMIN)){
+        if (group.getAccessManager() == Session.ADMIN) {
             setEnableAllComponent(true);
+        } else {
+            setEnableAllComponent(false);
         }
-        else setEnableAllComponent(false);
     }
-    
-    // set true
 
+    // set true
     private void setEnableAllComponent(boolean b) {
         jButton2.setEnabled(b);
         jButton3.setEnabled(b);
@@ -833,6 +850,4 @@ private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         jButton5.setEnabled(b);
         jButton6.setEnabled(b);
     }
-    
-    
 }

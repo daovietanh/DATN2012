@@ -3,6 +3,9 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import org.jdesktop.swingx.decorator.AlternateRowHighlighter;
 import org.jdesktop.swingx.decorator.Filter;
 import org.jdesktop.swingx.decorator.FilterPipeline;
@@ -273,15 +276,15 @@ public class Pnl_DoKho extends javax.swing.JPanel {
 
         jLabel8.setText("Tỉ lệ câu thường");
 
-        txtTb.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtTbKeyPressed(evt);
+        txtTb.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtTbCaretUpdate(evt);
             }
         });
 
-        txtDe.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtDeKeyPressed(evt);
+        txtDe.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtDeCaretUpdate(evt);
             }
         });
 
@@ -291,6 +294,7 @@ public class Pnl_DoKho extends javax.swing.JPanel {
 
         jLabel4.setText("%");
 
+        txtKho.setEnabled(false);
         txtKho.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKhoKeyPressed(evt);
@@ -341,28 +345,26 @@ public class Pnl_DoKho extends javax.swing.JPanel {
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(txtDe, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(8, 8, 8)))))
+                                    .addComponent(txtDe)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(15, 15, 15)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTb, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                                    .addComponent(txtKho, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(btnThem)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnHuy)))))
+                            .addComponent(jLabel8))
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnThem)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnHuy)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE))
+                            .addComponent(txtKho, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                            .addComponent(txtTb, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(90, 90, 90))
         );
         jPanel3Layout.setVerticalGroup(
@@ -377,29 +379,28 @@ public class Pnl_DoKho extends javax.swing.JPanel {
                         .addComponent(jLabel16))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(123, 123, 123)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))))
-                .addGap(26, 26, 26)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtKho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(txtTb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtTb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(txtKho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHuy)
-                    .addComponent(btnThem))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Nhóm Người Dùng"));
@@ -523,9 +524,9 @@ public class Pnl_DoKho extends javax.swing.JPanel {
 
         jLabel18.setText("ID Độ Khó");
 
-        txtTbU.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtTbUKeyPressed(evt);
+        txtTbU.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtTbUCaretUpdate(evt);
             }
         });
 
@@ -539,17 +540,13 @@ public class Pnl_DoKho extends javax.swing.JPanel {
 
         jLabel13.setText("Thỉ lệ câu khó");
 
-        txtKhoU.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtKhoUKeyPressed(evt);
-            }
-        });
+        txtKhoU.setEnabled(false);
 
         jLabel14.setText("Tỉ lệ câu dễ");
 
-        txtDeU.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtDeUKeyPressed(evt);
+        txtDeU.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtDeUCaretUpdate(evt);
             }
         });
 
@@ -914,10 +911,20 @@ public class Pnl_DoKho extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         try {
             // TODO add your handling code here:
+            int de, tb, kho;
             if (txtTenDoKho.getText().length() <= 0) {
                 return;
             }
-            if (Integer.parseInt(txtDe.getText()) + Integer.parseInt(txtTb.getText()) + Integer.parseInt(txtKho.getText()) != 100) {
+            try {
+                de = Integer.parseInt(txtDe.getText());
+                tb = Integer.parseInt(txtTb.getText());
+                kho = Integer.parseInt(txtKho.getText());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Nhập sai tỷ lệ ");
+                return;
+            }
+
+            if (de + tb + kho != 100) {
                 JOptionPane.showConfirmDialog(null, "Tổng số khác 100% ! Vui lòng nhập lại", "Lỗi", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
                 txtDe.setText("");
                 txtTb.setText("");
@@ -929,7 +936,6 @@ public class Pnl_DoKho extends javax.swing.JPanel {
                 return;
             }
 
-            JOptionPane.showMessageDialog(null, txtMoTa.getText());
             LevelAll bean = new LevelAll(txtTenDoKho.getText(), txtMoTa.getText(), Integer.parseInt(txtDe.getText()), Integer.parseInt(txtTb.getText()), Integer.parseInt(txtKho.getText()));
             Cl_Client.c.insertLevel(bean);
             loadTable();
@@ -941,47 +947,7 @@ public class Pnl_DoKho extends javax.swing.JPanel {
 
     private void txtKhoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKhoKeyPressed
         // TODO add your handling code here:
-        try {
-            if (Integer.parseInt(txtKho.getText().toString()) >= 10) {
-                JOptionPane.showMessageDialog(null, "Tỉ lệ nhập phải nhỏ hơn 100");
-                txtKho.setText("");
-            }
-        } catch (Exception e) {
-        }
 }//GEN-LAST:event_txtKhoKeyPressed
-
-    private void txtTbKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTbKeyPressed
-        // TODO add your handling code here:
-        try {
-            if (Integer.parseInt(txtTb.getText().toString()) >= 10) {
-                JOptionPane.showMessageDialog(null, "Tỉ lệ nhập phải nhỏ hơn 100");
-                txtTb.setText("");
-            }
-        } catch (Exception e) {
-        }
-}//GEN-LAST:event_txtTbKeyPressed
-
-    private void txtDeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDeKeyPressed
-        // TODO add your handling code here:
-        try {
-            if (Integer.parseInt(txtDe.getText().toString()) >= 10) {
-                JOptionPane.showMessageDialog(null, "Tỉ lệ nhập phải nhỏ hơn 100");
-                txtDe.setText("");
-            }
-        } catch (Exception e) {
-        }
-}//GEN-LAST:event_txtDeKeyPressed
-
-    private void txtTbUKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTbUKeyPressed
-        // TODO add your handling code here:
-        try {
-            if (Integer.parseInt(txtTb.getText().toString()) >= 10) {
-                JOptionPane.showMessageDialog(null, "Tỉ lệ nhập phải nhỏ hơn 100");
-                txtTb.setText("");
-            }
-        } catch (Exception e) {
-        }
-}//GEN-LAST:event_txtTbUKeyPressed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
@@ -993,15 +959,26 @@ public class Pnl_DoKho extends javax.swing.JPanel {
                 Long id = Main.client.getIDTable(jTDoKho);
                 LevelAll l = Cl_Client.c.getLeveltByID(id);
 
-                if (Integer.parseInt(txtDeU.getText()) + Integer.parseInt(txtTbU.getText()) + Integer.parseInt(txtKhoU.getText()) != 100) {
+                int de, tb, kho;
+                if (txtTenDoKhoU.getText().length() <= 0) {
+                    return;
+                }
+                try {
+                    de = Integer.parseInt(txtDeU.getText());
+                    tb = Integer.parseInt(txtTbU.getText());
+                    kho = Integer.parseInt(txtKhoU.getText());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Nhập sai tỷ lệ ");
+                    return;
+                }
+                
+                if (de > 100 || tb > 100 || kho  > 100) return ;
+
+                if (de + tb + kho != 100) {
                     JOptionPane.showConfirmDialog(null, "Tổng số khác 100% ! Vui lòng nhập lại", "Lỗi", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
                     txtDeU.setText("");
                     txtTbU.setText("");
                     txtKhoU.setText("");
-                    return;
-                }
-                if (txtTenDoKhoU.getText().equals("")) {
-                    JOptionPane.showConfirmDialog(null, "Bạn chưa nhập tên độ khó ", "Lỗi", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -1012,17 +989,6 @@ public class Pnl_DoKho extends javax.swing.JPanel {
             }
         }
 }//GEN-LAST:event_btnSuaActionPerformed
-
-    private void txtKhoUKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKhoUKeyPressed
-        // TODO add your handling code here:
-        try {
-            if (Integer.parseInt(txtKho.getText().toString()) >= 10) {
-                JOptionPane.showMessageDialog(null, "Tỉ lệ nhập phải nhỏ hơn 100");
-                txtKho.setText("");
-            }
-        } catch (Exception e) {
-        }
-}//GEN-LAST:event_txtKhoUKeyPressed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
@@ -1038,17 +1004,6 @@ public class Pnl_DoKho extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
-
-    private void txtDeUKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDeUKeyPressed
-        // TODO add your handling code here:
-        try {
-            if (Integer.parseInt(txtDe.getText().toString()) >= 10) {
-                JOptionPane.showMessageDialog(null, "Tỉ lệ nhập phải nhỏ hơn 100");
-                txtDe.setText("");
-            }
-        } catch (Exception e) {
-        }
-}//GEN-LAST:event_txtDeUKeyPressed
 
     private void jTabbedPane2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseReleased
         // TODO add your handling code here:
@@ -1077,7 +1032,7 @@ public class Pnl_DoKho extends javax.swing.JPanel {
         if (!id.equals("")) {
             try {
                 GroupUser bean = Cl_Client.c.getGroupByID(id);
-                txtIdGroupU.setText(bean.getGroupID()+"");
+                txtIdGroupU.setText(bean.getGroupID() + "");
                 txtGroupNameU.setText(bean.getGroupName());
                 txtMoTa1U.setText(bean.getGroupDescription());
                 jCbU.setSelected(bean.isStatus());
@@ -1125,10 +1080,14 @@ public class Pnl_DoKho extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if (txtIdGroupU.getText().length()== 0) return ;
+        if (txtIdGroupU.getText().length() == 0) {
+            return;
+        }
         Long id = Long.parseLong(txtIdGroupU.getText());
-        if (id.equals("")) return ;
-         try {
+        if (id.equals("")) {
+            return;
+        }
+        try {
             // TODO add your handling code here:
             String name = txtGroupNameU.getText();
             String description = txtMoTa1U.getText();
@@ -1136,7 +1095,7 @@ public class Pnl_DoKho extends javax.swing.JPanel {
             if (name.length() == 0 || accountManager == 0) {
                 return;
             }
-            
+
             GroupUser guBean = Cl_Client.c.getGroupByID(id);
             guBean.setGroupName(name);
             guBean.setGroupDescription(description);
@@ -1152,7 +1111,9 @@ public class Pnl_DoKho extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        if (txtIdGroupU.getText().length()== 0) return ;
+        if (txtIdGroupU.getText().length() == 0) {
+            return;
+        }
         Long id = Long.parseLong(txtIdGroupU.getText());
         try {
             Cl_Client.c.removeGroupUser(id);
@@ -1161,43 +1122,86 @@ public class Pnl_DoKho extends javax.swing.JPanel {
         }
         resetGroupUserU();
         loadTableGroup();
-        
-        
+
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jCbGroupSItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCbGroupSItemStateChanged
         // TODO add your handling code here:
         String quyenQl = evt.getItem().toString();
-        if (quyenQl.equals("-- Lựa Chọn --") ){
-            quyenQl ="";
+        if (quyenQl.equals("-- Lựa Chọn --")) {
+            quyenQl = "";
         }
         jTGroupUser.setFilters(new FilterPipeline(
-             new Filter[] { new PatternFilter(quyenQl+".*", 0, 1), new PatternFilter(txtIdGroupS.getText() +".*", 0, 0), new PatternFilter(txtNameGroupS.getText().toString()+".*", 0, 1) }));
+                new Filter[]{new PatternFilter(quyenQl + ".*", 0, 4), new PatternFilter(txtIdGroupS.getText() + ".*", 0, 0), new PatternFilter(txtNameGroupS.getText().toString() + ".*", 0, 1)}));
 
-        
+
     }//GEN-LAST:event_jCbGroupSItemStateChanged
 
     private void txtIdGroupSCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtIdGroupSCaretUpdate
         // TODO add your handling code here:
         String quyenQl = jCbGroupS.getSelectedItem().toString();
-        if (quyenQl.equals("-- Lựa Chọn --") ){
-            quyenQl ="";
+        if (quyenQl.equals("-- Lựa Chọn --")) {
+            quyenQl = "";
         }
         jTGroupUser.setFilters(new FilterPipeline(
-             new Filter[] { new PatternFilter(quyenQl+".*", 0, 1), new PatternFilter(txtIdGroupS.getText() +".*", 0, 0), new PatternFilter(txtNameGroupS.getText().toString()+".*", 0, 1) }));
+                new Filter[]{new PatternFilter(quyenQl + ".*", 0, 4), new PatternFilter(txtIdGroupS.getText() + ".*", 0, 0), new PatternFilter(txtNameGroupS.getText().toString() + ".*", 0, 1)}));
 
     }//GEN-LAST:event_txtIdGroupSCaretUpdate
 
     private void txtNameGroupSCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtNameGroupSCaretUpdate
         // TODO add your handling code here:
-         String quyenQl = jCbGroupS.getSelectedItem().toString();
-        if (quyenQl.equals("-- Lựa Chọn --") ){
-            quyenQl ="";
+        String quyenQl = jCbGroupS.getSelectedItem().toString();
+        if (quyenQl.equals("-- Lựa Chọn --")) {
+            quyenQl = "";
         }
         jTGroupUser.setFilters(new FilterPipeline(
-             new Filter[] { new PatternFilter(quyenQl+".*", 0, 1), new PatternFilter(txtIdGroupS.getText() +".*", 0, 0), new PatternFilter(txtNameGroupS.getText().toString()+".*", 0, 1) }));
+                new Filter[]{new PatternFilter(quyenQl + ".*", 0, 4), new PatternFilter(txtIdGroupS.getText() + ".*", 0, 0), new PatternFilter(txtNameGroupS.getText().toString() + ".*", 0, 1)}));
 
     }//GEN-LAST:event_txtNameGroupSCaretUpdate
+
+    private void txtDeCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtDeCaretUpdate
+        // TODO add your handling code here:
+        try {
+            int de = Integer.parseInt(txtDe.getText().trim());
+            int tb = Integer.parseInt(txtTb.getText().trim());
+            txtKho.setText((100 - de - tb) + "");
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_txtDeCaretUpdate
+
+    private void txtTbCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTbCaretUpdate
+        // TODO add your handling code here:
+        int de = 0 ,tb = 0;
+        try {
+            de = Integer.parseInt(txtDe.getText().trim());
+            tb = Integer.parseInt(txtTb.getText().trim());
+            txtKho.setText((100 - de - tb) + "");
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_txtTbCaretUpdate
+
+    private void txtDeUCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtDeUCaretUpdate
+        // TODO add your handling code here:
+        int de = 0 ,tb = 0;
+        try {
+            de = Integer.parseInt(txtDeU.getText().trim());
+            tb = Integer.parseInt(txtTbU.getText().trim());
+            txtKhoU.setText((100 - de - tb) + "");
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_txtDeUCaretUpdate
+
+    private void txtTbUCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTbUCaretUpdate
+        // TODO add your handling code here:
+        int de = 0 ,tb = 0;
+        try {
+            de = Integer.parseInt(txtDeU.getText().trim());
+            tb = Integer.parseInt(txtTbU.getText().trim());
+            txtKhoU.setText((100 - de - tb) + "");
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_txtTbUCaretUpdate
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuy;
@@ -1325,26 +1329,35 @@ public class Pnl_DoKho extends javax.swing.JPanel {
     }
 
     private void InitData() {
+        txtDe.setDocument(new DigitsDocument());
+        txtTb.setDocument(new DigitsDocument());
+        txtKho.setDocument(new DigitsDocument());
+        
+        txtDeU.setDocument(new DigitsDocument());
+        txtTbU.setDocument(new DigitsDocument());
+        txtKhoU.setDocument(new DigitsDocument());
+        
+        
         jCb.setSelected(false);
         cbxManager.removeAllItems();
         cbxManager.addItem("-- Lựa Chọn --");
         cbxManager.addItem(ADMIN);
         cbxManager.addItem(TEACHER);
         cbxManager.addItem(STUDENT);
-        
+
         jCbU.setSelected(false);
         cbxManagerU.removeAllItems();
         cbxManagerU.addItem("-- Lựa Chọn --");
         cbxManagerU.addItem(ADMIN);
         cbxManagerU.addItem(TEACHER);
         cbxManagerU.addItem(STUDENT);
-        
+
         jCbGroupS.removeAllItems();
         jCbGroupS.addItem("-- Lựa Chọn --");
         jCbGroupS.addItem(ADMIN);
         jCbGroupS.addItem(TEACHER);
         jCbGroupS.addItem(STUDENT);
-          
+
     }
 
     private void resetGroupUser() {
@@ -1361,4 +1374,29 @@ public class Pnl_DoKho extends javax.swing.JPanel {
         jCbU.setSelected(false);
         cbxManagerU.setSelectedIndex(0);
     }
+    
+    
+    
+    
+    public class DigitsDocument extends PlainDocument {
+
+        @Override
+        public void insertString(int offs, String str, AttributeSet a)
+                throws BadLocationException {
+            if (str == null) {
+                return;
+            }
+            char[] addedFigures = str.toCharArray();
+            char c;
+            for (int i = addedFigures.length; i > 0; i--) {
+                c = addedFigures[i - 1];
+                if (Character.isDigit(c) || c == '.') {
+                    super.insertString(offs, new String(new Character(c).toString()), a);
+                }
+            }
+        }
+    }
+
+    
+    
 }

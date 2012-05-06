@@ -131,15 +131,14 @@ public class Frm_Online extends javax.swing.JFrame {
             return;
         }
         for (int i = 0; i < lstOnline.size(); i++) {           
-            
             String s = "";
             int value = 0;
             try {
                 Users u  = Cl_Client.c.getUserByID(lstOnline.get(i)) ;
                 s = u.getUserName();
                 GroupUser gr = Cl_Client.c.getGroupByID(u.getGroupUserID());
-                if (gr.getGroupName().equals(Session.ADMIN)) value = Session.ADMIN_ICON;
-                else if (gr.getGroupName().equals(Session.TEACHER)) value = Session.TEACHER_ICON;
+                if (gr.getAccessManager() == Session.ADMIN ) value = Session.ADMIN_ICON;
+                else if (gr.getAccessManager() == Session.TEACHER ) value = Session.TEACHER_ICON;
                 else value = Session.STUDENT_ICON;
             } catch (RemoteException ex) {
                 return;

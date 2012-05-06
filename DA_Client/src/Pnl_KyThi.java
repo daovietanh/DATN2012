@@ -729,7 +729,7 @@ public class Pnl_KyThi extends javax.swing.JPanel {
             c2.setTime(de);
 
             LevelAll level = (LevelAll) jCbDoKho.getSelectedItem();
-            String userName = User.username;
+            String userName = Session.user.getUserName();
             Users user = Cl_Client.c.getUserByUserName(userName);
             Subject subject = (Subject) jCbMonThi.getSelectedItem();
             int tg = Integer.parseInt(txtThoiGianLamBai.getText());
@@ -984,7 +984,7 @@ private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
         jCbSoLuotLam.removeAllItems();
         jCbSoLuotLam.addItem("0");
-        for (int i = 0; i <= 10; i++) {
+        for (int i = 1; i <= 10; i++) {
             jCbSoLuotLam.addItem("" + i);
         }
 

@@ -234,7 +234,6 @@ public class Pnl_MainForm extends javax.swing.JPanel {
             return;
         }
         try {
-            JOptionPane.showMessageDialog(null, "value = " + listOnline.getSelectedValue());
             Users user = Cl_Client.c.getUserByUserName(listOnline.getSelectedValue().toString());
             Long id = user.getUserID();
             if (!Calculate.isBanChat(Session.user.getUserID(), id)) {
@@ -328,16 +327,15 @@ public class Pnl_MainForm extends javax.swing.JPanel {
             return;
         }
         for (int i = 0; i < lstOnline.size(); i++) {
-
             String s = "";
             int value = 0;
             try {
                 Users u = Cl_Client.c.getUserByID(lstOnline.get(i));
                 s = u.getUserName();
                 GroupUser gr = Cl_Client.c.getGroupByID(u.getGroupUserID());
-                if (gr.getGroupName().equals(Session.ADMIN)) {
+                if (gr.getAccessManager() == Session.ADMIN) {
                     value = Session.ADMIN_ICON;
-                } else if (gr.getGroupName().equals(Session.TEACHER)) {
+                } else if (gr.getAccessManager() == Session.TEACHER) {
                     value = Session.TEACHER_ICON;
                 } else {
                     value = Session.STUDENT_ICON;
@@ -346,7 +344,7 @@ public class Pnl_MainForm extends javax.swing.JPanel {
                 return;
             }
             if (!lstIsChat.get(i)) {
-                value = Session.BAN_ICON;
+                value = Session.BAN_ICON ;
             }
             icon = getImageIcon(value);
 

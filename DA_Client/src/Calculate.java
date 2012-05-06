@@ -186,14 +186,14 @@ public class Calculate {
             GroupUser gr2 = Cl_Client.c.getGroupByID(user2.getGroupUserID());
             // Nếu admin - admin : Ko đc .
             // Khác : được
-            if (gr1.getGroupName().equals(Session.ADMIN)){
-               if (gr2.getGroupName().equals(Session.ADMIN)) return false;
-               if (!gr2.getGroupName().equals(Session.ADMIN)) return true;
+            if (gr1.getAccessManager() == Session.ADMIN){
+               if (gr2.getAccessManager() == Session.ADMIN ) return false;
+               return true;
             }
             
             // Nếu Giáo viên vs Sinh viên : đc 
             // Khác : Ko đc 
-            if (gr1.getGroupName().equals(Session.TEACHER) && gr2.getGroupName().equals(Session.STUDENT)){
+            if (gr1.getAccessManager() == Session.TEACHER && gr2.getAccessManager() == Session.STUDENT ){
                 return true;
             }
             return false;

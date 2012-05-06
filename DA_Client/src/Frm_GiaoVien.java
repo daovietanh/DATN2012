@@ -107,7 +107,7 @@ public class Frm_GiaoVien extends javax.swing.JFrame {
         });
 
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Giao Tiếp"));
 
@@ -174,6 +174,8 @@ public class Frm_GiaoVien extends javax.swing.JFrame {
                 .addContainerGap(221, Short.MAX_VALUE))
         );
 
+        jPanel8 = new Pnl_MainForm();
+
         jTabbedPane1.addTab(" Trang Chủ  ", new javax.swing.ImageIcon(getClass().getResource("/resource/home1.png")), jPanel8); // NOI18N
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -207,6 +209,11 @@ public class Frm_GiaoVien extends javax.swing.JFrame {
         jTabbedPane1.addTab("Độ Khó         ", new javax.swing.ImageIcon(getClass().getResource("/resource/Do Kho.png")), jPanel2); // NOI18N
 
         jPanel10.setAutoscrolls(true);
+        jPanel10.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanel10ComponentShown(evt);
+            }
+        });
 
         jButton1.setText("<<");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -452,7 +459,11 @@ public class Frm_GiaoVien extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
+       loadForm();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void loadForm(){
+         try {
             jCbDanhSachKyThi.removeAllItems();
             jCbDanhSachMonHoc.removeAllItems();
             // Danh sach cac cau hoi list 1
@@ -475,11 +486,9 @@ public class Frm_GiaoVien extends javax.swing.JFrame {
             
         }
 
-
-
-
-    }//GEN-LAST:event_formWindowOpened
-
+    }
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (jListTatCaCauHoi.getSelectedIndex() < 0)
@@ -521,7 +530,6 @@ public class Frm_GiaoVien extends javax.swing.JFrame {
             {
                 return ;
             }
-            JOptionPane.showMessageDialog(null, evt.getItem());
             Exam exam = (Exam) evt.getItem();
             List<Exam_Question> lst = Cl_Client.c.getAllExamQuestionByExam(exam.getExamID());
             if (lst.size() <= 0) {
@@ -754,6 +762,11 @@ public class Frm_GiaoVien extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_chatKeyTyped
+
+    private void jPanel10ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel10ComponentShown
+        // TODO add your handling code here:
+        loadForm();
+    }//GEN-LAST:event_jPanel10ComponentShown
 
 
     public void loadList()

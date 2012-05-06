@@ -171,6 +171,10 @@ public class FrmLogon extends javax.swing.JFrame {
             if (Cl_Client.c.checkLogin(txtUsername.getText().trim(), txtPassword.getText())) {
                 checkGroupUser();
                 Users u = Cl_Client.c.getUserByUserName(txtUsername.getText().trim());
+                if (!u.getEnable()) {
+                    JOptionPane.showMessageDialog(null, " Tài khoản bị cấm đăng nhập. Vui lòng liên hệ Admin");
+                    return;
+                }
                 Session.user = u;                
                 if (u.getGroupUserID() == null) {
                     Frm_SinhVien a = new Frm_SinhVien();

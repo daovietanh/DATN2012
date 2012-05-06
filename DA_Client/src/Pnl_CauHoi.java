@@ -757,14 +757,10 @@ private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             }
 
             
-            String usernameCreate = User.username ;
-            Long idUser = null ;
-            try {
-                Users u = Cl_Client.c.getUserByUserName(usernameCreate);
-                idUser = u.getUserID();
-            } catch (Exception e) {
-                idUser = null ;
-            }
+
+            Users u = Session.user ;
+            Long idUser = u.getUserID();
+
             
             Date d = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -842,7 +838,7 @@ private void jTCauHoiUMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
-            if (jTCauHoi.getSelectedRow() < 0) {
+            if (jTCauHoiU.getSelectedRow() < 0) {
                 Cl_Client.ShowError("Hãy chọn 1 câu hỏi ");
                 return ;
             }

@@ -455,7 +455,7 @@ public class Pnl_TaiKhoan extends javax.swing.JPanel {
                         .addComponent(cbx))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jCbCauHoi, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtCauHoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCauHoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -863,7 +863,12 @@ public class Pnl_TaiKhoan extends javax.swing.JPanel {
                     city = jCbCity.getSelectedItem().toString();
                 }
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                String birthday = sdf.format(jDate.getDate());
+                String birthday ;
+                try {
+                    birthday = sdf.format(jDate.getDate());
+                } catch (NullPointerException e){
+                    birthday = null;
+                }
                 String email = txtEmail.getText();
                 String phone = txtDienThoai.getText();
                 boolean enable ;
@@ -873,15 +878,29 @@ public class Pnl_TaiKhoan extends javax.swing.JPanel {
                 Date d = new Date();
                 String dateJoint = sdf.format(d);
                 Long idGroup = ((GroupUser)jCbNhom.getSelectedItem()).getGroupID();
-                Users u = new Users(txtUsername.getText().trim(), pass.getText(), idGroup , fullName , birthday  , address , city , 
-                    email , phone , image , dateJoint , dateJoint , enable ,cauhoi ,traloi);
-                if (Cl_Client.c.insertUser(u)){
+                
+                Users bean = new Users();
+                bean.setGroupUserID(idGroup);
+                bean.setUserName(txtUsername.getText().trim());
+                bean.setPassword(pass.getText());
+                bean.setFullName(fullName);
+                bean.setBirthday(birthday);
+                bean.setAddress(address);
+                bean.setCity(city);
+                bean.setEmail(email);
+                bean.setMobile(phone);
+                bean.setPhoto(image);
+                bean.setJoinDate(dateJoint);
+                bean.setEnable(enable);
+                bean.setQuestion(cauhoi);
+                bean.setAnswerQuestion(traloi);
+                
+                if (Cl_Client.c.insertUser(bean)){
                     resetAll();
                     loadTable();
                 }
                 else JOptionPane.showMessageDialog(null, "Them loi");
-        } catch (RemoteException ex) {
-            Logger.getLogger(Pnl_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
         }
             
 }//GEN-LAST:event_btnThemActionPerformed
@@ -932,7 +951,8 @@ public class Pnl_TaiKhoan extends javax.swing.JPanel {
             GroupUser g = (GroupUser) jCbNhomU.getSelectedItem();
             String hoten = txtHoTenU.getText();
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            String date = sdf.format(jDateU.getDate());
+            String date = null;
+            if (jDateU.getDate() != null) date = sdf.format(jDateU.getDate());
             String dc = txtDiaChiU.getText();
             String email = txtEmailU.getText();
             String city = jCbCityU.getSelectedItem().toString();
@@ -990,11 +1010,16 @@ public class Pnl_TaiKhoan extends javax.swing.JPanel {
                 
                 GroupUser g = Cl_Client.c.getGroupByID(u.getGroupUserID());
                 String dateString = u.getBirthday();
-                String s[] = dateString.split("-");
-                int year = Integer.parseInt(s[2])-1900;
-                int month = Integer.parseInt(s[1])- 1;
-                int date = Integer.parseInt(s[0]);
-                Date d = new Date(year, month, date);
+                int year, month,date ;
+                Date d =null;
+                if (dateString != null) {
+                    String s[] = dateString.split("-");
+                    year = Integer.parseInt(s[2])-1900;
+                    month = Integer.parseInt(s[1])- 1;
+                    date = Integer.parseInt(s[0]);
+                    d = new Date(year, month, date);
+                } 
+                
                 
                 txtIDU.setText(""+u.getUserID());
                 txtUsernameU.setText(u.getUserName());
@@ -1014,7 +1039,8 @@ public class Pnl_TaiKhoan extends javax.swing.JPanel {
                 txtTraLoiU.setText(u.getAnserQuestion());
                 txtHoTenU.setText(u.getFullName());
                 jDateU.setDateFormatString("dd-MM-yyyy");
-                jDateU.setDate(d);
+                if (dateString != null) jDateU.setDate(d);
+                else jDateU.setDate(null);
                 txtDiaChiU.setText(u.getAddress());
                 txtEmailU.setText(u.getEmail());
                 jCbCityU.setSelectedItem(u.getCity());
@@ -1023,8 +1049,8 @@ public class Pnl_TaiKhoan extends javax.swing.JPanel {
                 showImageUpdate();
                 
                 
-            } catch (RemoteException ex) {
-                Logger.getLogger(Pnl_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                
             }
         }
     }//GEN-LAST:event_jTTaiKhoanMouseReleased
@@ -1320,6 +1346,7 @@ private void lblPhotoUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
             jCbCity.addItem("Đà Nẵng");
             jCbCity.addItem("Hải Phòng");
             jCbCity.addItem("Bắc Giang");
+            jCbCity.addItem("Khác");
             
             jCbCityU.addItem("Lựa Chọn");
             jCbCityU.addItem("Hà Nội");
@@ -1328,6 +1355,8 @@ private void lblPhotoUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
             jCbCityU.addItem("Đà Nẵng");
             jCbCityU.addItem("Hải Phòng");
             jCbCityU.addItem("Bắc Giang");
+            jCbCityU.addItem("Khác");
+            
             
 
             // Câu Hỏi bí mật

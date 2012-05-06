@@ -346,15 +346,8 @@ public class FrmThemCauHoi extends javax.swing.JFrame {
             }
 
             // zooooooooooozozozozozozzzz
-            String usernameCreate = User.username ;
-            Long idUser = null ;
-            try {
-                Users u = Cl_Client.c.getUserByUserName(usernameCreate);
-                idUser = u.getUserID();
-            } catch (Exception e) {
-                idUser = null ;
-                JOptionPane.showMessageDialog(null,e.toString());
-            }
+            Users u = Session.user ;
+            Long idUser = u.getUserID();
             
             Date d = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
