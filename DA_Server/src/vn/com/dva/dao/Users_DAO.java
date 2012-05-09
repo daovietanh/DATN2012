@@ -4,7 +4,9 @@
  */
 package vn.com.dva.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import vn.com.dva.entities.GroupUser;
@@ -28,6 +30,10 @@ public class Users_DAO {
         list = mydao.getData2Field(Users.class, "UserName","Password" , user, pass);
         if (!list.isEmpty())
         {
+            Users bean = (Users) list.get(0);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            bean.setLastLoginDate(sdf.format(new Date()));
+            mydao.updateData(bean);
             return true ;
         }
         return false ;

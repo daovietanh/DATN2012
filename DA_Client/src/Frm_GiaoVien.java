@@ -29,15 +29,15 @@ import vn.com.dva.entities.Subject;
  * @author VietAnh
  */
 public class Frm_GiaoVien extends javax.swing.JFrame {
-    private final ListenRoomSocket RoomChat;
+    //private final ListenRoomSocket RoomChat;
     //static List<Question> questionExam  = new ArrayList<Question>();
     DefaultListModel model = new DefaultListModel();
     DefaultListModel model1 = new DefaultListModel();
     /** Creates new form Frm_GiaoVien */
     public Frm_GiaoVien() {
         initComponents();
-        RoomChat = new ListenRoomSocket(Session.user.getUserName());
-        RoomChat.setTextPanelView(View);
+//        RoomChat = new ListenRoomSocket(Session.user.getUserName());
+//        RoomChat.setTextPanelView(View);
     }
 
     /** This method is called from within the constructor to
@@ -737,30 +737,12 @@ public class Frm_GiaoVien extends javax.swing.JFrame {
 
         private void btnGuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiActionPerformed
         // TODO add your handling code here:
-        String Message = chat.getText();
-        RoomChat.writeMessage_on_panelView("Me" + ": " + Message + "\n");
-        chat.setText("");
-        try {
-            RoomChat.Chatting(Message + "\n");
-        } catch (Exception e) {
-        }
+        
     }//GEN-LAST:event_btnGuiActionPerformed
 
     private void chatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chatKeyTyped
         // TODO add your handling code here:
-         if (evt.getKeyChar() == '\n') {
-            if (evt.isControlDown()) {
-                chat.setText(chat.getText() + "\n");
-            } else {
-                String Message = chat.getText();
-                RoomChat.writeMessage_on_panelView("Me" + ": " + Message);
-                chat.setText("");
-                try {
-                    RoomChat.Chatting(Message + "\n");
-                } catch (Exception e) {
-                }
-            }
-        }
+         
     }//GEN-LAST:event_chatKeyTyped
 
     private void jPanel10ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel10ComponentShown

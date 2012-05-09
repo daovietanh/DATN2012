@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_20" class="java.beans.XMLDecoder"> 
+ <object class="com.horstmann.violet.ClassDiagramGraph"> 
+  <void method="addNode"> 
+   <object class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>SubjectID
+SubjectName
+Subject_Parent_ID
+SubjectDecription
+SubjectState
+UserID
+DateCreate
+</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>getAllAttribute() : Object
+getAllSubject() : List&lt;Subject&gt;
+getSubjectById() : Subject
+insert() : void
+update() : void
+delete() : void</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_SUBJECT</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>522.0</double> 
+     <double>-1.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>DetailID
+ResultID
+QuestionID
+Answer</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>getAllAttribute() : Object
+getDetailResultExamByResultExamID: DRE
+getAllDetailDetailResultExam: List&lt;DRE&gt;
+insert() : void
+update() : void
+delete() : void</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_DETAIL_RESULT_EXAM</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>171.0</double> 
+     <double>234.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>QuestionID
+Qusetion_Title
+SubjectID
+UserID(Create)
+LevelID
+Content
+Answer
+ChooseA
+ChooseB
+ChooseC
+ChooseD
+DateCreate
+Picture</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>getAttribute() : Object
+getAllQuestion() : List&lt;Question&gt;
+getAllQuestionBySubject():List&lt;Question&gt;
+insert() : void
+update() : void
+delete() : void</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_QUESTIONS</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>716.0</double> 
+     <double>4.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>ResultID
+ExamID
+UserID
+Time
+Date_Test</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>getAttribute() : Object
+getAllResultExam() : void
+getResultExamByExam(Exam) : ResultExam
+getAllResultExamByExamIDSortScore() : List&lt;ResultExam&gt;
+insert() : void
+update() : void
+delete() : void</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_RESULTSEXAM</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>172.0</double> 
+     <double>9.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>DetailTrainID
+TrainID
+ListQuestionID
+ListAnswer
+Comment</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>getAllAttribute() : Object
+getAllDetailTrain() : List&lt;DT&gt;
+getDetailResultTrainByTrainID(): DT
+insert()</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_DETAIL_TRAIN</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>171.0</double> 
+     <double>418.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>LevelID
+LevelName
+LevelDecription
+Percent_Easy
+Percent_Normal
+</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>getAllAttribute() : Object
+getLevelById() : Level
+getAllLevel: List&lt;Level&gt;
+insert() : void
+update() : void
+delete() : void
+</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_LEVEL</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>15.0</double> 
+     <double>383.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>ExamQuestionID
+ExamID
+QuestionID</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>getAttribute():Object
+getQuestionByExam:List&lt;Q&gt;
+insert() : void
+update() : void
+delete() : void</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_EXAM_QUESTION</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>436.0</double> 
+     <double>248.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>ExamID
+ExamName
+SubjectID
+Date_Start
+Date_End
+Time
+isTotalQuestion
+Total_DcLam</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>getAttribute() : Object
+getAllExam() : void
+getCurrentExam() : Exam
+getTotalTestOfExam() : int
+getTotalTestOfUser() : int
+insert() : void
+update() : void
+delete() : void</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_EXAM</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>625.0</double> 
+     <double>337.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>UserID
+UserName
+Password
+FullName
+Birthday
+Address
+City
+Email
+Mobile
+Photo
+Join_Date
+LastLogin_Date
+User_Enable
+Private_Question
+Answer_Question</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>getAttribute() : Object
+getAllUsers() : void
+insert() : void
+update() : void
+delete() : void
+checkLogin() : boolean
+</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_USERS</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>22.0</double> 
+     <double>8.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>TrainID
+SubjectID
+LevelID
+UserID
+Time
+Score
+Date_Train</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>getAllAttribute() : Object
+getAllTrain() : List&lt;Train&gt;
+getTrainById() : Train
+insert() : void
+update() : void
+delete() : void
+</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_TRAINS</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>789.0</double> 
+     <double>353.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>GroupID
+GroupName
+GroupDecription
+Access_Manager</string> 
+     </void> 
+    </void> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>getAttribute() : Object
+getAllGroup() : void
+insert() : void
+update() : void
+delete() : void
+</string> 
+     </void> 
+    </void> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>TO_GROUP</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>410.0</double> 
+     <double>422.0</double> 
+    </void> 
+   </object> 
+  </void> 
+ </object> 
+</java> 

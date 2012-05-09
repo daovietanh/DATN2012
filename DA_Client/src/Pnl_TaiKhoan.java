@@ -1005,6 +1005,7 @@ public class Pnl_TaiKhoan extends javax.swing.JPanel {
         
         if (!id.equals(""))
         {
+            resetAllCapNhat();
             try {
                 Users u = Cl_Client.c.getUserByID(id);
                 

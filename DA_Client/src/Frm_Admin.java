@@ -50,7 +50,7 @@ public class Frm_Admin extends javax.swing.JFrame {
         });
 
         tabMain.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-        tabMain.setFont(new java.awt.Font("Tahoma", 0, 14));
+        tabMain.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tabMain.setPreferredSize(new java.awt.Dimension(893, 562));
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
@@ -141,7 +141,7 @@ public class Frm_Admin extends javax.swing.JFrame {
 
         jPDoKho = new Pnl_DoKho();
 
-        tabMain.addTab("Độ Khó", new javax.swing.ImageIcon(getClass().getResource("/resource/Do Kho.png")), jPDoKho); // NOI18N
+        tabMain.addTab("QL Khác", new javax.swing.ImageIcon(getClass().getResource("/resource/Do Kho.png")), jPDoKho); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

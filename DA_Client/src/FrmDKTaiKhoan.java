@@ -97,6 +97,7 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
         jCbNhom = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel24.setText("Trả Lời");
 
@@ -147,7 +148,7 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
                     .addComponent(jCbCity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtDiaChi)
                     .addComponent(txtHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,7 +230,7 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
 
         jLabel2.setText("Mật khẩu");
 
-        lblCheck.setText("jLabel5");
+        lblCheck.setText("    ");
 
         btnHuy.setText("Hủy Bỏ");
 
@@ -276,8 +277,8 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
                                 .addComponent(jCbCauHoi, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtCauHoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
                                 .addComponent(txtTraLoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(311, 311, 311)
                         .addComponent(btnThem)
@@ -294,7 +295,7 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
                         .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,7 +407,7 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
             String birthday = sdf.format(jDate.getDate());
             String email = txtEmail.getText();
             String phone = txtDienThoai.getText();
-            boolean enable;
+            boolean enable = true;
             byte[] image = getDataImages();
             Date d = new Date();
             String dateJoint = sdf.format(d);
@@ -420,7 +421,7 @@ public class FrmDKTaiKhoan extends javax.swing.JFrame {
             }
             
             Users u = new Users(txtUsername.getText().trim(), pass.getText(), idGroup, fullName, birthday, address, city,
-                    email, phone, image, dateJoint, dateJoint, true , cauhoi, traloi);
+                    email, phone, image, dateJoint, dateJoint, enable , cauhoi, traloi);
             if (Cl_Client.c.insertUser(u)) {
                 JOptionPane.showMessageDialog(null, "Đăng ký thành công . Vui lòng đăng nhập ! ");
                 resetAll();

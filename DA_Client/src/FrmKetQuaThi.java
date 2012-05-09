@@ -1,5 +1,8 @@
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import vn.com.dva.entities.Exam;
 import vn.com.dva.entities.Question;
@@ -28,7 +31,7 @@ public class FrmKetQuaThi extends javax.swing.JFrame {
     private Exam kythi ;
     private int total ;
     private int countTrue ;
-    private boolean isTrain;
+    private boolean isReView = false ;
     /** Creates new form FrmKetQuaThi */
     public FrmKetQuaThi() {
         initComponents();
@@ -42,7 +45,7 @@ public class FrmKetQuaThi extends javax.swing.JFrame {
         this.monthi = s ;
         this.total = total ;
         this.countTrue = t; 
-        this.isTrain = b;
+        this.isReView = b;
         this.kythi = e;
     }
 
@@ -265,7 +268,14 @@ public class FrmKetQuaThi extends javax.swing.JFrame {
         else lblKyThi.setText(Session.kythi.getExamName());
         //--------------- sau lam tiep
         lblMonThi.setText(monthi.getSubjectName());
-        //lblNgayThi.setText(Session.ngaythi);     
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        if (isReView) {
+            if (Session.chitiet != null ) lblNgayThi.setText(sdf.format(Session.chitiet.getDateTest().getTime()));
+            else if (Session.chitietTrain != null ) lblNgayThi.setText(Session.chitietTrain);
+            
+        } else {
+            lblNgayThi.setText(sdf.format(new Date()));
+        }
         
         lblTongSoCau.setText(total+"");
         lblDung.setText(countTrue+"");

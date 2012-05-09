@@ -1,5 +1,4 @@
 
-import java.awt.GridLayout;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,10 +7,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import vn.com.dva.entities.DetailResultExam;
 import vn.com.dva.entities.DetailTrain;
@@ -190,16 +185,18 @@ public class Frm_SinhVien extends javax.swing.JFrame {
 
         jLabel27.setText("TEST ONLINE Version 1.02");
 
-        jLabel28.setText("Develop by .....");
+        jLabel28.setText("Develop by ĐÀO VIỆT ANH");
 
         jLabel22.setText("Lần đăng nhập cuối");
+
+        txtLastLogin.setEnabled(false);
 
         javax.swing.GroupLayout jPanelThongTinLayout = new javax.swing.GroupLayout(jPanelThongTin);
         jPanelThongTin.setLayout(jPanelThongTinLayout);
         jPanelThongTinLayout.setHorizontalGroup(
             jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelThongTinLayout.createSequentialGroup()
-                .addContainerGap(800, Short.MAX_VALUE)
+                .addContainerGap(798, Short.MAX_VALUE)
                 .addGroup(jPanelThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel28)
                     .addComponent(jLabel27))
@@ -292,6 +289,12 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Thông Tin", new javax.swing.ImageIcon(getClass().getResource("/resource/Profile.png")), jPanelThongTin); // NOI18N
+
+        jPanelThi.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanelThiComponentShown(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(View);
 
@@ -843,6 +846,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
                 resetPanelExam();
                 return;
             }
+            if (jCKyThi.getItemCount() == 0) return;
             if (jCKyThi.getSelectedIndex() == 0) {
                 resetPanelExam();
                 return;
@@ -857,7 +861,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
             // So cau hoi lay ra tu table kythi-cauhoi
             if (e.getNumberQuestion() == 0) {
                 List<Exam_Question> lst = Cl_Client.c.getAllExamQuestionByExam(e.getExamID());
-                txtSocau.setText(lst.size()+""); 
+                txtSocau.setText(lst.size() + "");
             } else {
                 txtSocau.setText(e.getNumberQuestion() + "");
             }
@@ -870,7 +874,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jCKyThiItemStateChanged
-       
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (FrmThi.isOpen == true) {
             JOptionPane.showMessageDialog(null, "Đang luyện tập");
@@ -901,7 +905,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
                 Cl_Client.ShowError("Không đủ câu hỏi");
                 return;
             }
-            
+
             FrmThi a = new FrmThi();
             FrmThi.isOpen = true;
             a.show();
@@ -1017,8 +1021,10 @@ public class Frm_SinhVien extends javax.swing.JFrame {
             }
             choose = bean.getListIdAnswer();
             answerRandom = bean.getListAnswerRandom();
-            int trueQuestion = (int) (train.getScore() * train.getTotalQuestion()/100);
-            FrmKetQuaThi kq = new FrmKetQuaThi(list, choose, answerRandom, subject, train.getTotalQuestion(), trueQuestion, true,null);
+            int trueQuestion = (int) (train.getScore() * train.getTotalQuestion() / 100);
+            FrmKetQuaThi kq = new FrmKetQuaThi(list, choose, answerRandom, subject, train.getTotalQuestion(), trueQuestion, true, null);
+            Session.chitietTrain = train.getDate_Train();
+            Session.chitiet = null ;
             kq.setVisible(true);
         } catch (Exception ex) {
             System.out.print(ex);
@@ -1041,16 +1047,17 @@ public class Frm_SinhVien extends javax.swing.JFrame {
             answerRandom = bean.getListAnswerRandom();
             int trueQuestion = (int) (re.getScore() * exam.getNumberQuestion() / 100);
             FrmKetQuaThi kq;
-            if (exam.getNumberQuestion() != 0) 
-                kq = new FrmKetQuaThi(list, choose, answerRandom, subject, exam.getNumberQuestion(), trueQuestion, true,null);
-            else {
+            if (exam.getNumberQuestion() != 0) {
+                kq = new FrmKetQuaThi(list, choose, answerRandom, subject, exam.getNumberQuestion(), trueQuestion, true, null);
+            } else {
                 List<Exam_Question> listEQ = Cl_Client.c.getAllExamQuestionByExam(exam.getExamID());
                 trueQuestion = (int) (re.getScore() * listEQ.size() / 100);
-                kq = new FrmKetQuaThi(list, choose, answerRandom, subject, listEQ.size(), trueQuestion, true,exam);
+                kq = new FrmKetQuaThi(list, choose, answerRandom, subject, listEQ.size(), trueQuestion, true, exam);
+                Session.chitietTrain = null;
+                Session.chitiet = re ;
             }
             kq.setVisible(true);
         } catch (Exception ex) {
-            
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -1085,13 +1092,19 @@ public class Frm_SinhVien extends javax.swing.JFrame {
         loadform();
     }//GEN-LAST:event_formComponentShown
 
+    private void jPanelThiComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelThiComponentShown
+        // TODO add your handling code here:
+        loadform();
+    }//GEN-LAST:event_jPanelThiComponentShown
+
     public void loadform() {
         try {
             Users user = Session.user;
             idUser = user.getUserID();
             // --------------- load table 
             // Lich su thi
-            jTableLichSu.setModel(Cl_Client.c.getAllTrainToTable());
+            jTableLichSu.setModel(Cl_Client.c.getAllTraintoTableByIdUser(idUser));
+            jTableLichSu.setModel(Cl_Client.c.getAllExamtoTableByIdUser(idUser));
             // ------------------  Tab Thi  --------------------------
             String username = user.getUserName();
             //String id = Cl_Client.c.getIDUser(user);
@@ -1123,6 +1136,7 @@ public class Frm_SinhVien extends javax.swing.JFrame {
             }
 
             // Ky Thi dang dien ra
+            jCKyThi.removeAllItems();
             List<Exam> currentExam = Cl_Client.c.getCurrentExam();
             jCKyThi.addItem("Lựa Chọn");
             if (!currentExam.isEmpty()) {

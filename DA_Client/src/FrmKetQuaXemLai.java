@@ -613,7 +613,12 @@ public class FrmKetQuaXemLai extends javax.swing.JFrame {
             
             // Ky thi
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            lblNgayThi.setText(sdf.format(new Date()));
+            try {
+                if (Session.chitiet != null ) lblNgayThi.setText(sdf.format(Session.chitiet.getDateTest().getTime()));
+                else if (Session.chitietTrain != null ) lblNgayThi.setText(Session.chitietTrain);
+            } catch(Exception ex){
+                
+            }
             if (kythi != null) {
                 lblKyThi.setText(kythi.getExamName());
                 

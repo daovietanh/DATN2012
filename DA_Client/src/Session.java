@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 import vn.com.dva.entities.Exam;
 import vn.com.dva.entities.LevelAll;
+import vn.com.dva.entities.ResultExam;
 import vn.com.dva.entities.Subject;
 import vn.com.dva.entities.Users;
 
@@ -40,6 +41,9 @@ public class Session {
     public static String tb ;
     public static String kho ;
     public static int thoigian ;
+    
+    public static ResultExam chitiet = null;
+    public static String chitietTrain = null;
     
     // Online
     public static List<Long> lstOnline = new ArrayList<Long>() ;

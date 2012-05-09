@@ -107,6 +107,10 @@ public class FrmThi extends javax.swing.JDialog implements ActionListener {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         lbl1 = new javax.swing.JLabel();
+        txtCau = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -404,6 +408,22 @@ public class FrmThi extends javax.swing.JDialog implements ActionListener {
         lbl1.setFont(new java.awt.Font("Tahoma", 1, 16));
         lbl1.setText("Thời gian còn lại :");
 
+        jLabel10.setText("Câu số :");
+
+        jButton5.setText("Đến");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("DS Chưa làm");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -419,12 +439,20 @@ public class FrmThi extends javax.swing.JDialog implements ActionListener {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(316, 316, 316)
+                        .addContainerGap()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCau, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5)
+                        .addGap(190, 190, 190)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
-                        .addGap(179, 179, 179)
-                        .addComponent(jButton3))
+                        .addGap(83, 83, 83)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                        .addComponent(jButton6))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(270, 270, 270)
                         .addComponent(lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -447,9 +475,13 @@ public class FrmThi extends javax.swing.JDialog implements ActionListener {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtCau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton6))
                 .addContainerGap())
         );
 
@@ -495,6 +527,7 @@ public class FrmThi extends javax.swing.JDialog implements ActionListener {
             //JOptionPane.showMessageDialog(null, "Load ds cau hoi"); 
             // Nếu train (ko phải thi )
             if (Session.kythi == null) {
+                list.clear();
                 // Lấy danh sách câu hỏi theo môn thi thử
                 list = Cl_Client.c.getAllQuestionBySubject(Session.monthi.getSubjecId());
                 // Lọc danh sách câu hỏi lây số câu hỏi theo độ khó 
@@ -747,30 +780,13 @@ public class FrmThi extends javax.swing.JDialog implements ActionListener {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        //initComponents();
-        //jScrollPane1.removeAll();
-        this.jScrollPane1.setVisible(false);
-       //jScrollPane1.setVisible(false);
-//       jScrollPane1.setSize(30, 100);
-//       jScrollPane1.removeAll();
-//        jTpNoiDung.setVisible(false);
-        //JOptionPane.showMessageDialog(null, "click");
-//        jScrollPane1.resize(100, 120);
-        //jScrollPane1.re
-       // jTpNoiDung.setSize(100, 100);
- //       jScrollPane1.setVisible(true);
-//        jTpNoiDung.setVisible(true);
-        
-        jScrollPane1.removeAll();
-        jScrollPane1.setSize(100, 100);
-        jScrollPane1.setPreferredSize(new Dimension(200, 200));
-
-        this.repaint();
-       this.jScrollPane1.setVisible(true);
-       //this.add(jScrollPane1);
-
-        this.repaint();
-        pack();
+        try {
+            int now = Integer.parseInt(lblSo.getText())-1 ;
+            Question q = list.get(now);
+            new Frm_Image(q.getPicture()).show();
+        } catch(Exception ex){
+            
+        }
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -778,6 +794,50 @@ public class FrmThi extends javax.swing.JDialog implements ActionListener {
         // TODO add your handling code here:
         Frm_SinhVien.isTest = false;
     }//GEN-LAST:event_formWindowClosed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        int now = Integer.parseInt(lblSo.getText()) - 1;
+        int next ;
+        try {
+            next = Integer.parseInt(txtCau.getText()) - 1;
+        } catch(Exception ex){
+            Cl_Client.ShowError("Lỗi");
+            return ;
+        }
+        if (next+1 > n || next <0) {
+            Cl_Client.ShowError("Lỗi");
+        } else {
+            if (jRdA.isSelected()) {
+                choose.set(now, "A");
+            } else if (jRdB.isSelected()) {
+                choose.set(now, "B");
+            } else if (jRdC.isSelected()) {
+                choose.set(now, "C");
+            } else if (jRdD.isSelected()) {
+                choose.set(now, "D");
+            } else {
+                choose.set(now, " ");
+            }
+            resetLuachon();
+            tai1cauhoi(next);
+            txtCau.setText("");
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        try {
+            String s = "Danh sách câu chưa làm : ";
+            for (int i=0; i< choose.size()/2;i++)
+                if (choose.get(i).equals("") || choose.get(i).equals(" ")) {
+                    s+= ""+ (i+1) +" , " ;
+                }
+            JOptionPane.showMessageDialog(null, s);
+        } catch (Exception ex){
+            
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     public void resetLuachon() {
         btg.clearSelection();
@@ -793,7 +853,10 @@ public class FrmThi extends javax.swing.JDialog implements ActionListener {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -832,6 +895,7 @@ public class FrmThi extends javax.swing.JDialog implements ActionListener {
     private javax.swing.JLabel lblSo;
     private javax.swing.JLabel lblTongSo;
     private javax.swing.JLabel lblUser;
+    private javax.swing.JTextField txtCau;
     // End of variables declaration//GEN-END:variables
 
     public void actionPerformed(ActionEvent e) {
